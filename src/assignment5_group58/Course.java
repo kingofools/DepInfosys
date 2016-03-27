@@ -11,7 +11,7 @@ package assignment5_group58;
  */
 import java.util.ArrayList;
 import java.io.Serializable;
-import java.util.Date;
+
 
 public class Course implements Serializable
 {
@@ -20,7 +20,7 @@ public class Course implements Serializable
 	private int grade;
 	private String status;
 	private String professor;
-	public  ArrayList<String> StudentsOnRoll = new ArrayList<String>();
+	public  ArrayList<String> StudentsOnRoll;
 	
 	public void setname(String topic)
 	{
