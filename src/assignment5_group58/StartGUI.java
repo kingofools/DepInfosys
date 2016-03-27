@@ -35,6 +35,9 @@ public class StartGUI extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPasswordField1 = new javax.swing.JPasswordField();
+        LoginPwdError = new javax.swing.JDialog();
+        jLabel1 = new javax.swing.JLabel();
+        OKButton = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         Hometab = new javax.swing.JPanel();
         welcome = new javax.swing.JLabel();
@@ -149,6 +152,41 @@ public class StartGUI extends javax.swing.JFrame {
                 .addGap(30, 30, 30))
         );
 
+        LoginPwdError.setTitle("Password Error");
+        LoginPwdError.setLocation(new java.awt.Point(0, 0));
+        LoginPwdError.setMinimumSize(new java.awt.Dimension(184, 140));
+        LoginPwdError.setResizable(false);
+
+        jLabel1.setText("Incorrect Password Entered");
+
+        OKButton.setText("OK");
+        OKButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OKButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout LoginPwdErrorLayout = new javax.swing.GroupLayout(LoginPwdError.getContentPane());
+        LoginPwdError.getContentPane().setLayout(LoginPwdErrorLayout);
+        LoginPwdErrorLayout.setHorizontalGroup(
+            LoginPwdErrorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LoginPwdErrorLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jLabel1))
+            .addGroup(LoginPwdErrorLayout.createSequentialGroup()
+                .addGap(84, 84, 84)
+                .addComponent(OKButton, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        LoginPwdErrorLayout.setVerticalGroup(
+            LoginPwdErrorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LoginPwdErrorLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(OKButton)
+                .addContainerGap(31, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         welcome.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -165,22 +203,23 @@ public class StartGUI extends javax.swing.JFrame {
         HometabLayout.setHorizontalGroup(
             HometabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HometabLayout.createSequentialGroup()
-                .addComponent(sem)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 395, Short.MAX_VALUE)
-                .addComponent(date)
+                .addGroup(HometabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(HometabLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(welcome))
+                    .addGroup(HometabLayout.createSequentialGroup()
+                        .addComponent(sem)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 395, Short.MAX_VALUE)
+                        .addComponent(date)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(time))
-            .addGroup(HometabLayout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(welcome)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         HometabLayout.setVerticalGroup(
             HometabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HometabLayout.createSequentialGroup()
-                .addGap(73, 73, 73)
+                .addGap(75, 75, 75)
                 .addComponent(welcome)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 176, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
                 .addGroup(HometabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(time)
                     .addComponent(date)
@@ -699,6 +738,9 @@ public class StartGUI extends javax.swing.JFrame {
                     SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
                     this.date.setText(sdf1.format(d));
                     this.sem.setText("Semester : Spring");
+                }else{
+                    this.LoginPwdError.setLocationRelativeTo(null);
+                    this.LoginPwdError.setVisible(true);
                 }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -713,6 +755,9 @@ public class StartGUI extends javax.swing.JFrame {
                     SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
                     this.date.setText(sdf1.format(d));
                     this.sem.setText("Semester : Spring");
+                }else{
+                    this.LoginPwdError.setLocationRelativeTo(null);
+                    this.LoginPwdError.setVisible(true);
                 }
     }//GEN-LAST:event_jPasswordField1ActionPerformed
 
@@ -727,6 +772,10 @@ public class StartGUI extends javax.swing.JFrame {
     private void PriceFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PriceFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_PriceFieldActionPerformed
+
+    private void OKButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OKButtonActionPerformed
+        this.LoginPwdError.setVisible(false);
+    }//GEN-LAST:event_OKButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -764,6 +813,7 @@ public class StartGUI extends javax.swing.JFrame {
                 
                 
                 StartGUI s = new StartGUI();
+                s.LoginPopup.setLocationRelativeTo(null);
                 s.LoginPopup.setVisible(true);
                 
             }
@@ -794,9 +844,11 @@ public class StartGUI extends javax.swing.JFrame {
     private javax.swing.JPanel Inventorytab;
     private javax.swing.JTable LocTable;
     private javax.swing.JFrame LoginPopup;
+    private javax.swing.JDialog LoginPwdError;
     private javax.swing.JPanel Logspanel;
     private javax.swing.JButton ModItem;
     private javax.swing.JButton NewStudent;
+    private javax.swing.JButton OKButton;
     private javax.swing.JTextField PriceField;
     private javax.swing.JButton PrintStudent;
     private javax.swing.JTextArea PubArea;
@@ -813,6 +865,7 @@ public class StartGUI extends javax.swing.JFrame {
     private javax.swing.JButton ViewCourse;
     private javax.swing.JLabel date;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
