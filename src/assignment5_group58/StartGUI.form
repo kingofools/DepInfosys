@@ -266,8 +266,8 @@
                               <Component id="Studentpanel" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="187" max="-2" attributes="0"/>
-                              <Component id="Evaluate" min="-2" pref="94" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="176" max="-2" attributes="0"/>
+                              <Component id="Evaluate" min="-2" pref="111" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
@@ -412,7 +412,7 @@
             </Container>
             <Component class="javax.swing.JButton" name="Evaluate">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Evaluate "/>
+                <Property name="text" type="java.lang.String" value="Enter Credits"/>
               </Properties>
             </Component>
           </SubComponents>

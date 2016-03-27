@@ -300,7 +300,7 @@ public class StartGUI extends javax.swing.JFrame {
                 .addGap(32, 32, 32))
         );
 
-        Evaluate.setText("Evaluate ");
+        Evaluate.setText("Enter Credits");
 
         javax.swing.GroupLayout AcadstabLayout = new javax.swing.GroupLayout(Acadstab);
         Acadstab.setLayout(AcadstabLayout);
@@ -314,8 +314,8 @@ public class StartGUI extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(Studentpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(AcadstabLayout.createSequentialGroup()
-                        .addGap(187, 187, 187)
-                        .addComponent(Evaluate, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(176, 176, 176)
+                        .addComponent(Evaluate, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         AcadstabLayout.setVerticalGroup(
