@@ -27,13 +27,48 @@ public class AddCourseGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        CreditsErrorDialog = new javax.swing.JDialog();
+        jLabel4 = new javax.swing.JLabel();
+        ExitError1Button = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        CourseNameField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        CreditsField = new javax.swing.JTextField();
+        ProfField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        CreateCourseButton = new javax.swing.JButton();
+
+        CreditsErrorDialog.setMinimumSize(new java.awt.Dimension(227, 164));
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setText("Enter an integer in credits!");
+
+        ExitError1Button.setText("OK");
+        ExitError1Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExitError1ButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout CreditsErrorDialogLayout = new javax.swing.GroupLayout(CreditsErrorDialog.getContentPane());
+        CreditsErrorDialog.getContentPane().setLayout(CreditsErrorDialogLayout);
+        CreditsErrorDialogLayout.setHorizontalGroup(
+            CreditsErrorDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CreditsErrorDialogLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jLabel4))
+            .addGroup(CreditsErrorDialogLayout.createSequentialGroup()
+                .addGap(126, 126, 126)
+                .addComponent(ExitError1Button, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        CreditsErrorDialogLayout.setVerticalGroup(
+            CreditsErrorDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CreditsErrorDialogLayout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
+                .addComponent(ExitError1Button))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Add Course");
@@ -42,9 +77,20 @@ public class AddCourseGUI extends javax.swing.JFrame {
 
         jLabel2.setText("Credits :");
 
+        ProfField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ProfFieldActionPerformed(evt);
+            }
+        });
+
         jLabel3.setText("Professor in charge :");
 
-        jButton1.setText("Create");
+        CreateCourseButton.setText("Create");
+        CreateCourseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CreateCourseButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -58,13 +104,13 @@ public class AddCourseGUI extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
-                    .addComponent(jTextField2)
-                    .addComponent(jTextField3))
+                    .addComponent(CourseNameField, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                    .addComponent(CreditsField)
+                    .addComponent(ProfField))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(129, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(CreateCourseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(117, 117, 117))
         );
         layout.setVerticalGroup(
@@ -73,22 +119,45 @@ public class AddCourseGUI extends javax.swing.JFrame {
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CourseNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CreditsField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ProfField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(CreateCourseButton)
                 .addContainerGap(40, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void CreateCourseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateCourseButtonActionPerformed
+        Course newcourse = new Course();
+        newcourse.setname(CourseNameField.getText());
+        String regex = "[0-9]";
+        String credits_string = CreditsField.getText();
+        if(credits_string.matches(regex)){
+            newcourse.setcredit(Integer.parseInt(credits_string));
+        }else{
+            this.CreditsErrorDialog.setLocationRelativeTo(null);
+            this.CreditsErrorDialog.setVisible(true);
+        }
+        newcourse.setprofessor(ProfField.getText());
+        //TODO add handling for adding students to course
+    }//GEN-LAST:event_CreateCourseButtonActionPerformed
+
+    private void ProfFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProfFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ProfFieldActionPerformed
+
+    private void ExitError1ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitError1ButtonActionPerformed
+        this.CreditsErrorDialog.setVisible(false);
+    }//GEN-LAST:event_ExitError1ButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -126,12 +195,15 @@ public class AddCourseGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTextField CourseNameField;
+    private javax.swing.JButton CreateCourseButton;
+    private javax.swing.JDialog CreditsErrorDialog;
+    private javax.swing.JTextField CreditsField;
+    private javax.swing.JButton ExitError1Button;
+    private javax.swing.JTextField ProfField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
 }

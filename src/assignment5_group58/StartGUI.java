@@ -5,8 +5,11 @@
  */
 package assignment5_group58;
 
+import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -766,7 +769,17 @@ public class StartGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_TransTypeActionPerformed
 
     private void AddCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddCourseActionPerformed
-        // TODO add your handling code here:
+        AddCourseGUI newcoursegui;
+        //todo : add exceptions here
+        //try {
+            newcoursegui = new AddCourseGUI();
+            newcoursegui.setLocationRelativeTo(null);
+            newcoursegui.setVisible(true);
+            //optional 
+            //setVisible(false);
+        /*} catch (FileNotFoundException ex) {
+            Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
     }//GEN-LAST:event_AddCourseActionPerformed
 
     private void PriceFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PriceFieldActionPerformed
