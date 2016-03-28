@@ -732,7 +732,7 @@ public class StartGUI extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String pwd = new String(this.jPasswordField1.getPassword());
-                if (pwd.equals("")){                    
+                if (pwd.equals("")){  //security threat !!                  
                     this.LoginPopup.setVisible(false);
                     this.setVisible(true);
                     Date d = new Date();
@@ -749,7 +749,7 @@ public class StartGUI extends javax.swing.JFrame {
 
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
         String pwd = new String(this.jPasswordField1.getPassword());
-                if (pwd.equals("")){                    
+                if (pwd.equals("")){      //security threat !!              
                     this.LoginPopup.setVisible(false);
                     this.setVisible(true);
                     Date d = new Date();
