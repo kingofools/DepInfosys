@@ -16,7 +16,7 @@ import java.io.Serializable;
 public class Course implements Serializable
 {
 	private String coursename;
-	private int credit;
+	private int credit = -1;
 	private int grade = -1;//applicable for students only , not required for courselist
 	private String status = "new";
 	private String professor;
