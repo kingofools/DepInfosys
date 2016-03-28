@@ -155,7 +155,8 @@ public class AddCourseGUI extends javax.swing.JFrame {
         //TODO add handling for adding students to course
         
         //saving course and closing current tab
-        if(CourseNameField.getText().isEmpty()||newcourse.getcredit()==-1)
+        //need to handle properly
+        if(!(CourseNameField.getText().isEmpty())&&newcourse.getcredit()!=-1)
         {
         JOptionPane.showMessageDialog(null,"Course "+newcourse.getname()+" saved!");
          Container frame2 = CreateCourseButton.getParent();
