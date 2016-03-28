@@ -15,13 +15,13 @@ import java.io.Serializable;
 
 public class Student 
 {
-	protected String name; 
-	protected String address;
-	protected String phone;
-	protected String mail;
-	protected int roll;
-        protected int prevCredits;
-       	public  ArrayList<Course> subjects = new ArrayList<Course>();
+	private String name; 
+	private String address;
+	private String phone;
+	private String mail;
+	private int roll;
+        private int prevCredits;
+        public  ArrayList<Course> subjects = new ArrayList<Course>();
       	public  ArrayList<Double> sgpa = new ArrayList<Double>();
         public  ArrayList<Double> cgpa = new ArrayList<Double>();
         
