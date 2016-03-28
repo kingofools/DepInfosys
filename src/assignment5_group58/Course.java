@@ -17,11 +17,11 @@ public class Course implements Serializable
 {
 	private String coursename;
 	private int credit;
-	private int grade;
-	private String status;
+	private int grade = -1;//applicable for students only , not required for courselist
+	private String status = "new";
 	private String professor;
 	public  ArrayList<String> StudentsOnRoll;
-	
+	        
 	public void setname(String topic)
 	{
 		this.coursename = topic;
@@ -49,6 +49,15 @@ public class Course implements Serializable
 		return grade;
 	};
 	
+        public void setstatus(String update)
+	{
+		this.status = update;
+	};
+	public String getstatus()
+	{
+		return status;
+	};
+        
 	public void setprofessor(String faculty)
 	{
 		this.professor = faculty;
