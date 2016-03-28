@@ -5,6 +5,10 @@
  */
 package assignment5_group58;
 
+import java.awt.Container;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author surya
@@ -149,6 +153,17 @@ public class AddCourseGUI extends javax.swing.JFrame {
         }
         newcourse.setprofessor(ProfField.getText());
         //TODO add handling for adding students to course
+        
+        //saving course and closing current tab
+        if(CourseNameField.getText().isEmpty()||newcourse.getcredit()==-1)
+        {
+        JOptionPane.showMessageDialog(null,"Course "+newcourse.getname()+" saved!");
+         Container frame2 = CreateCourseButton.getParent();
+	do 
+	frame2 = frame2.getParent(); 
+	while (!(this instanceof JFrame));                                      
+	    dispose();
+        }
     }//GEN-LAST:event_CreateCourseButtonActionPerformed
 
     private void ProfFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProfFieldActionPerformed
