@@ -36,9 +36,6 @@ public class AddCourseGUI extends javax.swing.JFrame implements Serializable{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        CreditsErrorDialog = new javax.swing.JDialog();
-        jLabel4 = new javax.swing.JLabel();
-        ExitError1Button = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         CourseNameField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -47,42 +44,16 @@ public class AddCourseGUI extends javax.swing.JFrame implements Serializable{
         jLabel3 = new javax.swing.JLabel();
         CreateCourseButton = new javax.swing.JButton();
 
-        CreditsErrorDialog.setMinimumSize(new java.awt.Dimension(227, 164));
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setText("Enter an integer in credits!");
-
-        ExitError1Button.setText("OK");
-        ExitError1Button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ExitError1ButtonActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout CreditsErrorDialogLayout = new javax.swing.GroupLayout(CreditsErrorDialog.getContentPane());
-        CreditsErrorDialog.getContentPane().setLayout(CreditsErrorDialogLayout);
-        CreditsErrorDialogLayout.setHorizontalGroup(
-            CreditsErrorDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CreditsErrorDialogLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jLabel4))
-            .addGroup(CreditsErrorDialogLayout.createSequentialGroup()
-                .addGap(126, 126, 126)
-                .addComponent(ExitError1Button, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        CreditsErrorDialogLayout.setVerticalGroup(
-            CreditsErrorDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CreditsErrorDialogLayout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(jLabel4)
-                .addGap(18, 18, 18)
-                .addComponent(ExitError1Button))
-        );
-
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Add Course");
 
         jLabel1.setText("Course Name :");
+
+        CourseNameField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CourseNameFieldActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Credits :");
 
@@ -147,9 +118,6 @@ public class AddCourseGUI extends javax.swing.JFrame implements Serializable{
 */
     private void newinitComponents(ArrayList<Course> courseList) {
 
-        CreditsErrorDialog = new javax.swing.JDialog();
-        jLabel4 = new javax.swing.JLabel();
-        ExitError1Button = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         CourseNameField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -157,38 +125,6 @@ public class AddCourseGUI extends javax.swing.JFrame implements Serializable{
         ProfField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         CreateCourseButton = new javax.swing.JButton();
-
-        CreditsErrorDialog.setMinimumSize(new java.awt.Dimension(227, 164));
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setText("Enter an integer in credits!");
-
-        ExitError1Button.setText("OK");
-        ExitError1Button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ExitError1ButtonActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout CreditsErrorDialogLayout = new javax.swing.GroupLayout(CreditsErrorDialog.getContentPane());
-        CreditsErrorDialog.getContentPane().setLayout(CreditsErrorDialogLayout);
-        CreditsErrorDialogLayout.setHorizontalGroup(
-            CreditsErrorDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CreditsErrorDialogLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jLabel4))
-            .addGroup(CreditsErrorDialogLayout.createSequentialGroup()
-                .addGap(126, 126, 126)
-                .addComponent(ExitError1Button, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        CreditsErrorDialogLayout.setVerticalGroup(
-            CreditsErrorDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CreditsErrorDialogLayout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(jLabel4)
-                .addGap(18, 18, 18)
-                .addComponent(ExitError1Button))
-        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Add Course");
@@ -270,12 +206,13 @@ public class AddCourseGUI extends javax.swing.JFrame implements Serializable{
         if(credits_string.matches(regex)){
             newcourse.setcredit(Integer.parseInt(credits_string));
         }else{
-            this.CreditsErrorDialog.setLocationRelativeTo(null);
-            this.CreditsErrorDialog.setVisible(true);
+            JOptionPane.showMessageDialog(null,"Need to write a number as credits!");
         }
         if(!(ProfField.getText().isEmpty()))
         {
             newcourse.setprofessor(ProfField.getText());
+        }else{
+            JOptionPane.showMessageDialog(null,"Need to write professor's name!");
         }
         //TODO add handling for adding students to course
         
@@ -296,9 +233,9 @@ public class AddCourseGUI extends javax.swing.JFrame implements Serializable{
         // TODO add your handling code here:
     }//GEN-LAST:event_ProfFieldActionPerformed
 
-    private void ExitError1ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitError1ButtonActionPerformed
-        this.CreditsErrorDialog.setVisible(false);
-    }//GEN-LAST:event_ExitError1ButtonActionPerformed
+    private void CourseNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CourseNameFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CourseNameFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -339,13 +276,10 @@ public class AddCourseGUI extends javax.swing.JFrame implements Serializable{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField CourseNameField;
     private javax.swing.JButton CreateCourseButton;
-    private javax.swing.JDialog CreditsErrorDialog;
     private javax.swing.JTextField CreditsField;
-    private javax.swing.JButton ExitError1Button;
     private javax.swing.JTextField ProfField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
 }
