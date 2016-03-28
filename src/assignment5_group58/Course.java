@@ -19,7 +19,7 @@ public class Course implements Serializable
 	private int credit = -1;
 	private int grade = -1;//applicable for students only , not required for courselist
 	private String status = "new";
-	private String professor;
+	private String professor = "";
 	public  ArrayList<String> StudentsOnRoll;
 	        
 	public void setname(String topic)

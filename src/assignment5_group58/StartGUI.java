@@ -6,20 +6,26 @@
 package assignment5_group58;
 
 import java.io.FileNotFoundException;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
 /**
  *
  * @author surya
  */
-public class StartGUI extends javax.swing.JFrame {
+public class StartGUI extends javax.swing.JFrame implements Serializable{
 
     /**
      * Creates new form StartGUI
      */
+    static  ArrayList<Course> courseList = new ArrayList<Course>();
     public StartGUI() {
         initComponents();
     }
@@ -772,7 +778,7 @@ public class StartGUI extends javax.swing.JFrame {
         AddCourseGUI newcoursegui;
         //todo : add exceptions here
         //try {
-            newcoursegui = new AddCourseGUI();
+            newcoursegui = new AddCourseGUI(courseList);
             newcoursegui.setLocationRelativeTo(null);
             newcoursegui.setVisible(true);
             //optional 
