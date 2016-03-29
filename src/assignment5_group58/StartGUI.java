@@ -250,6 +250,11 @@ public class StartGUI extends javax.swing.JFrame implements Serializable{
         });
 
         DelCourse.setText("Delete Course");
+        DelCourse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DelCourseActionPerformed(evt);
+            }
+        });
 
         ViewCourse.setText("View Course");
 
@@ -795,6 +800,20 @@ public class StartGUI extends javax.swing.JFrame implements Serializable{
     private void OKButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OKButtonActionPerformed
         this.LoginPwdError.setVisible(false);
     }//GEN-LAST:event_OKButtonActionPerformed
+
+    private void DelCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DelCourseActionPerformed
+        ViewCourseGUI coursegui;
+        //todo : add exceptions here
+        //try {
+            coursegui = new ViewCourseGUI();
+            coursegui.setLocationRelativeTo(null);
+            coursegui.setVisible(true);
+            //optional
+            //setVisible(false);
+        /*} catch (FileNotFoundException ex) {
+            Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+    }//GEN-LAST:event_DelCourseActionPerformed
 
     /**
      * @param args the command line arguments
