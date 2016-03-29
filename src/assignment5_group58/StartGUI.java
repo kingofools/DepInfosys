@@ -257,6 +257,11 @@ public class StartGUI extends javax.swing.JFrame implements Serializable{
         });
 
         ViewCourse.setText("View Course");
+        ViewCourse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ViewCourseActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout CoursepanelLayout = new javax.swing.GroupLayout(Coursepanel);
         Coursepanel.setLayout(CoursepanelLayout);
@@ -802,7 +807,21 @@ public class StartGUI extends javax.swing.JFrame implements Serializable{
     }//GEN-LAST:event_OKButtonActionPerformed
 
     private void DelCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DelCourseActionPerformed
-        ViewCourseGUI coursegui;
+        ViewAndDeleteCourseGUI coursegui;
+        //todo : add exceptions here
+        //try {
+            coursegui = new ViewAndDeleteCourseGUI();
+            coursegui.setLocationRelativeTo(null);
+            coursegui.setVisible(true);
+            //optional
+            //setVisible(false);
+        /*} catch (FileNotFoundException ex) {
+            Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+    }//GEN-LAST:event_DelCourseActionPerformed
+
+    private void ViewCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewCourseActionPerformed
+         ViewCourseGUI coursegui;
         //todo : add exceptions here
         //try {
             coursegui = new ViewCourseGUI();
@@ -813,7 +832,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable{
         /*} catch (FileNotFoundException ex) {
             Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
         }*/
-    }//GEN-LAST:event_DelCourseActionPerformed
+    }//GEN-LAST:event_ViewCourseActionPerformed
 
     /**
      * @param args the command line arguments
