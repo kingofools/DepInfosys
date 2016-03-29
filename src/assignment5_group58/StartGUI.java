@@ -290,6 +290,11 @@ public class StartGUI extends javax.swing.JFrame implements Serializable{
         Studentpanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Student"));
 
         NewStudent.setText("New Student");
+        NewStudent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NewStudentActionPerformed(evt);
+            }
+        });
 
         EnrollStudent.setText("Enroll Student");
 
@@ -850,6 +855,20 @@ public class StartGUI extends javax.swing.JFrame implements Serializable{
             Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
         }*/
     }//GEN-LAST:event_EvaluateActionPerformed
+
+    private void NewStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewStudentActionPerformed
+        AddStudentGUI newgui;
+        //todo : add exceptions here
+        //try {
+            newgui = new AddStudentGUI();
+            newgui.setLocationRelativeTo(null);
+            newgui.setVisible(true);
+            //optional 
+            //setVisible(false);
+        /*} catch (FileNotFoundException ex) {
+            Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+    }//GEN-LAST:event_NewStudentActionPerformed
 
     /**
      * @param args the command line arguments

@@ -32,6 +32,7 @@ public class ViewAndDeleteCourseGUI extends javax.swing.JFrame {
         DeleteCourse = new javax.swing.JButton();
         Back = new javax.swing.JButton();
         SelectCourse = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -78,6 +79,8 @@ public class ViewAndDeleteCourseGUI extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Enroll Student");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -90,6 +93,8 @@ public class ViewAndDeleteCourseGUI extends javax.swing.JFrame {
                         .addComponent(DeleteCourse)
                         .addGap(18, 18, 18)
                         .addComponent(SelectCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(Back)))
                 .addContainerGap())
@@ -103,7 +108,8 @@ public class ViewAndDeleteCourseGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(DeleteCourse)
                     .addComponent(Back)
-                    .addComponent(SelectCourse))
+                    .addComponent(SelectCourse)
+                    .addComponent(jButton1))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
@@ -168,6 +174,7 @@ public class ViewAndDeleteCourseGUI extends javax.swing.JFrame {
     private javax.swing.JButton Back;
     private javax.swing.JButton DeleteCourse;
     private javax.swing.JButton SelectCourse;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
