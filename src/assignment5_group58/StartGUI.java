@@ -377,10 +377,8 @@ public class StartGUI extends javax.swing.JFrame implements Serializable{
                 return canEdit [columnIndex];
             }
         });
-        LocTable.setColumnSelectionAllowed(true);
         LocTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(LocTable);
-        LocTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         if (LocTable.getColumnModel().getColumnCount() > 0) {
             LocTable.getColumnModel().getColumn(0).setResizable(false);
             LocTable.getColumnModel().getColumn(1).setResizable(false);

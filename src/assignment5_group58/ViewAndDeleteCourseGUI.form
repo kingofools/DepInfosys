@@ -29,6 +29,8 @@
                   <Component id="jScrollPane1" alignment="0" pref="435" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="DeleteCourse" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="SelectCourse" min="-2" pref="107" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="Back" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -46,6 +48,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="DeleteCourse" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="Back" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="SelectCourse" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="15" max="32767" attributes="0"/>
           </Group>
@@ -113,6 +116,11 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BackActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="SelectCourse">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Select Course"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
