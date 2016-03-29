@@ -72,6 +72,11 @@ public class ViewAndDeleteCourseGUI extends javax.swing.JFrame {
         });
 
         SelectCourse.setText("Select Course");
+        SelectCourse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SelectCourseActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -108,6 +113,20 @@ public class ViewAndDeleteCourseGUI extends javax.swing.JFrame {
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
         dispose();
     }//GEN-LAST:event_BackActionPerformed
+
+    private void SelectCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectCourseActionPerformed
+        DispStudentsGUI newstudentgui;
+        //todo : add exceptions here
+        //try {
+            newstudentgui = new DispStudentsGUI();
+            newstudentgui.setLocationRelativeTo(null);
+            newstudentgui.setVisible(true);
+            //optional 
+            //setVisible(false);
+        /*} catch (FileNotFoundException ex) {
+            Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+    }//GEN-LAST:event_SelectCourseActionPerformed
 
     /**
      * @param args the command line arguments

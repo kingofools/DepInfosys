@@ -320,6 +320,11 @@ public class StartGUI extends javax.swing.JFrame implements Serializable{
         );
 
         Evaluate.setText("Enter Credits");
+        Evaluate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EvaluateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout AcadstabLayout = new javax.swing.GroupLayout(Acadstab);
         Acadstab.setLayout(AcadstabLayout);
@@ -831,6 +836,20 @@ public class StartGUI extends javax.swing.JFrame implements Serializable{
             Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
         }*/
     }//GEN-LAST:event_ViewCourseActionPerformed
+
+    private void EvaluateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EvaluateActionPerformed
+        ViewAndDeleteCourseGUI newviewcoursegui;
+        //todo : add exceptions here
+        //try {
+            newviewcoursegui = new ViewAndDeleteCourseGUI();
+            newviewcoursegui.setLocationRelativeTo(null);
+            newviewcoursegui.setVisible(true);
+            //optional 
+            //setVisible(false);
+        /*} catch (FileNotFoundException ex) {
+            Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+    }//GEN-LAST:event_EvaluateActionPerformed
 
     /**
      * @param args the command line arguments
