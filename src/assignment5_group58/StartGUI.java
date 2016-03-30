@@ -16,16 +16,22 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author surya
  */
-public class StartGUI extends javax.swing.JFrame implements Serializable{
+public class StartGUI extends javax.swing.JFrame implements Serializable {
 
     /**
      * Creates new form StartGUI
      */
-    static  ArrayList<Course> courseList = new ArrayList<Course>();
+    static ArrayList<Course> courseList = new ArrayList<Course>();
+    static ArrayList<Transaction> cashbook = new ArrayList<Transaction>();
+    static double netIncome = 0.0;
+    static double netExpenditure = 0.0;
+    
     public StartGUI() {
         initComponents();
     }
@@ -218,7 +224,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable{
                         .addComponent(welcome))
                     .addGroup(HometabLayout.createSequentialGroup()
                         .addComponent(sem)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 395, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 396, Short.MAX_VALUE)
                         .addComponent(date)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(time))
@@ -228,7 +234,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable{
             .addGroup(HometabLayout.createSequentialGroup()
                 .addGap(75, 75, 75)
                 .addComponent(welcome)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 184, Short.MAX_VALUE)
                 .addGroup(HometabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(time)
                     .addComponent(date)
@@ -354,7 +360,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable{
                 .addGroup(AcadstabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Coursepanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Studentpanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addComponent(Evaluate)
                 .addGap(31, 31, 31))
         );
@@ -415,12 +421,12 @@ public class StartGUI extends javax.swing.JFrame implements Serializable{
                     .addComponent(DispNum, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(AddItem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ModItem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
         InventorytabLayout.setVerticalGroup(
             InventorytabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(InventorytabLayout.createSequentialGroup()
-                .addContainerGap(65, Short.MAX_VALUE)
+                .addContainerGap(75, Short.MAX_VALUE)
                 .addComponent(AddItem)
                 .addGap(18, 18, 18)
                 .addComponent(DelItem)
@@ -462,6 +468,11 @@ public class StartGUI extends javax.swing.JFrame implements Serializable{
         jLabel6.setText("Details:");
 
         AddTrans.setText("Add Transaction");
+        AddTrans.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddTransActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout TreasurytabLayout = new javax.swing.GroupLayout(Treasurytab);
         Treasurytab.setLayout(TreasurytabLayout);
@@ -480,7 +491,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable{
                     .addGroup(TreasurytabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(TransType, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(PriceField)))
-                .addContainerGap(155, Short.MAX_VALUE))
+                .addContainerGap(156, Short.MAX_VALUE))
         );
         TreasurytabLayout.setVerticalGroup(
             TreasurytabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -499,7 +510,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable{
                     .addComponent(jLabel6))
                 .addGap(18, 18, 18)
                 .addComponent(AddTrans)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Treasury", Treasurytab);
@@ -530,7 +541,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable{
                     .addGroup(LogspanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(LogspanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LogspanelLayout.createSequentialGroup()
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -626,7 +637,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable{
             RespanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(RespanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -722,7 +733,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable{
                 .addContainerGap()
                 .addGroup(SearchtabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(SearchField)
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE))
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE))
                 .addContainerGap())
         );
         SearchtabLayout.setVerticalGroup(
@@ -731,7 +742,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable{
                 .addContainerGap()
                 .addComponent(SearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -756,36 +767,36 @@ public class StartGUI extends javax.swing.JFrame implements Serializable{
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String pwd = new String(this.jPasswordField1.getPassword());
-                if (pwd.equals("")){  //security threat !!                  
-                    this.LoginPopup.setVisible(false);
-                    this.setVisible(true);
-                    Date d = new Date();
-                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-                    this.time.setText(sdf.format(d));
-                    SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
-                    this.date.setText(sdf1.format(d));
-                    this.sem.setText("Semester : Spring");
-                }else{
-                    this.LoginPwdError.setLocationRelativeTo(null);
-                    this.LoginPwdError.setVisible(true);
-                }
+        if (pwd.equals("")) {  //security threat !!                  
+            this.LoginPopup.setVisible(false);
+            this.setVisible(true);
+            Date d = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+            this.time.setText(sdf.format(d));
+            SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
+            this.date.setText(sdf1.format(d));
+            this.sem.setText("Semester : Spring");
+        } else {
+            this.LoginPwdError.setLocationRelativeTo(null);
+            this.LoginPwdError.setVisible(true);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
         String pwd = new String(this.jPasswordField1.getPassword());
-                if (pwd.equals("")){      //security threat !!              
-                    this.LoginPopup.setVisible(false);
-                    this.setVisible(true);
-                    Date d = new Date();
-                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-                    this.time.setText(sdf.format(d));
-                    SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
-                    this.date.setText(sdf1.format(d));
-                    this.sem.setText("Semester : Spring");
-                }else{
-                    this.LoginPwdError.setLocationRelativeTo(null);
-                    this.LoginPwdError.setVisible(true);
-                }
+        if (pwd.equals("")) {      //security threat !!              
+            this.LoginPopup.setVisible(false);
+            this.setVisible(true);
+            Date d = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+            this.time.setText(sdf.format(d));
+            SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
+            this.date.setText(sdf1.format(d));
+            this.sem.setText("Semester : Spring");
+        } else {
+            this.LoginPwdError.setLocationRelativeTo(null);
+            this.LoginPwdError.setVisible(true);
+        }
     }//GEN-LAST:event_jPasswordField1ActionPerformed
 
     private void TransTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TransTypeActionPerformed
@@ -796,11 +807,11 @@ public class StartGUI extends javax.swing.JFrame implements Serializable{
         AddCourseGUI newcoursegui;
         //todo : add exceptions here
         //try {
-            newcoursegui = new AddCourseGUI(courseList);
-            newcoursegui.setLocationRelativeTo(null);
-            newcoursegui.setVisible(true);
-            //optional 
-            //setVisible(false);
+        newcoursegui = new AddCourseGUI(courseList);
+        newcoursegui.setLocationRelativeTo(null);
+        newcoursegui.setVisible(true);
+        //optional 
+        //setVisible(false);
         /*} catch (FileNotFoundException ex) {
             Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
         }*/
@@ -818,25 +829,25 @@ public class StartGUI extends javax.swing.JFrame implements Serializable{
         ViewAndDeleteCourseGUI coursegui;
         //todo : add exceptions here
         //try {
-            coursegui = new ViewAndDeleteCourseGUI();
-            coursegui.setLocationRelativeTo(null);
-            coursegui.setVisible(true);
-            //optional
-            //setVisible(false);
+        coursegui = new ViewAndDeleteCourseGUI();
+        coursegui.setLocationRelativeTo(null);
+        coursegui.setVisible(true);
+        //optional
+        //setVisible(false);
         /*} catch (FileNotFoundException ex) {
             Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
         }*/
     }//GEN-LAST:event_DelCourseActionPerformed
 
     private void ViewCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewCourseActionPerformed
-         ViewCourseGUI coursegui;
+        ViewCourseGUI coursegui;
         //todo : add exceptions here
         //try {
-            coursegui = new ViewCourseGUI();
-            coursegui.setLocationRelativeTo(null);
-            coursegui.setVisible(true);
-            //optional
-            //setVisible(false);
+        coursegui = new ViewCourseGUI();
+        coursegui.setLocationRelativeTo(null);
+        coursegui.setVisible(true);
+        //optional
+        //setVisible(false);
         /*} catch (FileNotFoundException ex) {
             Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
         }*/
@@ -846,11 +857,11 @@ public class StartGUI extends javax.swing.JFrame implements Serializable{
         ViewAndDeleteCourseGUI newviewcoursegui;
         //todo : add exceptions here
         //try {
-            newviewcoursegui = new ViewAndDeleteCourseGUI();
-            newviewcoursegui.setLocationRelativeTo(null);
-            newviewcoursegui.setVisible(true);
-            //optional 
-            //setVisible(false);
+        newviewcoursegui = new ViewAndDeleteCourseGUI();
+        newviewcoursegui.setLocationRelativeTo(null);
+        newviewcoursegui.setVisible(true);
+        //optional 
+        //setVisible(false);
         /*} catch (FileNotFoundException ex) {
             Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
         }*/
@@ -860,15 +871,53 @@ public class StartGUI extends javax.swing.JFrame implements Serializable{
         AddStudentGUI newgui;
         //todo : add exceptions here
         //try {
-            newgui = new AddStudentGUI();
-            newgui.setLocationRelativeTo(null);
-            newgui.setVisible(true);
-            //optional 
-            //setVisible(false);
+        newgui = new AddStudentGUI();
+        newgui.setLocationRelativeTo(null);
+        newgui.setVisible(true);
+        //optional 
+        //setVisible(false);
         /*} catch (FileNotFoundException ex) {
             Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
         }*/
     }//GEN-LAST:event_NewStudentActionPerformed
+
+    private void AddTransActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddTransActionPerformed
+        // TODO add your handling code here:
+        Transaction newTransaction = new Transaction();
+        String selected = (String) TransType.getSelectedItem();
+      
+        //  JOptionPane.showMessageDialog(null,"Type : "+selected);
+        newTransaction.settitle(selected);
+        newTransaction.setauthority("");
+        newTransaction.settype(selected);
+        newTransaction.setdetails(DetailsArea.getText());
+        
+        if(PriceField.getText().isEmpty()){
+             JOptionPane.showMessageDialog(null, "Need to enter price !");
+        }
+        else
+        {
+            if(selected.equals("Non Inventory Expenture"))
+            {
+                newTransaction.setprofit(0.0);
+                newTransaction.setinvestment(Double.parseDouble(PriceField.getText()));
+            }
+            else
+            {
+                newTransaction.setinvestment(0.0);
+                newTransaction.setprofit(Double.parseDouble(PriceField.getText()));
+            }
+            //transaction must be saved
+            netIncome += newTransaction.getprofit();
+            netExpenditure += newTransaction.getinvestment();
+            cashbook.add(newTransaction);
+            
+           // JOptionPane.showMessageDialog(null,"Type : "+selected+" profit "
+           //+newTransaction.getprofit()+" invest "+newTransaction.getinvestment());
+           JOptionPane.showMessageDialog(null, "Current income = "+netIncome+
+                   "\nCurrent expenditure : "+netExpenditure);
+        }
+    }//GEN-LAST:event_AddTransActionPerformed
 
     /**
      * @param args the command line arguments
@@ -902,13 +951,11 @@ public class StartGUI extends javax.swing.JFrame implements Serializable{
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
-                
-                
+
                 StartGUI s = new StartGUI();
                 s.LoginPopup.setLocationRelativeTo(null);
                 s.LoginPopup.setVisible(true);
-                
+
             }
         });
     }
