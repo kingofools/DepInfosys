@@ -29,8 +29,12 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
      */
     static ArrayList<Course> courseList = new ArrayList<Course>();
     static ArrayList<Transaction> cashbook = new ArrayList<Transaction>();
+    static ArrayList<Item> itemList = new ArrayList<Item>();
     static double netIncome = 0.0;
     static double netExpenditure = 0.0;
+    
+    static int canDelete = 0 ;
+    static Item modifyItem = new Item();
     
     public StartGUI() {
         initComponents();
@@ -53,6 +57,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         LoginPwdError = new javax.swing.JDialog();
         jLabel1 = new javax.swing.JLabel();
         OKButton = new javax.swing.JButton();
+        jSpinner1 = new javax.swing.JSpinner();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         Hometab = new javax.swing.JPanel();
         welcome = new javax.swing.JLabel();
@@ -70,12 +75,19 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         PrintStudent = new javax.swing.JButton();
         Evaluate = new javax.swing.JButton();
         Inventorytab = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        LocTable = new javax.swing.JTable();
-        AddItem = new javax.swing.JButton();
+        viewItem = new javax.swing.JButton();
         DelItem = new javax.swing.JButton();
         ModItem = new javax.swing.JButton();
         DispNum = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        itemName = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        itemLocation = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        itemPrice = new javax.swing.JTextField();
+        saveItem = new javax.swing.JButton();
         Treasurytab = new javax.swing.JPanel();
         TransType = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
@@ -224,7 +236,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                         .addComponent(welcome))
                     .addGroup(HometabLayout.createSequentialGroup()
                         .addComponent(sem)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 396, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 395, Short.MAX_VALUE)
                         .addComponent(date)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(time))
@@ -234,7 +246,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             .addGroup(HometabLayout.createSequentialGroup()
                 .addGap(75, 75, 75)
                 .addComponent(welcome)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 184, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
                 .addGroup(HometabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(time)
                     .addComponent(date)
@@ -360,74 +372,134 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                 .addGroup(AcadstabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Coursepanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Studentpanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(Evaluate)
                 .addGap(31, 31, 31))
         );
 
         jTabbedPane1.addTab("Academics", Acadstab);
 
-        LocTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Name", "Location"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                true, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+        viewItem.setText("View all");
+        viewItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewItemActionPerformed(evt);
             }
         });
-        LocTable.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(LocTable);
-        if (LocTable.getColumnModel().getColumnCount() > 0) {
-            LocTable.getColumnModel().getColumn(0).setResizable(false);
-            LocTable.getColumnModel().getColumn(1).setResizable(false);
-        }
-
-        AddItem.setText("Add Item");
 
         DelItem.setText("Delete Item");
+        DelItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DelItemActionPerformed(evt);
+            }
+        });
 
         ModItem.setText("Modify Details");
+        ModItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModItemActionPerformed(evt);
+            }
+        });
 
         DispNum.setText("Display by Numbers");
+        DispNum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DispNumActionPerformed(evt);
+            }
+        });
+
+        jLabel12.setText("Name : ");
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel13.setText("New item");
+
+        jLabel14.setText("Location :");
+
+        jLabel15.setText("Price : ");
+
+        itemPrice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemPriceActionPerformed(evt);
+            }
+        });
+
+        saveItem.setText("Save");
+        saveItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveItemActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(83, Short.MAX_VALUE)
+                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(113, 113, 113))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(jLabel12)
+                        .addGap(14, 14, 14))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel15))
+                        .addGap(18, 18, 18)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(itemName)
+                    .addComponent(itemLocation)
+                    .addComponent(itemPrice)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(saveItem, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(itemName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(itemLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel15)
+                    .addComponent(itemPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addComponent(saveItem, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout InventorytabLayout = new javax.swing.GroupLayout(Inventorytab);
         Inventorytab.setLayout(InventorytabLayout);
         InventorytabLayout.setHorizontalGroup(
             InventorytabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(InventorytabLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51)
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(InventorytabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(DelItem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(DispNum, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(AddItem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(viewItem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ModItem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
         InventorytabLayout.setVerticalGroup(
             InventorytabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(InventorytabLayout.createSequentialGroup()
-                .addContainerGap(75, Short.MAX_VALUE)
-                .addComponent(AddItem)
+                .addContainerGap(65, Short.MAX_VALUE)
+                .addComponent(viewItem)
                 .addGap(18, 18, 18)
                 .addComponent(DelItem)
                 .addGap(18, 18, 18)
@@ -436,8 +508,8 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                 .addComponent(DispNum)
                 .addGap(63, 63, 63))
             .addGroup(InventorytabLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -491,7 +563,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                     .addGroup(TreasurytabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(TransType, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(PriceField)))
-                .addContainerGap(156, Short.MAX_VALUE))
+                .addContainerGap(155, Short.MAX_VALUE))
         );
         TreasurytabLayout.setVerticalGroup(
             TreasurytabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -510,7 +582,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                     .addComponent(jLabel6))
                 .addGap(18, 18, 18)
                 .addComponent(AddTrans)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Treasury", Treasurytab);
@@ -541,7 +613,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                     .addGroup(LogspanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addGroup(LogspanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LogspanelLayout.createSequentialGroup()
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -637,7 +709,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             RespanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(RespanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -733,7 +805,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                 .addContainerGap()
                 .addGroup(SearchtabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(SearchField)
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE))
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE))
                 .addContainerGap())
         );
         SearchtabLayout.setVerticalGroup(
@@ -742,7 +814,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                 .addContainerGap()
                 .addComponent(SearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -924,6 +996,124 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         }
     }//GEN-LAST:event_AddTransActionPerformed
 
+    private void saveItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveItemActionPerformed
+        // TODO add your handling code here:
+        Item newItem = new Item();
+        Transaction itemTrans = new Transaction();
+        
+        if(itemName.getText().isEmpty())
+       {
+            JOptionPane.showMessageDialog(null,"Need to enter name!");
+        }
+        else if(itemLocation.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null,"Need to enter location!");
+        }
+        else if(itemPrice.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null,"Need to enter price!");
+        }
+        else//non are empty
+        {
+            newItem.setname(itemName.getText());
+            newItem.setlocation(itemLocation.getText());
+            newItem.setprice(Double.parseDouble(itemPrice.getText()));
+            itemList.add(newItem);
+            JOptionPane.showMessageDialog(null,"Item "+newItem.getname()+" has been added!");
+            
+            itemTrans.settitle(newItem.getname());
+            itemTrans.setauthority("Inventory");
+            itemTrans.setdetails("Location :"+newItem.getlocation());
+            itemTrans.setinvestment(newItem.getprice());
+            itemTrans.setprofit(0.0);
+            itemTrans.settype("Item");
+            
+            netExpenditure += itemTrans.getinvestment();
+            cashbook.add(itemTrans);
+            JOptionPane.showMessageDialog(null, "Current income = "+netIncome+
+                   "\nCurrent expenditure : "+netExpenditure);
+           
+           //update incfiels and expfield
+           IncField.setText(Double.toString(netIncome));
+           ExpField.setText(Double.toString(netExpenditure));
+           BalField.setText(Double.toString(netIncome - netExpenditure));
+        }
+    }//GEN-LAST:event_saveItemActionPerformed
+
+    private void viewItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewItemActionPerformed
+        // TODO add your handling code here:
+        canDelete = 0;
+        ViewItemGUI newgui = new ViewItemGUI(itemList,canDelete,modifyItem);
+        newgui.setLocationRelativeTo(null);
+        newgui.setVisible(true);
+        
+    }//GEN-LAST:event_viewItemActionPerformed
+
+    private void DelItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DelItemActionPerformed
+        // TODO add your handling code here:
+                canDelete = 1;
+        ViewItemGUI newgui = new ViewItemGUI(itemList,canDelete,modifyItem);
+        newgui.setLocationRelativeTo(null);
+        newgui.setVisible(true);
+    }//GEN-LAST:event_DelItemActionPerformed
+
+    private void itemPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemPriceActionPerformed
+        // TODO add your handling code here:
+        Item newItem = new Item();
+        Transaction itemTrans = new Transaction();
+        
+        if(itemName.getText().isEmpty())
+       {
+            JOptionPane.showMessageDialog(null,"Need to enter name!");
+        }
+        else if(itemLocation.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null,"Need to enter location!");
+        }
+        else if(itemPrice.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null,"Need to enter price!");
+        }
+        else//non are empty
+        {
+            newItem.setname(itemName.getText());
+            newItem.setlocation(itemLocation.getText());
+            newItem.setprice(Double.parseDouble(itemPrice.getText()));
+            itemList.add(newItem);
+            JOptionPane.showMessageDialog(null,"Item "+newItem.getname()+" has been added!");
+            
+            itemTrans.settitle(newItem.getname());
+            itemTrans.setauthority("Inventory");
+            itemTrans.setdetails("Location :"+newItem.getlocation());
+            itemTrans.setinvestment(newItem.getprice());
+            itemTrans.setprofit(0.0);
+            itemTrans.settype("Item");
+            
+            netExpenditure += itemTrans.getinvestment();
+            cashbook.add(itemTrans);
+            JOptionPane.showMessageDialog(null, "Current income = "+netIncome+
+                   "\nCurrent expenditure : "+netExpenditure);
+           
+        }//update incfiels and expfield
+           IncField.setText(Double.toString(netIncome));
+           ExpField.setText(Double.toString(netExpenditure));
+           BalField.setText(Double.toString(netIncome - netExpenditure));
+    }//GEN-LAST:event_itemPriceActionPerformed
+
+    private void ModItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModItemActionPerformed
+        // TODO add your handling code here:
+        canDelete = -1;
+        ViewItemGUI newgui = new ViewItemGUI(itemList,canDelete,modifyItem);
+        newgui.setLocationRelativeTo(null);
+        newgui.setVisible(true);
+        
+    }//GEN-LAST:event_ModItemActionPerformed
+
+    private void DispNumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DispNumActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_DispNumActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -968,10 +1158,9 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Acadstab;
     private javax.swing.JButton AddCourse;
-    private javax.swing.JButton AddItem;
     private javax.swing.JButton AddResPub;
     private javax.swing.JButton AddTrans;
-    private javax.swing.JTextField BalField;
+    public static javax.swing.JTextField BalField;
     private javax.swing.JPanel Cashbooktab;
     private javax.swing.JPanel Coursepanel;
     private javax.swing.JTextArea CreditsArea;
@@ -983,11 +1172,10 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     private javax.swing.JButton DispNum;
     private javax.swing.JButton EnrollStudent;
     private javax.swing.JButton Evaluate;
-    private javax.swing.JTextField ExpField;
+    public static javax.swing.JTextField ExpField;
     private javax.swing.JPanel Hometab;
-    private javax.swing.JTextField IncField;
+    public static javax.swing.JTextField IncField;
     private javax.swing.JPanel Inventorytab;
-    private javax.swing.JTable LocTable;
     private javax.swing.JFrame LoginPopup;
     private javax.swing.JDialog LoginPwdError;
     private javax.swing.JPanel Logspanel;
@@ -1009,10 +1197,17 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     private javax.swing.JPanel Treasurytab;
     private javax.swing.JButton ViewCourse;
     private javax.swing.JLabel date;
+    private javax.swing.JTextField itemLocation;
+    private javax.swing.JTextField itemName;
+    private javax.swing.JTextField itemPrice;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1021,16 +1216,19 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JButton saveItem;
     private javax.swing.JLabel sem;
     private javax.swing.JLabel time;
+    private javax.swing.JButton viewItem;
     private javax.swing.JLabel welcome;
     // End of variables declaration//GEN-END:variables
 }
