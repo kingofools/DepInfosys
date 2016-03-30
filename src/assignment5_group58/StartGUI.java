@@ -1111,7 +1111,9 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
 
     private void DispNumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DispNumActionPerformed
         // TODO add your handling code here:
-        
+        ItemNumGUI numgui = new ItemNumGUI(itemList);
+        numgui.setLocationRelativeTo(null);
+        numgui.setVisible(true);
     }//GEN-LAST:event_DispNumActionPerformed
 
     /**

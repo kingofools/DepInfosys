@@ -7,6 +7,7 @@ package assignment5_group58;
 
 import static assignment5_group58.StartGUI.itemList;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  *
@@ -89,18 +90,29 @@ public class ItemNumGUI extends javax.swing.JFrame {
         setTitle("Number crunching");
         
         String[] columns = {"Name","#"};
+        ArrayList<String> names = new ArrayList<>();
+        int i;
+        for(i=0;i<itemList.size();i++)
+        {
+            names.add(itemList.get(i).getname());
+        }
+        HashSet<String> NameSet = new HashSet<>(names); 
+        Object[] temp = new String[NameSet.size()];
+        temp = NameSet.toArray();
         
+        Object[][]itemObj = new String[temp.length+1][2];
         
-        
-        jTable1 = new javax.swing.JTable();
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Name", "#"
-            }
-        ));
+        itemObj[0][0] = temp[0];
+        itemObj[0][1] = frequency(temp[0].toString(),names);
+        for(i=1;i<temp.length;i++)
+        {
+           itemObj[i][0] = temp[i];
+           itemObj[i][1] = frequency(temp[i].toString(),names);
+        }
+            itemObj[i][0] = "Total : ";
+            itemObj[i][1] = String.valueOf(itemList.size());
+            
+        jTable1 = new javax.swing.JTable(itemObj,columns);
         jScrollPane1.setViewportView(jTable1);
 
         jButton1.setText("OK");
@@ -180,4 +192,18 @@ public class ItemNumGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
+    private Object frequency(String find,ArrayList<String> names) 
+    {
+        Double count = 0.0;
+        int i;
+        for(i=0;i<names.size();i++)
+        {
+            if(names.get(i).equals(find))
+            {
+                count = count + 1.0;
+            }
+        }
+        return Double.toString(count);
+    }
 }
