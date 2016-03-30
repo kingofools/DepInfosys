@@ -12,7 +12,7 @@ package assignment5_group58;
 import java.util.ArrayList;
 import java.io.Serializable;
 
-public class Item {
+public class Item implements Serializable {
     
     private String name;
     private String location;
