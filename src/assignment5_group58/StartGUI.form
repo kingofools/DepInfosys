@@ -838,10 +838,19 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="IncField">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTextField(Double.toString(netIncome))"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JTextField" name="ExpField">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTextField(Double.toString(netExpenditure))"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JTextField" name="BalField">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTextField(Double.toString(netIncome - netExpenditure))"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>

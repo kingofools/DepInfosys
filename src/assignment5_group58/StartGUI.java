@@ -96,9 +96,9 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        IncField = new javax.swing.JTextField();
-        ExpField = new javax.swing.JTextField();
-        BalField = new javax.swing.JTextField();
+        IncField = new javax.swing.JTextField(Double.toString(netIncome));
+        ExpField = new javax.swing.JTextField(Double.toString(netExpenditure));
+        BalField = new javax.swing.JTextField(Double.toString(netIncome - netExpenditure));
         ResPubtab = new javax.swing.JPanel();
         Respanel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -916,6 +916,11 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
            //+newTransaction.getprofit()+" invest "+newTransaction.getinvestment());
            JOptionPane.showMessageDialog(null, "Current income = "+netIncome+
                    "\nCurrent expenditure : "+netExpenditure);
+           
+           //update incfiels and expfield
+           IncField.setText(Double.toString(netIncome));
+           ExpField.setText(Double.toString(netExpenditure));
+           BalField.setText(Double.toString(netIncome - netExpenditure));
         }
     }//GEN-LAST:event_AddTransActionPerformed
 
