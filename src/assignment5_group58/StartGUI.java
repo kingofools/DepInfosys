@@ -1350,8 +1350,8 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             }
             
             newResPub.settitle(respubTitle.getText());
-            newResPub.setauthority(respubAuthority.getText());
-            newResPub.setdetails(respubDetails.getText());
+            //newResPub.setauthority(respubAuthority.getText());
+            newResPub.setdetails(respubDetails.getText() + "\nAuthority:" + respubAuthority.getText() + "\nType: " + newResPub.gettype());
             newResPub.setinvestment(Double.parseDouble(respubInvestment.getText()));
             newResPub.setprofit(Double.parseDouble(respubProfit.getText()));
             
@@ -1373,7 +1373,10 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
            IncField.setText(Double.toString(netIncome));
            ExpField.setText(Double.toString(netExpenditure));
            BalField.setText(Double.toString(netIncome - netExpenditure));
-            
+           
+            updateCreditsArea(newResPub);
+            updateDebitsArea(newResPub);
+           
         }
         
     }//GEN-LAST:event_saveRespubActionPerformed
