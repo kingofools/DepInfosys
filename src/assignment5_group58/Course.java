@@ -67,6 +67,10 @@ public class Course implements Serializable
 	{
 		return professor;
 	};
+        
+        public int getstudentsonroll(){
+            return StudentsOnRoll.size();
+        };
 
 }
 
