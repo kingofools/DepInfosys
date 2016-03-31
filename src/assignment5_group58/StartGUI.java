@@ -39,6 +39,20 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     public StartGUI() {
         initComponents();
     }
+    
+    //check if price is numeric
+    public static boolean isNumeric(String str)  
+    {  
+      try  
+      {  
+           double d = Double.parseDouble(str);  
+      }  
+      catch(NumberFormatException nfe)  
+      {  
+        return false;  
+      }  
+      return true;  
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -58,6 +72,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         jLabel1 = new javax.swing.JLabel();
         OKButton = new javax.swing.JButton();
         jSpinner1 = new javax.swing.JSpinner();
+        respubGroup = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         Hometab = new javax.swing.JPanel();
         welcome = new javax.swing.JLabel();
@@ -112,13 +127,24 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         ExpField = new javax.swing.JTextField(Double.toString(netExpenditure));
         BalField = new javax.swing.JTextField(Double.toString(netIncome - netExpenditure));
         ResPubtab = new javax.swing.JPanel();
-        Respanel = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        ResArea = new javax.swing.JTextArea();
-        Pubpanel = new javax.swing.JPanel();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        PubArea = new javax.swing.JTextArea();
-        AddResPub = new javax.swing.JButton();
+        ResPubPanel = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        ResRadioButton = new javax.swing.JRadioButton();
+        PubRadioButton = new javax.swing.JRadioButton();
+        jLabel17 = new javax.swing.JLabel();
+        respubTitle = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        respubAuthority = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        respubDetails = new javax.swing.JTextArea();
+        jLabel20 = new javax.swing.JLabel();
+        respubInvestment = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        respubProfit = new javax.swing.JTextField();
+        saveRespub = new javax.swing.JButton();
+        ViewResearchButton = new javax.swing.JButton();
+        ViewPublicationButton = new javax.swing.JButton();
         Searchtab = new javax.swing.JPanel();
         SearchField = new javax.swing.JTextField();
         jScrollPane7 = new javax.swing.JScrollPane();
@@ -246,7 +272,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             .addGroup(HometabLayout.createSequentialGroup()
                 .addGap(75, 75, 75)
                 .addComponent(welcome)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 184, Short.MAX_VALUE)
                 .addGroup(HometabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(time)
                     .addComponent(date)
@@ -372,7 +398,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                 .addGroup(AcadstabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Coursepanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Studentpanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addComponent(Evaluate)
                 .addGap(31, 31, 31))
         );
@@ -498,7 +524,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         InventorytabLayout.setVerticalGroup(
             InventorytabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(InventorytabLayout.createSequentialGroup()
-                .addContainerGap(65, Short.MAX_VALUE)
+                .addContainerGap(75, Short.MAX_VALUE)
                 .addComponent(viewItem)
                 .addGap(18, 18, 18)
                 .addComponent(DelItem)
@@ -526,12 +552,6 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         jLabel4.setText("Transaction Type:");
 
         jLabel5.setText("Price:");
-
-        PriceField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PriceFieldActionPerformed(evt);
-            }
-        });
 
         DetailsArea.setColumns(20);
         DetailsArea.setRows(5);
@@ -582,7 +602,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                     .addComponent(jLabel6))
                 .addGap(18, 18, 18)
                 .addComponent(AddTrans)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Treasury", Treasurytab);
@@ -690,80 +710,144 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
 
         jTabbedPane1.addTab("Cash book", Cashbooktab);
 
-        Respanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Research Projects"));
+        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel16.setText("Research / Publication");
 
-        ResArea.setColumns(20);
-        ResArea.setRows(5);
-        jScrollPane3.setViewportView(ResArea);
+        respubGroup.add(ResRadioButton);
+        ResRadioButton.setSelected(true);
+        ResRadioButton.setText("Research");
 
-        javax.swing.GroupLayout RespanelLayout = new javax.swing.GroupLayout(Respanel);
-        Respanel.setLayout(RespanelLayout);
-        RespanelLayout.setHorizontalGroup(
-            RespanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(RespanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+        respubGroup.add(PubRadioButton);
+        PubRadioButton.setText("Publication");
+
+        jLabel17.setText("Title :");
+
+        jLabel18.setText("In-charge :");
+
+        jLabel19.setText("Details :");
+
+        respubDetails.setColumns(20);
+        respubDetails.setRows(5);
+        jScrollPane1.setViewportView(respubDetails);
+
+        jLabel20.setText("Investment :");
+
+        jLabel21.setText("Profit :");
+
+        saveRespub.setText("Save");
+        saveRespub.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveRespubActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout ResPubPanelLayout = new javax.swing.GroupLayout(ResPubPanel);
+        ResPubPanel.setLayout(ResPubPanelLayout);
+        ResPubPanelLayout.setHorizontalGroup(
+            ResPubPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ResPubPanelLayout.createSequentialGroup()
+                .addGroup(ResPubPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ResPubPanelLayout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(ResPubPanelLayout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addGroup(ResPubPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(ResPubPanelLayout.createSequentialGroup()
+                                .addComponent(ResRadioButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(PubRadioButton)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(ResPubPanelLayout.createSequentialGroup()
+                                .addGroup(ResPubPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel18)
+                                    .addComponent(jLabel19)
+                                    .addGroup(ResPubPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel21))
+                                    .addComponent(jLabel17))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(ResPubPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(respubTitle)
+                                    .addComponent(respubAuthority)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+                                    .addComponent(respubInvestment)
+                                    .addComponent(respubProfit)
+                                    .addGroup(ResPubPanelLayout.createSequentialGroup()
+                                        .addComponent(saveRespub, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE)))))))
+                .addGap(27, 27, 27))
+        );
+        ResPubPanelLayout.setVerticalGroup(
+            ResPubPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ResPubPanelLayout.createSequentialGroup()
+                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(ResPubPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(PubRadioButton)
+                    .addComponent(ResRadioButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(ResPubPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17)
+                    .addComponent(respubTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(ResPubPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18)
+                    .addComponent(respubAuthority, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(ResPubPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel19)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(ResPubPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(respubInvestment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel20))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(ResPubPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(respubProfit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel21))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(saveRespub, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        RespanelLayout.setVerticalGroup(
-            RespanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(RespanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
-                .addContainerGap())
-        );
 
-        Pubpanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Publications"));
+        ViewResearchButton.setText("View Research");
+        ViewResearchButton.setMaximumSize(new java.awt.Dimension(105, 25));
+        ViewResearchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ViewResearchButtonActionPerformed(evt);
+            }
+        });
 
-        PubArea.setColumns(20);
-        PubArea.setRows(5);
-        jScrollPane6.setViewportView(PubArea);
-
-        javax.swing.GroupLayout PubpanelLayout = new javax.swing.GroupLayout(Pubpanel);
-        Pubpanel.setLayout(PubpanelLayout);
-        PubpanelLayout.setHorizontalGroup(
-            PubpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PubpanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        PubpanelLayout.setVerticalGroup(
-            PubpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PubpanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane6)
-                .addContainerGap())
-        );
-
-        AddResPub.setText("Add New ");
+        ViewPublicationButton.setText("View Publication");
+        ViewPublicationButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ViewPublicationButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout ResPubtabLayout = new javax.swing.GroupLayout(ResPubtab);
         ResPubtab.setLayout(ResPubtabLayout);
         ResPubtabLayout.setHorizontalGroup(
             ResPubtabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ResPubtabLayout.createSequentialGroup()
-                .addGroup(ResPubtabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(ResPubtabLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(Respanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(Pubpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(ResPubtabLayout.createSequentialGroup()
-                        .addGap(192, 192, 192)
-                        .addComponent(AddResPub, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(ResPubPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addGroup(ResPubtabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(ViewResearchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ViewPublicationButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         ResPubtabLayout.setVerticalGroup(
             ResPubtabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ResPubtabLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(AddResPub)
-                .addGap(18, 18, 18)
-                .addGroup(ResPubtabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Respanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Pubpanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+            .addComponent(ResPubPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(ResPubtabLayout.createSequentialGroup()
+                .addGap(58, 58, 58)
+                .addComponent(ViewResearchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addComponent(ViewPublicationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Research/Publication", ResPubtab);
@@ -814,7 +898,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                 .addContainerGap()
                 .addComponent(SearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -829,7 +913,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -888,10 +972,6 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
         }*/
     }//GEN-LAST:event_AddCourseActionPerformed
-
-    private void PriceFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PriceFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PriceFieldActionPerformed
 
     private void OKButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OKButtonActionPerformed
         this.LoginPwdError.setVisible(false);
@@ -964,8 +1044,8 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         newTransaction.settype(selected);
         newTransaction.setdetails(DetailsArea.getText());
         
-        if(PriceField.getText().isEmpty()){
-             JOptionPane.showMessageDialog(null, "Need to enter price !");
+        if(PriceField.getText().isEmpty()||!isNumeric(PriceField.getText())){
+             JOptionPane.showMessageDialog(null, "Need to enter price correctly !");
         }
         else
         {
@@ -987,8 +1067,13 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
            // JOptionPane.showMessageDialog(null,"Type : "+selected+" profit "
            //+newTransaction.getprofit()+" invest "+newTransaction.getinvestment());
            JOptionPane.showMessageDialog(null, "Current income = "+netIncome+
-                   "\nCurrent expenditure : "+netExpenditure);
+                   "\nCurrent expenditure : "+netExpenditure+
+                   "\nCurrent balance : "+(netIncome - netExpenditure));
            
+           if(netIncome < netExpenditure)
+           {
+               JOptionPane.showMessageDialog(null,"Negative balance! Suggested to add grant/fund");
+           }
            //update incfiels and expfield
            IncField.setText(Double.toString(netIncome));
            ExpField.setText(Double.toString(netExpenditure));
@@ -1009,9 +1094,9 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         {
             JOptionPane.showMessageDialog(null,"Need to enter location!");
         }
-        else if(itemPrice.getText().isEmpty())
+        else if(itemPrice.getText().isEmpty()||!isNumeric(itemPrice.getText()))
         {
-            JOptionPane.showMessageDialog(null,"Need to enter price!");
+            JOptionPane.showMessageDialog(null,"Need to enter price correctly!");
         }
         else//non are empty
         {
@@ -1031,7 +1116,13 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             netExpenditure += itemTrans.getinvestment();
             cashbook.add(itemTrans);
             JOptionPane.showMessageDialog(null, "Current income = "+netIncome+
-                   "\nCurrent expenditure : "+netExpenditure);
+                   "\nCurrent expenditure : "+netExpenditure+
+                   "\nCurrent balance : "+(netIncome - netExpenditure));
+           
+           if(netIncome < netExpenditure)
+           {
+               JOptionPane.showMessageDialog(null,"Negative balance! Suggested to add grant/fund");
+           }
            
            //update incfiels and expfield
            IncField.setText(Double.toString(netIncome));
@@ -1070,9 +1161,9 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         {
             JOptionPane.showMessageDialog(null,"Need to enter location!");
         }
-        else if(itemPrice.getText().isEmpty())
+        else if(itemPrice.getText().isEmpty()||!isNumeric(itemPrice.getText()))
         {
-            JOptionPane.showMessageDialog(null,"Need to enter price!");
+            JOptionPane.showMessageDialog(null,"Need to enter price correctly!");
         }
         else//non are empty
         {
@@ -1092,6 +1183,13 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             netExpenditure += itemTrans.getinvestment();
             cashbook.add(itemTrans);
             JOptionPane.showMessageDialog(null, "Current income = "+netIncome+
+                   "\nCurrent expenditure : "+netExpenditure+
+                   "\nCurrent balance : "+(netIncome - netExpenditure));
+           
+           if(netIncome < netExpenditure)
+           {
+               JOptionPane.showMessageDialog(null,"Negative balance! Suggested to add grant/fund");
+           }JOptionPane.showMessageDialog(null, "Current income = "+netIncome+
                    "\nCurrent expenditure : "+netExpenditure);
            
         }//update incfiels and expfield
@@ -1115,6 +1213,73 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         numgui.setLocationRelativeTo(null);
         numgui.setVisible(true);
     }//GEN-LAST:event_DispNumActionPerformed
+
+    private void saveRespubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveRespubActionPerformed
+        // TODO add your handling code here:
+        Transaction newResPub = new Transaction();
+        if(respubTitle.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null,"Enter name !");
+        }
+        else if(respubAuthority.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null,"Enter name of in-charge !");
+        }
+        else if(!isNumeric(respubInvestment.getText()))
+        {
+            JOptionPane.showMessageDialog(null,"Enter numerical investment!- 0 if none ");
+        }
+        else if(!isNumeric(respubProfit.getText()))
+        {
+            JOptionPane.showMessageDialog(null,"Enter numerical profit!- 0 if none ");
+        }
+        else
+        {//minimum details are present
+            if(ResRadioButton.isSelected())
+            {
+                newResPub.settype("Research");
+            }
+            else
+            {
+                newResPub.settype("Publication");
+            }
+            
+            newResPub.settitle(respubTitle.getText());
+            newResPub.setauthority(respubAuthority.getText());
+            newResPub.setdetails(respubDetails.getText());
+            newResPub.setinvestment(Double.parseDouble(respubInvestment.getText()));
+            newResPub.setprofit(Double.parseDouble(respubProfit.getText()));
+            
+            //transaction must be saved
+            netIncome += newResPub.getprofit();
+            netExpenditure += newResPub.getinvestment();
+            cashbook.add(newResPub);
+           JOptionPane.showMessageDialog(null,newResPub.gettype()+" "+newResPub.gettitle()+" added!");
+           
+           JOptionPane.showMessageDialog(null, "Current income = "+netIncome+
+                   "\nCurrent expenditure : "+netExpenditure+
+                   "\nCurrent balance : "+(netIncome - netExpenditure));
+           
+           if(netIncome < netExpenditure)
+           {
+               JOptionPane.showMessageDialog(null,"Negative balance! Suggested to add grant/fund");
+           }
+           //update incfiels and expfield
+           IncField.setText(Double.toString(netIncome));
+           ExpField.setText(Double.toString(netExpenditure));
+           BalField.setText(Double.toString(netIncome - netExpenditure));
+            
+        }
+        
+    }//GEN-LAST:event_saveRespubActionPerformed
+
+    private void ViewResearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewResearchButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ViewResearchButtonActionPerformed
+
+    private void ViewPublicationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewPublicationButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ViewPublicationButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1160,7 +1325,6 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Acadstab;
     private javax.swing.JButton AddCourse;
-    private javax.swing.JButton AddResPub;
     private javax.swing.JButton AddTrans;
     public static javax.swing.JTextField BalField;
     private javax.swing.JPanel Cashbooktab;
@@ -1186,11 +1350,10 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     private javax.swing.JButton OKButton;
     private javax.swing.JTextField PriceField;
     private javax.swing.JButton PrintStudent;
-    private javax.swing.JTextArea PubArea;
-    private javax.swing.JPanel Pubpanel;
-    private javax.swing.JTextArea ResArea;
+    private javax.swing.JRadioButton PubRadioButton;
+    private javax.swing.JPanel ResPubPanel;
     private javax.swing.JPanel ResPubtab;
-    private javax.swing.JPanel Respanel;
+    private javax.swing.JRadioButton ResRadioButton;
     private javax.swing.JTextField SearchField;
     private javax.swing.JTable SearchResTable;
     private javax.swing.JPanel Searchtab;
@@ -1198,6 +1361,8 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     private javax.swing.JComboBox<String> TransType;
     private javax.swing.JPanel Treasurytab;
     private javax.swing.JButton ViewCourse;
+    private javax.swing.JButton ViewPublicationButton;
+    private javax.swing.JButton ViewResearchButton;
     private javax.swing.JLabel date;
     private javax.swing.JTextField itemLocation;
     private javax.swing.JTextField itemName;
@@ -1210,7 +1375,13 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1220,14 +1391,20 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextField respubAuthority;
+    private javax.swing.JTextArea respubDetails;
+    private javax.swing.ButtonGroup respubGroup;
+    private javax.swing.JTextField respubInvestment;
+    private javax.swing.JTextField respubProfit;
+    private javax.swing.JTextField respubTitle;
     private javax.swing.JButton saveItem;
+    private javax.swing.JButton saveRespub;
     private javax.swing.JLabel sem;
     private javax.swing.JLabel time;
     private javax.swing.JButton viewItem;
