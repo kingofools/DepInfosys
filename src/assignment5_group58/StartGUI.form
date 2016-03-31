@@ -1188,11 +1188,11 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="SearchField" max="32767" attributes="0"/>
-                          <Component id="jScrollPane7" pref="468" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jScrollPane7" pref="0" max="32767" attributes="0"/>
+                          <Component id="SearchField" pref="233" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace pref="245" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1210,9 +1210,9 @@
           </Layout>
           <SubComponents>
             <Component class="javax.swing.JTextField" name="SearchField">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Enter Search "/>
-              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SearchFieldActionPerformed"/>
+              </Events>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane7">
               <AuxValues>
@@ -1224,31 +1224,19 @@
                 <Component class="javax.swing.JTable" name="SearchResTable">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="4" rowCount="4">
-                        <Column editable="false" title="Name" type="java.lang.Object"/>
-                        <Column editable="false" title="Author" type="java.lang.Object"/>
-                        <Column editable="false" title="Expenditure" type="java.lang.Object"/>
-                        <Column editable="false" title="Details" type="java.lang.Object"/>
+                      <Table columnCount="2" rowCount="0">
+                        <Column editable="true" title="Title" type="java.lang.Object"/>
+                        <Column editable="true" title="Type" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                           <Title/>
                           <Editor/>
                           <Renderer/>
                         </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                           <Title/>
                           <Editor/>
                           <Renderer/>

@@ -42,6 +42,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     static int canEnroll = 0;
     static int canSelect = 0;
     static Item modifyItem = new Item();
+    static String key = "";
     
     public StartGUI() {
         initComponents();
@@ -260,7 +261,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         HometabLayout.setHorizontalGroup(
             HometabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HometabLayout.createSequentialGroup()
-                .addGap(0, 38, Short.MAX_VALUE)
+                .addGap(0, 39, Short.MAX_VALUE)
                 .addGroup(HometabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(welcome)
                     .addComponent(date))
@@ -523,7 +524,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                     .addComponent(DispNum, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(viewItem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ModItem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         InventorytabLayout.setVerticalGroup(
             InventorytabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -587,7 +588,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                     .addGroup(TreasurytabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(TransType, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(PriceField)))
-                .addContainerGap(155, Short.MAX_VALUE))
+                .addContainerGap(156, Short.MAX_VALUE))
         );
         TreasurytabLayout.setVerticalGroup(
             TreasurytabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -639,7 +640,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                     .addGroup(LogspanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(LogspanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LogspanelLayout.createSequentialGroup()
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -843,7 +844,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                 .addGroup(ResPubtabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(ViewResearchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ViewPublicationButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         ResPubtabLayout.setVerticalGroup(
             ResPubtabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -858,34 +859,21 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
 
         jTabbedPane1.addTab("Research/Publication", ResPubtab);
 
-        SearchField.setText("Enter Search ");
+        SearchField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchFieldActionPerformed(evt);
+            }
+        });
 
         SearchResTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Name", "Author", "Expenditure", "Details"
+                "Title", "Type"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         jScrollPane7.setViewportView(SearchResTable);
-        if (SearchResTable.getColumnModel().getColumnCount() > 0) {
-            SearchResTable.getColumnModel().getColumn(0).setResizable(false);
-            SearchResTable.getColumnModel().getColumn(1).setResizable(false);
-            SearchResTable.getColumnModel().getColumn(2).setResizable(false);
-            SearchResTable.getColumnModel().getColumn(3).setResizable(false);
-        }
 
         javax.swing.GroupLayout SearchtabLayout = new javax.swing.GroupLayout(Searchtab);
         Searchtab.setLayout(SearchtabLayout);
@@ -893,10 +881,10 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             SearchtabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SearchtabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(SearchtabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(SearchField)
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(SearchtabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(SearchField, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE))
+                .addContainerGap(245, Short.MAX_VALUE))
         );
         SearchtabLayout.setVerticalGroup(
             SearchtabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1405,6 +1393,46 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
         }*/
     }//GEN-LAST:event_EnrollStudentActionPerformed
+
+    private void SearchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchFieldActionPerformed
+
+                if(!SearchField.getText().isEmpty())
+        {
+            key = "";
+        } 
+        else
+        {
+            key = SearchField.getText();
+        }
+        String[] columns = {"Name","Type"};
+	int foundSize = 0;
+	int i;
+	for(i = 0; i < cashbook.size() ; i++)
+        {
+            if(cashbook.get(i).gettitle().contains(key.toLowerCase()))
+            {
+		foundSize++;
+            }
+	}
+        
+	Object[][] contact_object  = new String[foundSize][2];
+	int j =0;
+		
+	for(i = 0; i < cashbook.size(); i++)
+	{
+            if (cashbook.get(i).gettitle().contains(key.toLowerCase())) 
+            { 
+                Transaction found = cashbook.get(i);
+                //displayMessage(null,"Contact " + found.getname() + " has been found");
+                
+                contact_object[j][0] = found.gettitle();
+                contact_object[j][1] = found.gettype();
+                j++;
+            }
+        }
+        SearchResTable = new javax.swing.JTable(contact_object,columns);
+        jScrollPane7.setViewportView(SearchResTable);           
+    }//GEN-LAST:event_SearchFieldActionPerformed
 
     /**
      * @param args the command line arguments

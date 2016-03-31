@@ -101,17 +101,19 @@ public class ItemNumGUI extends javax.swing.JFrame {
         temp = NameSet.toArray();
         
         Object[][]itemObj = new String[temp.length+1][2];
-        
-        itemObj[0][0] = temp[0];
-        itemObj[0][1] = frequency(temp[0].toString(),names);
+        if(itemList.size()>0){
+            itemObj[0][0] = temp[0];
+            itemObj[0][1] = frequency(temp[0].toString(),names);
+        }
         for(i=1;i<temp.length;i++)
         {
            itemObj[i][0] = temp[i];
            itemObj[i][1] = frequency(temp[i].toString(),names);
         }
+        if(itemList.size()>0){
             itemObj[i][0] = "Total : ";
             itemObj[i][1] = String.valueOf(itemList.size());
-            
+        }
         jTable1 = new javax.swing.JTable(itemObj,columns);
         jScrollPane1.setViewportView(jTable1);
 
