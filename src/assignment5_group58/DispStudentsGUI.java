@@ -5,6 +5,8 @@
  */
 package assignment5_group58;
 
+import static assignment5_group58.StartGUI.index_stud;
+import static assignment5_group58.StartGUI.courseList;
 /**
  *
  * @author surya
@@ -13,11 +15,102 @@ public class DispStudentsGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form DispStudentsGUI
+     * @param index_stud
      */
-    public DispStudentsGUI() {
-        initComponents();
+    public DispStudentsGUI(int index_stud) {
+        //initComponents();
+        newinitComponents(index_stud);
     }
 
+    private void newinitComponents(int index_stud) {
+
+        Course newcourse = courseList.get(index_stud);
+        
+        String[] columns = {"Student", "Grades"};
+	int size = courseList.size();
+	Object[][] itemObject  = new String[size][2];
+		
+	int i;
+	for(i = 0; i < size ; i++)
+	{
+		itemObject[i][0] = courseList.get(index_stud).StudentsOnRoll.get(i);
+                //itemObject[i][1] = courseList.get(index_stud).StudentsOnRoll.
+	}
+		
+        
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        UpdateGrades = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        /*jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Student", "Grade"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });*/
+        jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
+        }
+
+        UpdateGrades.setText("Update Grades");
+
+        jButton1.setText("Go Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(UpdateGrades)))
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(UpdateGrades)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(12, Short.MAX_VALUE))
+        );
+
+        pack();
+    }// </editor-fold>     
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -133,7 +226,7 @@ public class DispStudentsGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DispStudentsGUI().setVisible(true);
+                new DispStudentsGUI(index_stud).setVisible(true);
             }
         });
     }

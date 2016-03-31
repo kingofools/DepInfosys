@@ -134,6 +134,24 @@ public class ViewCourseGUI extends javax.swing.JFrame implements Serializable{
                      DeleteItemButtonActionPerformed(evt);
                 }
             });
+        }else if(canDelete == -1){
+            DeleteItemButton.setVisible(true);
+            DeleteItemButton.setText("Enter Grades");
+            DeleteItemButton.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    int index = jTable1.getSelectedRow();
+                    if(index==-1){
+                        JOptionPane.showMessageDialog(null, "Select an item first!");
+                    }
+                    else{
+                        DispStudentsGUI dispgui;
+                        dispgui = new DispStudentsGUI(index);
+                        
+                        dispose();
+                    }
+                    //DispStudentsinCourseGUI();
+                }
+            });
         }
         
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -162,7 +180,6 @@ public class ViewCourseGUI extends javax.swing.JFrame implements Serializable{
 
         pack();
     }// </editor-fold>    
-    
     
     private void DeleteItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteItemButtonActionPerformed
         // TODO add your handling code here:

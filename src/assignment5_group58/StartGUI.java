@@ -39,8 +39,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     static double netExpenditure = 0.0;
     
     static int canDelete = 0;
-    static int canEnroll = 0;
-    static int canSelect = 0;
+    static int index_stud = -1;
     static Item modifyItem = new Item();
     static String key = "";
     static Object[][] contact_object;
@@ -342,7 +341,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         CoursepanelLayout.setVerticalGroup(
             CoursepanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CoursepanelLayout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(AddCourse)
                 .addGap(18, 18, 18)
                 .addComponent(DelCourse)
@@ -384,7 +383,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         StudentpanelLayout.setVerticalGroup(
             StudentpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(StudentpanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(37, Short.MAX_VALUE)
                 .addComponent(NewStudent)
                 .addGap(18, 18, 18)
                 .addComponent(EnrollStudent)
@@ -421,9 +420,9 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             .addGroup(AcadstabLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(AcadstabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Coursepanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Coursepanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Studentpanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(Evaluate)
                 .addGap(31, 31, 31))
         );
@@ -1206,10 +1205,10 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     }//GEN-LAST:event_ViewCourseActionPerformed
 
     private void EvaluateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EvaluateActionPerformed
-        /*ViewCourseGUI newviewcoursegui;
+        ViewCourseGUI newviewcoursegui;
         //todo : add exceptions here
         //try {
-        canDelete = 0;
+        canDelete = -1;
         newviewcoursegui = new ViewCourseGUI(courseList, canDelete);
         newviewcoursegui.setLocationRelativeTo(null);
         newviewcoursegui.setTitle("Enter Grades");
