@@ -119,7 +119,7 @@ public class ViewCourseGUI extends javax.swing.JFrame implements Serializable{
         
         if(canDelete == 0)
         {   DeleteItemButton.setVisible(true);
-            DeleteItemButton.setText("Select Course");
+            DeleteItemButton.setText("View Students");
             DeleteItemButton.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
                      //dispose();
@@ -132,23 +132,6 @@ public class ViewCourseGUI extends javax.swing.JFrame implements Serializable{
             DeleteItemButton.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
                      DeleteItemButtonActionPerformed(evt);
-                }
-            });
-        }
-        else if(canDelete==-1)//modify
-        {   DeleteItemButton.setVisible(true);
-            DeleteItemButton.setText("Enroll Student");
-            DeleteItemButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                     //DeleteItemButtonActionPerformed(evt);
-                }
-            });
-        }else{
-            DeleteItemButton.setVisible(true);
-            DeleteItemButton.setText("Go Back");
-            DeleteItemButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    dispose();
                 }
             });
         }

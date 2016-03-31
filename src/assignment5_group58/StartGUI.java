@@ -265,6 +265,9 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Home");
+
+        jTabbedPane1.setName("Home"); // NOI18N
 
         welcome.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         welcome.setText("Welcome to IIT KGP Department Information System");
@@ -278,7 +281,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         HometabLayout.setHorizontalGroup(
             HometabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HometabLayout.createSequentialGroup()
-                .addGap(0, 66, Short.MAX_VALUE)
+                .addGap(0, 39, Short.MAX_VALUE)
                 .addGroup(HometabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(welcome)
                     .addComponent(date))
@@ -541,7 +544,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                     .addComponent(DispNum, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(viewItem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ModItem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         InventorytabLayout.setVerticalGroup(
             InventorytabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -605,7 +608,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                     .addGroup(TreasurytabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(TransType, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(PriceField)))
-                .addContainerGap(183, Short.MAX_VALUE))
+                .addContainerGap(156, Short.MAX_VALUE))
         );
         TreasurytabLayout.setVerticalGroup(
             TreasurytabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -657,7 +660,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                     .addGroup(LogspanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(LogspanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LogspanelLayout.createSequentialGroup()
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -861,7 +864,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                 .addGroup(ResPubtabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(ViewResearchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ViewPublicationButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         ResPubtabLayout.setVerticalGroup(
             ResPubtabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -939,7 +942,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(searchInvestment)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
                     .addComponent(searchAuthority)
                     .addComponent(searchType)
                     .addComponent(searchTitle)))
@@ -1177,6 +1180,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         canDelete = 1;
         coursegui = new ViewCourseGUI(courseList,canDelete);
         coursegui.setLocationRelativeTo(null);
+        coursegui.setTitle("Delete Course");
         coursegui.setVisible(true);
         //optional
         //setVisible(false);
@@ -1189,9 +1193,10 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         ViewCourseGUI coursegui;
         //todo : add exceptions here
         //try {
-        canDelete = 2;
+        canDelete = 0;
         coursegui = new ViewCourseGUI(courseList, canDelete);
         coursegui.setLocationRelativeTo(null);
+        coursegui.setTitle("View Course");
         coursegui.setVisible(true);
         //optional
         //setVisible(false);
@@ -1201,12 +1206,13 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     }//GEN-LAST:event_ViewCourseActionPerformed
 
     private void EvaluateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EvaluateActionPerformed
-        ViewCourseGUI newviewcoursegui;
+        /*ViewCourseGUI newviewcoursegui;
         //todo : add exceptions here
         //try {
         canDelete = 0;
         newviewcoursegui = new ViewCourseGUI(courseList, canDelete);
         newviewcoursegui.setLocationRelativeTo(null);
+        newviewcoursegui.setTitle("Enter Grades");
         newviewcoursegui.setVisible(true);
         //optional 
         //setVisible(false);
@@ -1488,12 +1494,13 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     }//GEN-LAST:event_ViewPublicationButtonActionPerformed
 
     private void EnrollStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnrollStudentActionPerformed
-        ViewCourseGUI newgui;
+        /*ViewCourseGUI newgui;
         //todo : add exceptions here
         //try {
         canDelete = -1;
         newgui = new ViewCourseGUI(courseList, canDelete);
         newgui.setLocationRelativeTo(null);
+        newgui.setTitle("Select Course");
         newgui.setVisible(true);
         //optional 
         //setVisible(false);

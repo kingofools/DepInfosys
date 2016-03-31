@@ -239,7 +239,7 @@ public class AddCourseGUI extends javax.swing.JFrame implements Serializable{
         if(credits_string.matches(regex)){
             newcourse.setcredit(Integer.parseInt(credits_string));
         }else{
-            JOptionPane.showMessageDialog(null,"Need to write a number as credits!");
+            JOptionPane.showMessageDialog(null,"Need to write a number less than 10 as credits!");
         }
         if(!(ProfField.getText().isEmpty()))
         {
