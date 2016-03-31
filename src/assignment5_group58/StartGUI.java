@@ -992,26 +992,26 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     }
     
     //updating debits area
-    private void updateCreditsArea(Transaction debit){
+    private void updateDebitsArea(Transaction debit){
         redirectSystemStreamstoDeb();
         //System.out.println("\n______________________________");
-        System.out.printf("Transaction Title : " + debit.gettitle());
-        System.out.printf("\nInvestment :" + debit.getinvestment());
-        System.out.printf("\nTransaction Details : " + debit.getdetails());
-        System.out.println("\n______________________________");
+        System.out.printf("Transaction Title: " + debit.gettitle());
+        System.out.printf("\nProfit:" + debit.getprofit());
+        System.out.printf("\nTransaction Details: " + debit.getdetails());
+        System.out.println("\n____________________________");
         revertstream();
     }
     
-    private void updateDebitsArea(Transaction credit){
+    private void updateCreditsArea(Transaction credit){
         redirectSystemStreamstoCred();
         //System.out.println("\n______________________________");
-        System.out.printf("Transaction Title : " + credit.gettitle());
-        System.out.printf("\nProfit :" + credit.getprofit());
-        System.out.println("\nTransaction Details : " + credit.getdetails());
-        System.out.println("______________________________");
+        System.out.printf("Transaction Title: " + credit.gettitle());
+        System.out.printf("\nInvestment:" + credit.getinvestment());
+        System.out.println("\nTransaction Details: " + credit.getdetails());
+        System.out.println("____________________________");
         revertstream();
     }
-    
+       
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String pwd = new String(this.jPasswordField1.getPassword());
         if (pwd.equals("")) {  //security threat !!                  
@@ -1211,8 +1211,8 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             JOptionPane.showMessageDialog(null,"Item "+newItem.getname()+" has been added!");
             
             itemTrans.settitle(newItem.getname());
-            itemTrans.setauthority("Inventory");
-            itemTrans.setdetails("Location :"+newItem.getlocation());
+            //itemTrans.setauthority("Inventory"); //found a easier way for this
+            itemTrans.setdetails(newItem.getlocation() + "\nAuthority : Inventory");
             itemTrans.setinvestment(newItem.getprice());
             itemTrans.setprofit(0.0);
             itemTrans.settype("Item");
@@ -1232,6 +1232,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
            IncField.setText(Double.toString(netIncome));
            ExpField.setText(Double.toString(netExpenditure));
            BalField.setText(Double.toString(netIncome - netExpenditure));
+           updateCreditsArea(itemTrans);
         }
     }//GEN-LAST:event_saveItemActionPerformed
 
