@@ -35,6 +35,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     static ArrayList<Course> courseList = new ArrayList<Course>();
     static ArrayList<Transaction> cashbook = new ArrayList<Transaction>();
     static ArrayList<Item> itemList = new ArrayList<Item>();
+    static ArrayList<Student> studentList = new ArrayList<Student>();
     static double netIncome = 0.0;
     static double netExpenditure = 0.0;
     

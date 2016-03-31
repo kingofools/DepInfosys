@@ -5,6 +5,11 @@
  */
 package assignment5_group58;
 
+import javax.swing.JOptionPane;
+import static assignment5_group58.StartGUI.studentList;
+import java.awt.Container;
+import javax.swing.JFrame;
+
 /**
  *
  * @author surya
@@ -133,8 +138,40 @@ public class AddStudentGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_BackButtonActionPerformed
 
     private void CreateStudButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateStudButtonActionPerformed
-        Student newstudent;
-        newstudent = new Student();
+        Student newstudent = new Student();
+        if(!(NameField.getText().isEmpty()))
+        {
+            newstudent.setname(NameField.getText());
+        }
+        else
+        {
+           JOptionPane.showMessageDialog(null,"Need to write student name!");
+        }
+        String regex = "[0-9]";
+        String number = NumField.getText();
+        if(number.matches(regex)){
+            newstudent.setnumber(number);
+        }else{
+            JOptionPane.showMessageDialog(null,"Need to write a number!");
+        }
+        if(!(AddField.getText().isEmpty()))
+        {
+            newstudent.setplace(AddField.getText());
+        }else{
+            JOptionPane.showMessageDialog(null,"Need to write address!");
+        }
+        
+        //saving student and closing current tab
+        if(!NameField.getText().isEmpty())
+        {
+            studentList.add(newstudent);
+            JOptionPane.showMessageDialog(null,"Student "+newstudent.getname()+" added!");
+            Container frame2 = CreateStudButton.getParent();
+            do 
+            frame2 = frame2.getParent(); 
+            while (!(this instanceof JFrame));                                      
+                dispose();
+        }
     }//GEN-LAST:event_CreateStudButtonActionPerformed
 
     /**
