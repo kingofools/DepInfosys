@@ -6,8 +6,7 @@
 package assignment5_group58;
 
 import static assignment5_group58.StartGUI.canDelete;
-import static assignment5_group58.StartGUI.itemList;
-import static assignment5_group58.StartGUI.modifyItem;
+import static assignment5_group58.StartGUI.courseList;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -16,15 +15,13 @@ import javax.swing.JOptionPane;
  *
  * @author kaustubh
  */
-public class ViewItemGUI extends javax.swing.JFrame implements Serializable{
-
-    private Item modItem;
+public class ViewCourseGUI extends javax.swing.JFrame implements Serializable{
 
     /**
      * Creates new form ViewItemGUI
      */
-    public ViewItemGUI(ArrayList<Item> itemList,int canDelete,Item modifyItem) {
-        newinitComponents(itemList,canDelete,modifyItem);
+    public ViewCourseGUI(ArrayList<Course> courseList,int canDelete) {
+        newinitComponents(courseList, canDelete);
     }
 
     /**
@@ -90,18 +87,18 @@ public class ViewItemGUI extends javax.swing.JFrame implements Serializable{
     }// </editor-fold>//GEN-END:initComponents
 
     
-    private void newinitComponents(ArrayList<Item> itemList,int canDelete,Item modifyItem) {
+    private void newinitComponents(ArrayList<Course> itemList,int canDelete) {
         
-        String[] columns = {"Name", "Location", "Price"};
-	int size = itemList.size();
+        String[] columns = {"Name", "Professor", "Credits"};
+	int size = courseList.size();
 	Object[][] itemObject  = new String[size][3];
 		
 	int i;
 	for(i = 0; i < size ; i++)
 	{
-		itemObject[i][0] = itemList.get(i).getname();
-		itemObject[i][1] = itemList.get(i).getlocation();
-		itemObject[i][2] = Double.toString(itemList.get(i).getprice());
+		itemObject[i][0] = courseList.get(i).getname();
+                itemObject[i][1] = courseList.get(i).getprofessor();
+		itemObject[i][2] = Double.toString(courseList.get(i).getcredit());
 	}
 		
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -112,18 +109,18 @@ public class ViewItemGUI extends javax.swing.JFrame implements Serializable{
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         jScrollPane1.setViewportView(jTable1);
         
-        if(canDelete==0)
+        if(canDelete == 0)
         {   DeleteItemButton.setVisible(true);
-            DeleteItemButton.setText("OK");
+            DeleteItemButton.setText("Select Course");
             DeleteItemButton.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-                     dispose();
+                    // dispose();
                 }
             });
         }
         else if(canDelete==1)
         {   DeleteItemButton.setVisible(true);
-            DeleteItemButton.setText("Delete");
+            DeleteItemButton.setText("Delete Course");
             DeleteItemButton.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
                      DeleteItemButtonActionPerformed(evt);
@@ -132,10 +129,10 @@ public class ViewItemGUI extends javax.swing.JFrame implements Serializable{
         }
         else if(canDelete==-1)//modify
         {   DeleteItemButton.setVisible(true);
-            DeleteItemButton.setText("Modify");
+            DeleteItemButton.setText("Enroll Student");
             DeleteItemButton.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-                     DeleteItemButtonActionPerformed(evt);
+                     //DeleteItemButtonActionPerformed(evt);
                 }
             });
         }
@@ -177,18 +174,10 @@ public class ViewItemGUI extends javax.swing.JFrame implements Serializable{
 	}
         else if(canDelete==1)
 	{
-            Item remove = itemList.remove(discard);
+            Course remove = courseList.remove(discard);
             JOptionPane.showMessageDialog(null,remove.getname()+" has been removed!");
             dispose();
            // new ViewItemGUI(itemList,canDelete).setVisible(true);
-        }
-        else
-        {
-            modifyItem = itemList.get(discard);
-            ModifyItemGUI newgui = new ModifyItemGUI(modifyItem);
-            newgui.setLocationRelativeTo(null);
-            newgui.setVisible(true);
-            dispose();
         }
     }//GEN-LAST:event_DeleteItemButtonActionPerformed
 
@@ -209,20 +198,21 @@ public class ViewItemGUI extends javax.swing.JFrame implements Serializable{
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewItemGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewCourseGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewItemGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewCourseGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewItemGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewCourseGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewItemGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewCourseGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewItemGUI(itemList,canDelete,modifyItem).setVisible(true);
+                new ViewCourseGUI(courseList,canDelete).setVisible(true);
             }
         });
     }

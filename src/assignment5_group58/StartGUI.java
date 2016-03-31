@@ -1171,13 +1171,11 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     }//GEN-LAST:event_OKButtonActionPerformed
 
     private void DelCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DelCourseActionPerformed
-        ViewAndDeleteCourseGUI coursegui;
+        ViewCourseGUI coursegui;
         //todo : add exceptions here
         //try {
         canDelete = 1;
-        canEnroll = 0;
-        canSelect = 0;
-        coursegui = new ViewAndDeleteCourseGUI(courseList,canDelete,canEnroll, canSelect);
+        coursegui = new ViewCourseGUI(courseList,canDelete);
         coursegui.setLocationRelativeTo(null);
         coursegui.setVisible(true);
         //optional
@@ -1192,8 +1190,6 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         //todo : add exceptions here
         //try {
         canDelete = 0;
-        canEnroll = 0;
-        canSelect = 0;
         coursegui = new ViewAndDeleteCourseGUI(courseList, canDelete, canEnroll, canSelect);
         coursegui.setLocationRelativeTo(null);
         coursegui.setVisible(true);

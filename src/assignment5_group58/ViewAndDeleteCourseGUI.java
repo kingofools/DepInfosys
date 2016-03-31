@@ -27,7 +27,20 @@ public class ViewAndDeleteCourseGUI extends javax.swing.JFrame {
     }
     
     public void newinitComponents(ArrayList<Course> courseList, int canDel, int canEnroll, int canSelect){
-         
+        
+        String[] columns = {"Name", "Professor", "credits", "number of students"};
+	int size = courseList.size();
+	Object[][] itemObject  = new String[size][3];
+		
+	int i;
+	for(i = 0; i < size ; i++)
+	{
+		itemObject[i][0] = courseList.get(i).getname();
+		itemObject[i][1] = courseList.get(i).getprofessor();
+		itemObject[i][2] = Double.toString(courseList.get(i).getcredit());
+                //itemObject[i][3] = Double.toString(courseList.get(i).getstudentsonroll());
+        }
+        
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         DeleteCourse = new javax.swing.JButton();
@@ -36,19 +49,6 @@ public class ViewAndDeleteCourseGUI extends javax.swing.JFrame {
         EnrollStudent = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        
-        String[] columns = {"Name", "Professor", "credits", "number of students"};
-	int size = courseList.size();
-	Object[][] itemObject  = new String[size][4];
-		
-	int i;
-	for(i = 0; i < size ; i++)
-	{
-		itemObject[i][0] = courseList.get(i).getname();
-		itemObject[i][1] = courseList.get(i).getprofessor();
-		itemObject[i][2] = Double.toString(courseList.get(i).getcredit());
-                itemObject[i][3] = Double.toString(courseList.get(i).getstudentsonroll());
-        }
         
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
@@ -158,9 +158,13 @@ public class ViewAndDeleteCourseGUI extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(0).setHeaderValue("Name");
             jTable1.getColumnModel().getColumn(1).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setHeaderValue("Professor");
             jTable1.getColumnModel().getColumn(2).setResizable(false);
+            jTable1.getColumnModel().getColumn(2).setHeaderValue("credits");
             jTable1.getColumnModel().getColumn(3).setResizable(false);
+            jTable1.getColumnModel().getColumn(3).setHeaderValue("number of students");
         }
 
         DeleteCourse.setText("Delete Course");

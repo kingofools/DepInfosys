@@ -69,6 +69,8 @@ public class Course implements Serializable
 	};
         
         public int getstudentsonroll(){
+            if (StudentsOnRoll.isEmpty())
+                return 0;
             return StudentsOnRoll.size();
         };
 
