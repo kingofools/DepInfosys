@@ -45,14 +45,6 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     
     public StartGUI() {
         initComponents();
-        redirectSystemStreamstoCred();
-        System.out.println("Testing Debits area");
-        //updateCreditsArea();
-        redirectSystemStreamstoDeb();
-        System.out.println("Testing Credits Area");
-        //updateDebitsArea();
-        //revert back to system streams
-        revertstream();
     }
     
     //check if price is numeric
@@ -624,10 +616,12 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         jLabel10.setText("Debit");
 
         DebitsArea.setColumns(20);
+        DebitsArea.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         DebitsArea.setRows(5);
         jScrollPane4.setViewportView(DebitsArea);
 
         CreditsArea.setColumns(20);
+        CreditsArea.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         CreditsArea.setRows(5);
         jScrollPane5.setViewportView(CreditsArea);
 
@@ -998,11 +992,25 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     }
     
     //updating debits area
-    private void updateDebitsArea(){
-        DebitsArea.setText("");
-        
+    private void updateCreditsArea(Transaction debit){
+        redirectSystemStreamstoDeb();
+        //System.out.println("\n______________________________");
+        System.out.printf("Transaction Title : " + debit.gettitle());
+        System.out.printf("\nInvestment :" + debit.getinvestment());
+        System.out.printf("\nTransaction Details : " + debit.getdetails());
+        System.out.println("\n______________________________");
+        revertstream();
     }
     
+    private void updateDebitsArea(Transaction credit){
+        redirectSystemStreamstoCred();
+        //System.out.println("\n______________________________");
+        System.out.printf("Transaction Title : " + credit.gettitle());
+        System.out.printf("\nProfit :" + credit.getprofit());
+        System.out.println("\nTransaction Details : " + credit.getdetails());
+        System.out.println("______________________________");
+        revertstream();
+    }
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String pwd = new String(this.jPasswordField1.getPassword());
@@ -1168,6 +1176,12 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
            IncField.setText(Double.toString(netIncome));
            ExpField.setText(Double.toString(netExpenditure));
            BalField.setText(Double.toString(netIncome - netExpenditure));
+        }
+        
+        if(newTransaction.getinvestment() == 0.0){
+            updateDebitsArea(newTransaction);
+        }else if(newTransaction.getprofit() == 0.0){
+            updateCreditsArea(newTransaction);
         }
     }//GEN-LAST:event_AddTransActionPerformed
 
@@ -1512,7 +1526,6 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     private javax.swing.JTextField respubTitle;
     private javax.swing.JButton saveItem;
     private javax.swing.JButton saveRespub;
-    private javax.swing.JLabel sem;
     private javax.swing.JLabel time;
     private javax.swing.JButton viewItem;
     private javax.swing.JLabel welcome;
