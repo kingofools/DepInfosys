@@ -1315,7 +1315,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             JOptionPane.showMessageDialog(null,"Item "+newItem.getname()+" has been added!");
             
             itemTrans.settitle(newItem.getname());
-            //itemTrans.setauthority("Inventory"); //found a easier way for this
+            itemTrans.setauthority("Inventory"); //need this for search result
             itemTrans.setdetails(newItem.getlocation() + "\nAuthority : Inventory");
             itemTrans.setinvestment(newItem.getprice());
             itemTrans.setprofit(0.0);
