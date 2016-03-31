@@ -49,7 +49,15 @@ public class ViewCourseGUI extends javax.swing.JFrame implements Serializable{
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         DeleteItemButton.setText("Delete");
@@ -114,7 +122,7 @@ public class ViewCourseGUI extends javax.swing.JFrame implements Serializable{
             DeleteItemButton.setText("Select Course");
             DeleteItemButton.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    // dispose();
+                     //dispose();
                 }
             });
         }
@@ -135,7 +143,16 @@ public class ViewCourseGUI extends javax.swing.JFrame implements Serializable{
                      //DeleteItemButtonActionPerformed(evt);
                 }
             });
+        }else{
+            DeleteItemButton.setVisible(true);
+            DeleteItemButton.setText("Go Back");
+            DeleteItemButton.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    dispose();
+                }
+            });
         }
+        
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(

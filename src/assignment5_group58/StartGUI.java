@@ -1186,11 +1186,11 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     }//GEN-LAST:event_DelCourseActionPerformed
 
     private void ViewCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewCourseActionPerformed
-        ViewAndDeleteCourseGUI coursegui;
+        ViewCourseGUI coursegui;
         //todo : add exceptions here
         //try {
-        canDelete = 0;
-        coursegui = new ViewAndDeleteCourseGUI(courseList, canDelete, canEnroll, canSelect);
+        canDelete = 2;
+        coursegui = new ViewCourseGUI(courseList, canDelete);
         coursegui.setLocationRelativeTo(null);
         coursegui.setVisible(true);
         //optional
@@ -1201,13 +1201,11 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     }//GEN-LAST:event_ViewCourseActionPerformed
 
     private void EvaluateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EvaluateActionPerformed
-        ViewAndDeleteCourseGUI newviewcoursegui;
+        ViewCourseGUI newviewcoursegui;
         //todo : add exceptions here
         //try {
         canDelete = 0;
-        canEnroll = 0;
-        canSelect = 1;
-        newviewcoursegui = new ViewAndDeleteCourseGUI(courseList, canDelete, canEnroll, canSelect);
+        newviewcoursegui = new ViewCourseGUI(courseList, canDelete);
         newviewcoursegui.setLocationRelativeTo(null);
         newviewcoursegui.setVisible(true);
         //optional 
@@ -1490,13 +1488,11 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     }//GEN-LAST:event_ViewPublicationButtonActionPerformed
 
     private void EnrollStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnrollStudentActionPerformed
-        ViewAndDeleteCourseGUI newgui;
+        ViewCourseGUI newgui;
         //todo : add exceptions here
         //try {
-        canDelete = 0;
-        canEnroll = 1;
-        canSelect = 0;
-        newgui = new ViewAndDeleteCourseGUI(courseList, canDelete, canEnroll, canSelect);
+        canDelete = -1;
+        newgui = new ViewCourseGUI(courseList, canDelete);
         newgui.setLocationRelativeTo(null);
         newgui.setVisible(true);
         //optional 
