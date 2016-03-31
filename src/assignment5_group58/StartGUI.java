@@ -12,11 +12,16 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.io.File;
+import java.io.FileDescriptor;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -40,6 +45,14 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     
     public StartGUI() {
         initComponents();
+        redirectSystemStreamstoCred();
+        System.out.println("Testing Debits area");
+        //updateCreditsArea();
+        redirectSystemStreamstoDeb();
+        System.out.println("Testing Credits Area");
+        //updateDebitsArea();
+        //revert back to system streams
+        revertstream();
     }
 
     /**
@@ -836,6 +849,77 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void updateDebitsTextArea(final String text) {
+    SwingUtilities.invokeLater(() -> {
+        DebitsArea.append(text);
+    });
+    }
+    
+    private void updateCreditsTextArea(final String text) {
+    SwingUtilities.invokeLater(() -> {
+        CreditsArea.append(text);
+    });
+    }
+    
+    private void redirectSystemStreamstoDeb() {
+    OutputStream out;
+        out = new OutputStream() {
+            @Override
+            public void write(int b) throws IOException {
+                updateDebitsTextArea(String.valueOf((char) b));
+            }
+            
+            @Override
+            public void write(byte[] b, int off, int len) throws IOException {
+                updateDebitsTextArea(new String(b, off, len));
+            }
+            
+            @Override
+            public void write(byte[] b) throws IOException {
+                write(b, 0, b.length);
+            }
+        };
+ 
+    System.setOut(new PrintStream(out, true));
+    System.setErr(new PrintStream(out, true));
+    }
+    
+    private void redirectSystemStreamstoCred() {
+    OutputStream out;
+        out = new OutputStream() {
+            @Override
+            public void write(int b) throws IOException {
+                updateCreditsTextArea(String.valueOf((char) b));
+            }
+            
+            @Override
+            public void write(byte[] b, int off, int len) throws IOException {
+                updateCreditsTextArea(new String(b, off, len));
+            }
+            
+            @Override
+            public void write(byte[] b) throws IOException {
+                write(b, 0, b.length);
+            }
+        };
+ 
+    System.setOut(new PrintStream(out, true));
+    System.setErr(new PrintStream(out, true));
+    }
+    
+    //revert system streams
+    
+    private void revertstream(){
+        System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
+    }
+    
+    //updating debits area
+    private void updateDebitsArea(){
+        DebitsArea.setText("");
+        
+    }
+    
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String pwd = new String(this.jPasswordField1.getPassword());
         if (pwd.equals("")) {  //security threat !!                  
