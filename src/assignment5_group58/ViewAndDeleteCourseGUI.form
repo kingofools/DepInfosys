@@ -32,7 +32,7 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="SelectCourse" min="-2" pref="107" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <Component id="EnrollStudent" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="Back" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -51,7 +51,7 @@
                   <Component id="DeleteCourse" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="Back" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="SelectCourse" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="EnrollStudent" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="15" max="32767" attributes="0"/>
           </Group>
@@ -128,7 +128,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SelectCourseActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="EnrollStudent">
       <Properties>
         <Property name="text" type="java.lang.String" value="Enroll Student"/>
       </Properties>

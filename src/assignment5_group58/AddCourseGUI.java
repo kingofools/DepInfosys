@@ -247,7 +247,6 @@ public class AddCourseGUI extends javax.swing.JFrame implements Serializable{
         }else{
             JOptionPane.showMessageDialog(null,"Need to write professor's name!");
         }
-        //TODO add handling for adding students to course
         
         //saving course and closing current tab
         if(!(CourseNameField.getText().isEmpty())&&newcourse.getcredit()!=-1)

@@ -33,7 +33,9 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     static double netIncome = 0.0;
     static double netExpenditure = 0.0;
     
-    static int canDelete = 0 ;
+    static int canDelete = 0;
+    static int canEnroll = 0;
+    static int canSelect = 0;
     static Item modifyItem = new Item();
     
     public StartGUI() {
@@ -78,7 +80,6 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         welcome = new javax.swing.JLabel();
         time = new javax.swing.JLabel();
         date = new javax.swing.JLabel();
-        sem = new javax.swing.JLabel();
         Acadstab = new javax.swing.JPanel();
         Coursepanel = new javax.swing.JPanel();
         AddCourse = new javax.swing.JButton();
@@ -249,21 +250,15 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
 
         date.setText("date");
 
-        sem.setText("semester");
-
         javax.swing.GroupLayout HometabLayout = new javax.swing.GroupLayout(Hometab);
         Hometab.setLayout(HometabLayout);
         HometabLayout.setHorizontalGroup(
             HometabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HometabLayout.createSequentialGroup()
+                .addGap(0, 38, Short.MAX_VALUE)
                 .addGroup(HometabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(HometabLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(welcome))
-                    .addGroup(HometabLayout.createSequentialGroup()
-                        .addComponent(sem)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 395, Short.MAX_VALUE)
-                        .addComponent(date)))
+                    .addComponent(welcome)
+                    .addComponent(date))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(time))
         );
@@ -275,8 +270,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 184, Short.MAX_VALUE)
                 .addGroup(HometabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(time)
-                    .addComponent(date)
-                    .addComponent(sem)))
+                    .addComponent(date)))
         );
 
         jTabbedPane1.addTab("Home", Hometab);
@@ -341,6 +335,11 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         });
 
         EnrollStudent.setText("Enroll Student");
+        EnrollStudent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EnrollStudentActionPerformed(evt);
+            }
+        });
 
         PrintStudent.setText("Print Student");
 
@@ -931,7 +930,6 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             this.time.setText(sdf.format(d));
             SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
             this.date.setText(sdf1.format(d));
-            this.sem.setText("Semester : Spring");
         } else {
             this.LoginPwdError.setLocationRelativeTo(null);
             this.LoginPwdError.setVisible(true);
@@ -948,7 +946,6 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             this.time.setText(sdf.format(d));
             SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
             this.date.setText(sdf1.format(d));
-            this.sem.setText("Semester : Spring");
         } else {
             this.LoginPwdError.setLocationRelativeTo(null);
             this.LoginPwdError.setVisible(true);
@@ -981,7 +978,10 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         ViewAndDeleteCourseGUI coursegui;
         //todo : add exceptions here
         //try {
-        coursegui = new ViewAndDeleteCourseGUI();
+        canDelete = 1;
+        canEnroll = 0;
+        canSelect = 0;
+        coursegui = new ViewAndDeleteCourseGUI(courseList,canDelete,canEnroll, canSelect);
         coursegui.setLocationRelativeTo(null);
         coursegui.setVisible(true);
         //optional
@@ -992,10 +992,13 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     }//GEN-LAST:event_DelCourseActionPerformed
 
     private void ViewCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewCourseActionPerformed
-        ViewCourseGUI coursegui;
+        ViewAndDeleteCourseGUI coursegui;
         //todo : add exceptions here
         //try {
-        coursegui = new ViewCourseGUI();
+        canDelete = 0;
+        canEnroll = 0;
+        canSelect = 0;
+        coursegui = new ViewAndDeleteCourseGUI(courseList, canDelete, canEnroll, canSelect);
         coursegui.setLocationRelativeTo(null);
         coursegui.setVisible(true);
         //optional
@@ -1009,7 +1012,10 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         ViewAndDeleteCourseGUI newviewcoursegui;
         //todo : add exceptions here
         //try {
-        newviewcoursegui = new ViewAndDeleteCourseGUI();
+        canDelete = 0;
+        canEnroll = 0;
+        canSelect = 1;
+        newviewcoursegui = new ViewAndDeleteCourseGUI(courseList, canDelete, canEnroll, canSelect);
         newviewcoursegui.setLocationRelativeTo(null);
         newviewcoursegui.setVisible(true);
         //optional 
@@ -1280,6 +1286,23 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     private void ViewPublicationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewPublicationButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ViewPublicationButtonActionPerformed
+
+    private void EnrollStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnrollStudentActionPerformed
+        ViewAndDeleteCourseGUI newgui;
+        //todo : add exceptions here
+        //try {
+        canDelete = 0;
+        canEnroll = 1;
+        canSelect = 0;
+        newgui = new ViewAndDeleteCourseGUI(courseList, canDelete, canEnroll, canSelect);
+        newgui.setLocationRelativeTo(null);
+        newgui.setVisible(true);
+        //optional 
+        //setVisible(false);
+        /*} catch (FileNotFoundException ex) {
+            Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+    }//GEN-LAST:event_EnrollStudentActionPerformed
 
     /**
      * @param args the command line arguments
