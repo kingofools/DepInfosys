@@ -6,7 +6,7 @@
 package assignment5_group58;
 
 import static assignment5_group58.StartGUI.index_stud;
-import static assignment5_group58.StartGUI.courseList;
+import static assignment5_group58.StartGUI.studentList;
 /**
  *
  * @author surya
@@ -17,31 +17,31 @@ public class DispStudentsGUI extends javax.swing.JFrame {
      * Creates new form DispStudentsGUI
      * @param index_stud
      */
-    public DispStudentsGUI(int index_stud) {
+    public DispStudentsGUI() {
         //initComponents();
-        newinitComponents(index_stud);
+        newinitComponents();
     }
 
-    private void newinitComponents(int index_stud) {
+    private void newinitComponents() {
 
-        Course newcourse = courseList.get(index_stud);
+        //Course newcourse = courseList.get(index_stud);
         
-        String[] columns = {"Student", "Grades"};
-	int size = courseList.size();
-	Object[][] itemObject  = new String[size][2];
+        String[] columns = {"Student"};
+	int size = studentList.size();
+	Object[][] itemObject  = new String[size][1];
 		
 	int i;
 	for(i = 0; i < size ; i++)
 	{
-		itemObject[i][0] = courseList.get(index_stud).StudentsOnRoll.get(i);
-                //itemObject[i][1] = courseList.get(index_stud).StudentsOnRoll.
+		itemObject[i][0] = studentList.get(i).getname();
+                //itemObject[i][1] = studentList.get(i)
 	}
 		
         
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         UpdateGrades = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        BackButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -72,10 +72,10 @@ public class DispStudentsGUI extends javax.swing.JFrame {
 
         UpdateGrades.setText("Update Grades");
 
-        jButton1.setText("Go Back");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        BackButton.setText("Go Back");
+        BackButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BackButtonActionPerformed(evt);
             }
         });
 
@@ -90,7 +90,7 @@ public class DispStudentsGUI extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(BackButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(UpdateGrades)))
                 .addContainerGap())
@@ -103,7 +103,7 @@ public class DispStudentsGUI extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(UpdateGrades)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
@@ -123,7 +123,7 @@ public class DispStudentsGUI extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         UpdateGrades = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        BackButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -154,10 +154,10 @@ public class DispStudentsGUI extends javax.swing.JFrame {
 
         UpdateGrades.setText("Update Grades");
 
-        jButton1.setText("Go Back");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        BackButton.setText("Go Back");
+        BackButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BackButtonActionPerformed(evt);
             }
         });
 
@@ -172,7 +172,7 @@ public class DispStudentsGUI extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(BackButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(UpdateGrades)))
                 .addContainerGap())
@@ -185,16 +185,16 @@ public class DispStudentsGUI extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(UpdateGrades)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
         dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_BackButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -226,14 +226,14 @@ public class DispStudentsGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DispStudentsGUI(index_stud).setVisible(true);
+                new DispStudentsGUI().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BackButton;
     private javax.swing.JButton UpdateGrades;
-    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables

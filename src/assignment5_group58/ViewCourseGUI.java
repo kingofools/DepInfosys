@@ -144,8 +144,8 @@ public class ViewCourseGUI extends javax.swing.JFrame implements Serializable{
                         JOptionPane.showMessageDialog(null, "Select an item first!");
                     }
                     else{
-                        DispStudentsGUI dispgui;
-                        dispgui = new DispStudentsGUI(index);
+                        //DispStudentsinCourseGUI dispgui;
+                        //dispgui = new DispStudentsinCourseGUI(index);
                         
                         dispose();
                     }

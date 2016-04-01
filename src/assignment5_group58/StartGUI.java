@@ -1494,13 +1494,12 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     }//GEN-LAST:event_ViewPublicationButtonActionPerformed
 
     private void EnrollStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnrollStudentActionPerformed
-        /*ViewCourseGUI newgui;
+        DispStudentsGUI newgui;
         //todo : add exceptions here
         //try {
-        canDelete = -1;
-        newgui = new ViewCourseGUI(courseList, canDelete);
+        newgui = new DispStudentsGUI();
         newgui.setLocationRelativeTo(null);
-        newgui.setTitle("Select Course");
+        //newgui.setTitle("Select Course");
         newgui.setVisible(true);
         //optional 
         //setVisible(false);
