@@ -6,7 +6,9 @@
 package assignment5_group58;
 
 import static assignment5_group58.StartGUI.modifyItem;
+import static assignment5_group58.StartGUI.modifyTransaction;
 import java.io.Serializable;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,8 +20,8 @@ public class ModifyItemGUI extends javax.swing.JFrame implements Serializable{
     /**
      * Creates new form ModifyItemGUI
      */
-    public ModifyItemGUI(Item modifyItem) {
-        newinitComponents(modifyItem);
+    public ModifyItemGUI(Item modifyItem,Transaction modifyTransaction) {
+        newinitComponents(modifyItem,modifyTransaction);
     }
 
     /**
@@ -90,7 +92,7 @@ public class ModifyItemGUI extends javax.swing.JFrame implements Serializable{
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-       private void newinitComponents(Item modItem) {
+       private void newinitComponents(Item modItem,Transaction modifyTransaction) {
 
         jLabel1 = new javax.swing.JLabel();
         newName = new javax.swing.JTextField(modItem.getname());
@@ -200,7 +202,7 @@ public class ModifyItemGUI extends javax.swing.JFrame implements Serializable{
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
 
-                new ModifyItemGUI(modifyItem).setVisible(true);
+                new ModifyItemGUI(modifyItem, modifyTransaction).setVisible(true);
             }
         });
     }

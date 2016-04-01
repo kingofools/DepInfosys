@@ -42,6 +42,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     static int canDelete = 0;
     static int index_stud = -1;
     static Item modifyItem = new Item();
+    static Transaction modifyTransaction = new Transaction();
     static String key = "";
     static Object[][] contact_object;
     static int[] index;
@@ -1242,10 +1243,18 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         // TODO add your handling code here:
         Transaction newTransaction = new Transaction();
         String selected = (String) TransType.getSelectedItem();
-      
-        //  JOptionPane.showMessageDialog(null,"Type : "+selected);
-        newTransaction.settitle(selected);
-        newTransaction.setauthority("");
+        
+        if(selected.equals("Grant")){
+            newTransaction.settitle("Grant");
+        }
+        else if(selected.equals("Fund")){
+            newTransaction.settitle("Fund");
+        }
+        else{
+            newTransaction.settitle("Non-inventory expenditure");
+        }
+        
+        newTransaction.setauthority("Treasurer");
         newTransaction.settype(selected);
         newTransaction.setdetails(DetailsArea.getText());
         
@@ -1275,6 +1284,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                    "\nCurrent expenditure : "+netExpenditure+
                    "\nCurrent balance : "+(netIncome - netExpenditure));
            
+          // JOptionPane.showMessageDialog(null,"Title "+newTransaction.gettitle());
            if(netIncome < netExpenditure)
            {
                JOptionPane.showMessageDialog(null,"Negative balance! Suggested to add grant/fund");
@@ -1346,7 +1356,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     private void viewItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewItemActionPerformed
         // TODO add your handling code here:
         canDelete = 0;
-        ViewItemGUI newgui = new ViewItemGUI(itemList,canDelete,modifyItem);
+        ViewItemGUI newgui = new ViewItemGUI(itemList,cashbook,canDelete,modifyItem,modifyTransaction);
         newgui.setLocationRelativeTo(null);
         newgui.setVisible(true);
         
@@ -1355,7 +1365,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     private void DelItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DelItemActionPerformed
         // TODO add your handling code here:
                 canDelete = 1;
-        ViewItemGUI newgui = new ViewItemGUI(itemList,canDelete,modifyItem);
+        ViewItemGUI newgui = new ViewItemGUI(itemList,cashbook,canDelete,modifyItem,modifyTransaction);
         newgui.setLocationRelativeTo(null);
         newgui.setVisible(true);
     }//GEN-LAST:event_DelItemActionPerformed
@@ -1412,7 +1422,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     private void ModItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModItemActionPerformed
         // TODO add your handling code here:
         canDelete = -1;
-        ViewItemGUI newgui = new ViewItemGUI(itemList,canDelete,modifyItem);
+        ViewItemGUI newgui = new ViewItemGUI(itemList,cashbook,canDelete,modifyItem,modifyTransaction);
         newgui.setLocationRelativeTo(null);
         newgui.setVisible(true);
         
@@ -1456,7 +1466,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             }
             
             newResPub.settitle(respubTitle.getText());
-            //newResPub.setauthority(respubAuthority.getText());
+            newResPub.setauthority(respubAuthority.getText());
             newResPub.setdetails(respubDetails.getText() + "\nAuthority:" + respubAuthority.getText() + "\nType: " + newResPub.gettype());
             newResPub.setinvestment(Double.parseDouble(respubInvestment.getText()));
             newResPub.setprofit(Double.parseDouble(respubProfit.getText()));
@@ -1528,6 +1538,11 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             if(cashbook.get(i).gettitle().contains(key.toLowerCase()))
             {
 		foundSize++;
+                JOptionPane.showMessageDialog(null,key+" in "+cashbook.get(i).gettitle());
+            }
+            else
+            {
+                 JOptionPane.showMessageDialog(null,key+" not in "+cashbook.get(i).gettitle());
             }
 	}
         index = new int[foundSize];

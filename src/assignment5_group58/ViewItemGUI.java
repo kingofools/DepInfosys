@@ -6,8 +6,10 @@
 package assignment5_group58;
 
 import static assignment5_group58.StartGUI.canDelete;
+import static assignment5_group58.StartGUI.cashbook;
 import static assignment5_group58.StartGUI.itemList;
 import static assignment5_group58.StartGUI.modifyItem;
+import static assignment5_group58.StartGUI.modifyTransaction;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -23,8 +25,9 @@ public class ViewItemGUI extends javax.swing.JFrame implements Serializable{
     /**
      * Creates new form ViewItemGUI
      */
-    public ViewItemGUI(ArrayList<Item> itemList,int canDelete,Item modifyItem) {
-        newinitComponents(itemList,canDelete,modifyItem);
+    public ViewItemGUI(ArrayList<Item> itemList,ArrayList<Transaction> cashbook,
+            int canDelete,Item modifyItem,Transaction modifyTransaction) {
+        newinitComponents(itemList,cashbook,canDelete,modifyItem,modifyTransaction);
     }
 
     /**
@@ -90,7 +93,8 @@ public class ViewItemGUI extends javax.swing.JFrame implements Serializable{
     }// </editor-fold>//GEN-END:initComponents
 
     
-    private void newinitComponents(ArrayList<Item> itemList,int canDelete,Item modifyItem) {
+    private void newinitComponents(ArrayList<Item> itemList, ArrayList<Transaction> cashbook,
+            int canDelete, Item modifyItem,Transaction modifyTransaction) {
         
         String[] columns = {"Name", "Location", "Price"};
 	int size = itemList.size();
@@ -185,7 +189,20 @@ public class ViewItemGUI extends javax.swing.JFrame implements Serializable{
         else
         {
             modifyItem = itemList.get(discard);
-            ModifyItemGUI newgui = new ModifyItemGUI(modifyItem);
+            int m;
+            for(m = 0;m <cashbook.size();m++)
+            {
+                if(cashbook.get(m).gettype().equals("Item"))
+                {
+                    if(cashbook.get(m).gettitle().equals(modifyItem.getname())
+                       &&cashbook.get(m).getinvestment().equals(modifyItem.getprice()))
+                    {
+                        modifyTransaction = cashbook.get(m);
+                        break;
+                    }
+                }
+            }
+            ModifyItemGUI newgui = new ModifyItemGUI(modifyItem,modifyTransaction);
             newgui.setLocationRelativeTo(null);
             newgui.setVisible(true);
             dispose();
@@ -222,7 +239,7 @@ public class ViewItemGUI extends javax.swing.JFrame implements Serializable{
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewItemGUI(itemList,canDelete,modifyItem).setVisible(true);
+                new ViewItemGUI(itemList,cashbook,canDelete,modifyItem,modifyTransaction).setVisible(true);
             }
         });
     }
