@@ -1021,11 +1021,14 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -1398,13 +1401,12 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
            if(netIncome < netExpenditure)
            {
                JOptionPane.showMessageDialog(null,"Negative balance! Suggested to add grant/fund");
-           }JOptionPane.showMessageDialog(null, "Current income = "+netIncome+
-                   "\nCurrent expenditure : "+netExpenditure);
-           
+           }
         }//update incfiels and expfield
            IncField.setText(Double.toString(netIncome));
            ExpField.setText(Double.toString(netExpenditure));
            BalField.setText(Double.toString(netIncome - netExpenditure));
+           updateCreditsArea(itemTrans);
     }//GEN-LAST:event_itemPriceActionPerformed
 
     private void ModItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModItemActionPerformed
@@ -1510,7 +1512,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
 
     private void SearchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchFieldActionPerformed
 
-                if(!SearchField.getText().isEmpty())
+        if(SearchField.getText().isEmpty())
         {
             key = "";
         } 
@@ -1537,7 +1539,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             if (cashbook.get(i).gettitle().contains(key.toLowerCase())) 
             { 
                 Transaction found = cashbook.get(i);
-                //displayMessage(null,"Contact " + found.getname() + " has been found");
+                
                 index[j] = i;
                 contact_object[j][0] = found.gettitle();
                 contact_object[j][1] = found.gettype();
