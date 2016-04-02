@@ -36,6 +36,8 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     static ArrayList<Transaction> cashbook = new ArrayList<Transaction>();
     static ArrayList<Item> itemList = new ArrayList<Item>();
     static ArrayList<Student> studentList = new ArrayList<Student>();
+    static ArrayList<Transaction> researchList = new ArrayList<Transaction>();
+    static ArrayList<Transaction> publicationList = new ArrayList<Transaction>();
     static double netIncome = 0.0;
     static double netExpenditure = 0.0;
     
@@ -46,6 +48,8 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     static String key = "";
     static Object[][] contact_object;
     static int[] index;
+    static int R_or_P = 0;
+    
     public StartGUI() {
         initComponents();
     }
@@ -1492,6 +1496,14 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
            
             updateCreditsArea(newResPub);
             updateDebitsArea(newResPub);
+            if(newResPub.gettype().equals("Research"))
+            {
+                researchList.add(newResPub);
+            }
+            else
+            {
+                publicationList.add(newResPub);
+            }
            
         }
         
@@ -1499,10 +1511,18 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
 
     private void ViewResearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewResearchButtonActionPerformed
         // TODO add your handling code here:
+        R_or_P = 0;
+        ViewResPubGUI rpgui = new ViewResPubGUI(researchList,publicationList,R_or_P);
+        rpgui.setLocationRelativeTo(null);
+        rpgui.setVisible(true);
     }//GEN-LAST:event_ViewResearchButtonActionPerformed
 
     private void ViewPublicationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewPublicationButtonActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here
+        R_or_P = 1;
+        ViewResPubGUI rpgui = new ViewResPubGUI(researchList,publicationList,R_or_P);
+        rpgui.setLocationRelativeTo(null);
+        rpgui.setVisible(true);
     }//GEN-LAST:event_ViewPublicationButtonActionPerformed
 
     private void EnrollStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnrollStudentActionPerformed
@@ -1538,11 +1558,11 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             if(cashbook.get(i).gettitle().contains(key.toLowerCase()))
             {
 		foundSize++;
-                JOptionPane.showMessageDialog(null,key+" in "+cashbook.get(i).gettitle());
+               // JOptionPane.showMessageDialog(null,key+" in "+cashbook.get(i).gettitle());
             }
             else
             {
-                 JOptionPane.showMessageDialog(null,key+" not in "+cashbook.get(i).gettitle());
+                 //JOptionPane.showMessageDialog(null,key+" not in "+cashbook.get(i).gettitle());
             }
 	}
         index = new int[foundSize];
@@ -1581,7 +1601,6 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             searchDetails.setText(interest.getdetails());
             searchInvestment.setText(Double.toString(interest.getinvestment()));
             searchProfit.setText(Double.toString(interest.getprofit()));
-            
         }
     }//GEN-LAST:event_ViewSearchActionPerformed
 
