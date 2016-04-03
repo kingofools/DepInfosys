@@ -666,17 +666,15 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                     .addGroup(LogspanelLayout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addComponent(jLabel10))
-                    .addGroup(LogspanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(LogspanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LogspanelLayout.createSequentialGroup()
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LogspanelLayout.createSequentialGroup()
+                    .addGroup(LogspanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                         .addComponent(jLabel11)
-                        .addGap(179, 179, 179))))
+                        .addGap(179, 179, 179))
+                    .addGroup(LogspanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane5))))
         );
         LogspanelLayout.setVerticalGroup(
             LogspanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -686,10 +684,10 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                     .addComponent(jLabel11)
                     .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(LogspanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
-                    .addComponent(jScrollPane5))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addGroup(LogspanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4))
+                .addContainerGap())
         );
 
         jLabel7.setText("Income :");
@@ -1559,14 +1557,17 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
 	int i;
 	for(i = 0; i < cashbook.size() ; i++)
         {
-            if(cashbook.get(i).gettitle().contains(key.toLowerCase()))
+            
+            if(cashbook.get(i).gettitle().toLowerCase().contains(key.toLowerCase())||
+                    cashbook.get(i).gettitle().toLowerCase().startsWith(key))
             {
 		foundSize++;
-               // JOptionPane.showMessageDialog(null,key+" in "+cashbook.get(i).gettitle());
+               //JOptionPane.showMessageDialog(null,key+" in "+cashbook.get(i).gettitle());
             }
             else
             {
                  //JOptionPane.showMessageDialog(null,key+" not in "+cashbook.get(i).gettitle());
+                 //JOptionPane.showMessageDialog(null,cashbook.get(i).gettitle().toLowerCase().startsWith(key)+"<bool");
             }
 	}
         index = new int[foundSize];
@@ -1575,7 +1576,8 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
 		
 	for(i = 0; i < cashbook.size(); i++)
 	{
-            if (cashbook.get(i).gettitle().contains(key.toLowerCase())) 
+            if (cashbook.get(i).gettitle().toLowerCase().contains(key.toLowerCase())||
+                    cashbook.get(i).gettitle().toLowerCase().startsWith(key)) 
             { 
                 Transaction found = cashbook.get(i);
                 
