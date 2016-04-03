@@ -1559,7 +1559,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         {
             
             if(cashbook.get(i).gettitle().toLowerCase().contains(key.toLowerCase())||
-                    cashbook.get(i).gettitle().toLowerCase().startsWith(key))
+                    cashbook.get(i).gettitle().toLowerCase().startsWith(key.toLowerCase()))
             {
 		foundSize++;
                //JOptionPane.showMessageDialog(null,key+" in "+cashbook.get(i).gettitle());
@@ -1577,7 +1577,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
 	for(i = 0; i < cashbook.size(); i++)
 	{
             if (cashbook.get(i).gettitle().toLowerCase().contains(key.toLowerCase())||
-                    cashbook.get(i).gettitle().toLowerCase().startsWith(key)) 
+                    cashbook.get(i).gettitle().toLowerCase().startsWith(key.toLowerCase())) 
             { 
                 Transaction found = cashbook.get(i);
                 
