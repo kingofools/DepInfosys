@@ -30,7 +30,7 @@ public class ViewResPubGUI extends javax.swing.JFrame {
         //assume view research
         int i;
         int foundsize;
-        if(R_or_P==1)
+        if(R_or_P==0)
         {
             foundsize= researchList.size();
             rp_object = new String[foundsize][2];
@@ -47,9 +47,9 @@ public class ViewResPubGUI extends javax.swing.JFrame {
             }
         }
         
-        if(R_or_P==1)
+        else if(R_or_P==1)
         {
-             foundsize = researchList.size();
+             foundsize = publicationList.size();
             rp_object = new String[foundsize][2];
             try{
             for(i = 0;i < foundsize;i++)
@@ -348,7 +348,7 @@ public class ViewResPubGUI extends javax.swing.JFrame {
         int select =  jTable1.getSelectedRow();
         if(select==-1)
         {
-            JOptionPane.showMessageDialog(null, "Select a transaction first!");
+            JOptionPane.showMessageDialog(null, "Select a work first!");
         }
         else
         {

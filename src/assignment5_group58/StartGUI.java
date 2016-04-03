@@ -60,6 +60,10 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
       try  
       {  
            double d = Double.parseDouble(str);  
+            if(d<0)
+            {
+                return false;
+            }
       }  
       catch(NumberFormatException nfe)  
       {  
@@ -1248,25 +1252,25 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         Transaction newTransaction = new Transaction();
         String selected = (String) TransType.getSelectedItem();
         
-        if(selected.equals("Grant")){
-            newTransaction.settitle("Grant");
-        }
-        else if(selected.equals("Fund")){
-            newTransaction.settitle("Fund");
-        }
-        else{
-            newTransaction.settitle("Non-inventory expenditure");
-        }
-        
-        newTransaction.setauthority("Treasurer");
-        newTransaction.settype(selected);
-        newTransaction.setdetails(DetailsArea.getText());
-        
         if(PriceField.getText().isEmpty()||!isNumeric(PriceField.getText())){
              JOptionPane.showMessageDialog(null, "Need to enter price correctly !");
         }
         else
         {
+            if(selected.equals("Grant")){
+                newTransaction.settitle("Grant");
+            }
+            else if(selected.equals("Fund")){
+                newTransaction.settitle("Fund");
+            }
+            else{
+                newTransaction.settitle("Non-inventory expenditure");
+            }
+        
+            newTransaction.setauthority("Treasurer");
+            newTransaction.settype(selected);
+            newTransaction.setdetails(DetailsArea.getText());
+            
             if(selected.equals("Non Inventory Expenture"))
             {
                 newTransaction.setprofit(0.0);
