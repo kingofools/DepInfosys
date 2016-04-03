@@ -1235,7 +1235,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         AddStudentGUI newgui;
         //todo : add exceptions here
         //try {
-        newgui = new AddStudentGUI();
+        newgui = new AddStudentGUI(studentList);
         newgui.setLocationRelativeTo(null);
         newgui.setVisible(true);
         //optional 

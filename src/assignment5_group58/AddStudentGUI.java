@@ -8,19 +8,20 @@ package assignment5_group58;
 import javax.swing.JOptionPane;
 import static assignment5_group58.StartGUI.studentList;
 import java.awt.Container;
+import java.io.Serializable;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 
 /**
  *
  * @author surya
  */
-public class AddStudentGUI extends javax.swing.JFrame {
-
+public class AddStudentGUI extends javax.swing.JFrame implements Serializable{
     /**
      * Creates new form AddStudentGUI
      */
-    public AddStudentGUI() {
-        initComponents();
+    public AddStudentGUI(ArrayList<Student> studentList) {
+        newinitComponents(studentList);
     }
 
         //check if price is numeric
@@ -151,6 +152,109 @@ public class AddStudentGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+     private void newinitComponents(ArrayList<Student> StudentList) {
+
+        jLabel1 = new javax.swing.JLabel();
+        NameField = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        AddField = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        NumField = new javax.swing.JTextField();
+        MailField = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        BackButton = new javax.swing.JButton();
+        CreateStudButton = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Enter Student Details");
+
+        jLabel1.setText("Name :");
+
+        jLabel2.setText("Address :");
+
+        jLabel3.setText("Phone number :");
+
+        jLabel4.setText("Email :");
+
+        BackButton.setText("Go Back");
+        BackButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BackButtonActionPerformed(evt);
+            }
+        });
+
+        CreateStudButton.setText("Create ");
+        CreateStudButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CreateStudButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(NameField, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(BackButton)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel4)
+                                        .addComponent(jLabel3)))
+                                .addGap(18, 18, 18)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(NumField, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(AddField, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(MailField, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(CreateStudButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(32, 32, 32))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(NameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(AddField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(NumField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(MailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BackButton)
+                    .addComponent(CreateStudButton))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        pack();
+    }
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
         dispose();
     }//GEN-LAST:event_BackButtonActionPerformed
@@ -165,7 +269,6 @@ public class AddStudentGUI extends javax.swing.JFrame {
         {
            JOptionPane.showMessageDialog(null,"Need to write student name!");
         }
-        String regex = "[0-9]";
         String number = NumField.getText();
         if(!NumField.getText().isEmpty()&&isNumeric(number)){
             newstudent.setnumber(number);
@@ -179,8 +282,15 @@ public class AddStudentGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Need to write address!");
         }
         
+        if(!(MailField.getText().isEmpty()))
+        {
+            newstudent.setmail(MailField.getText());
+        }else{
+            JOptionPane.showMessageDialog(null,"Need to write e-mail!");
+        }
         //saving student and closing current tab
-        if(!NameField.getText().isEmpty())
+        if(!NameField.getText().isEmpty()&&!NumField.getText().isEmpty()&&isNumeric(number)
+                &&!(AddField.getText().isEmpty())&&!(MailField.getText().isEmpty()))
         {
             studentList.add(newstudent);
             JOptionPane.showMessageDialog(null,"Student "+newstudent.getname()+" added!");
@@ -222,7 +332,7 @@ public class AddStudentGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddStudentGUI().setVisible(true);
+                new AddStudentGUI(studentList).setVisible(true);
             }
         });
     }
