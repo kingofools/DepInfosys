@@ -23,6 +23,24 @@ public class AddStudentGUI extends javax.swing.JFrame {
         initComponents();
     }
 
+        //check if price is numeric
+    public static boolean isNumeric(String str)  
+    {  
+      try  
+      {  
+           double d = Double.parseDouble(str);  
+            if(d<0)
+            {
+                return false;
+            }
+      }  
+      catch(NumberFormatException nfe)  
+      {  
+        return false;  
+      }  
+      return true;  
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -149,7 +167,7 @@ public class AddStudentGUI extends javax.swing.JFrame {
         }
         String regex = "[0-9]";
         String number = NumField.getText();
-        if(number.matches(regex)){
+        if(!NumField.getText().isEmpty()&&isNumeric(number)){
             newstudent.setnumber(number);
         }else{
             JOptionPane.showMessageDialog(null,"Need to write a number!");
