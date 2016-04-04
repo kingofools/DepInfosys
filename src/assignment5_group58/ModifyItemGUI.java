@@ -166,6 +166,8 @@ public class ModifyItemGUI extends javax.swing.JFrame implements Serializable{
         else{
             modifyItem.setname(newName.getText());
             modifyItem.setlocation(newLocation.getText());
+            modifyTransaction.settitle(newName.getText());
+            modifyTransaction.setdetails("Location: "+newLocation.getText());
             JOptionPane.showMessageDialog(null,"Changes saved!");
             dispose();
         }
