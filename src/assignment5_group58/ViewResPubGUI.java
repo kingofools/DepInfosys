@@ -25,12 +25,12 @@ public class ViewResPubGUI extends javax.swing.JFrame {
     String[] columns = {"Title","In-charge"};
     
     public ViewResPubGUI(ArrayList<Transaction> researchList,ArrayList<Transaction> publicationList,
-            int R_or_P) {
+            boolean R_or_P) {
         
         //assume view research
         int i;
         int foundsize;
-        if(R_or_P==0)
+        if(!R_or_P)
         {
             foundsize= researchList.size();
             rp_object = new String[foundsize][2];
@@ -47,7 +47,7 @@ public class ViewResPubGUI extends javax.swing.JFrame {
             }
         }
         
-        else if(R_or_P==1)
+        else if(R_or_P)
         {
              foundsize = publicationList.size();
             rp_object = new String[foundsize][2];
@@ -206,7 +206,8 @@ public class ViewResPubGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 
-    private void newinitComponents(ArrayList<Transaction> cashbook, ArrayList<Transaction> publicationList, int R_or_P) {
+    private void newinitComponents(ArrayList<Transaction> cashbook, ArrayList<Transaction> publicationList,
+           boolean R_or_P) {
 
          jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -225,7 +226,7 @@ public class ViewResPubGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Research");
-        if(R_or_P==1)
+        if(R_or_P)
         {
             setTitle("Publication");
         }
@@ -350,7 +351,7 @@ public class ViewResPubGUI extends javax.swing.JFrame {
         else
         {
             Transaction interest = researchList.get(select);
-            if(R_or_P==1)
+            if(R_or_P)
             {
                 interest = publicationList.get(select);
             }
