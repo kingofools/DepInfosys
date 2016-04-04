@@ -19,8 +19,12 @@ import javax.swing.JOptionPane;
  */
 public class EnrollStudentGUI extends javax.swing.JFrame implements Serializable{
 
+    private static int studentSelect = -1;
+
     /**
      * Creates new form SelectStudentGUI
+     * @param studentList
+     * @param courseList
      */
     public EnrollStudentGUI(ArrayList<Student> studentList , ArrayList<Course> courseList) {
         newinitComponents(studentList,courseList);
@@ -47,7 +51,8 @@ public class EnrollStudentGUI extends javax.swing.JFrame implements Serializable
         AddCourseButton = new javax.swing.JButton();
         SelectStudentButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Enroll Student");
 
         jLabel1.setText("Available courses");
 
@@ -56,6 +61,7 @@ public class EnrollStudentGUI extends javax.swing.JFrame implements Serializable
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        NameList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(NameList);
 
         jLabel2.setText("Student");
@@ -67,6 +73,7 @@ public class EnrollStudentGUI extends javax.swing.JFrame implements Serializable
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        availList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(availList);
 
         currentList.setModel(new javax.swing.AbstractListModel<String>() {
@@ -145,9 +152,9 @@ public class EnrollStudentGUI extends javax.swing.JFrame implements Serializable
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    static ArrayList<Course> applicableCourses = new ArrayList<Course>();
+    static ArrayList<Course> applicableCourses = new ArrayList<>();
     static List<Integer> index = new ArrayList<>();
-    static ArrayList<Course> currentCourses = new ArrayList<Course>();
+    static ArrayList<Course> currentCourses = new ArrayList<>();
     
       private void newinitComponents(ArrayList<Student> studentList,ArrayList<Course> courseList) {
 
@@ -163,7 +170,8 @@ public class EnrollStudentGUI extends javax.swing.JFrame implements Serializable
         AddCourseButton = new javax.swing.JButton();
         SelectStudentButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Enroll Student");
 
        jLabel1.setText("Available courses");
         String[] names = new String[studentList.size()];
@@ -173,8 +181,9 @@ public class EnrollStudentGUI extends javax.swing.JFrame implements Serializable
             names[n] = studentList.get(n).getname();
             model.add(n, names[n]);
         }
-          
+        
         NameList.setModel(model);
+        NameList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         //NameList.setModel(new javax.swing.AbstractListModel<String>() {model});
         jScrollPane2.setViewportView(NameList);
 
@@ -182,18 +191,20 @@ public class EnrollStudentGUI extends javax.swing.JFrame implements Serializable
 
         jLabel3.setText("Current courses of student");
 
-        availList.setModel(new javax.swing.AbstractListModel<String>() {
+        /*availList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
-        });
+        });*/
+        availList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(availList);
 
-        currentList.setModel(new javax.swing.AbstractListModel<String>() {
+        /*currentList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
-        });
+        });*/
+        currentList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane3.setViewportView(currentList);
 
         AddCourseButton.setText("Add course");
@@ -267,8 +278,70 @@ public class EnrollStudentGUI extends javax.swing.JFrame implements Serializable
     
     private void AddCourseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddCourseButtonActionPerformed
         // TODO add your handling code here:
+        int courseselect = availList.getSelectedIndex();
+        if(courseselect==-1)
+        {
+            JOptionPane.showMessageDialog(null,"Need to select a course first!");
+        }
+        else
+        {
+            Course newCourse = courseList.get(index.get(courseselect));
+            newCourse.setstatus("current");
+            studentList.get(studentSelect).subjects.add(newCourse);
+            updateCurrentList();
+            removeApplicable(courseselect);
+            
+        }
     }//GEN-LAST:event_AddCourseButtonActionPerformed
 
+    private void updateCurrentList()
+    {
+                //set current courses
+            DefaultListModel modelcurrent = new DefaultListModel();
+            currentCourses = new ArrayList<>();
+            if(!studentList.get(studentSelect).subjects.isEmpty())
+            {
+                int subjectsize = studentList.get(studentSelect).subjects.size();
+                for(int a=0;a<subjectsize;a++)
+                {
+                    if(studentList.get(studentSelect).subjects.get(a).getstatus().equals("current"))
+                    //course is not in particular student's cleared course list
+                    {
+                        currentCourses.add(studentList.get(studentSelect).subjects.get(a));
+                    }
+                }
+            
+                String[] Ongoing = new String[currentCourses.size()];
+                //DefaultListModel modelcurrent = new DefaultListModel();
+                for(int n=0;n<currentCourses.size();n++)
+                {
+                    Ongoing[n] = currentCourses.get(n).getname();
+                    modelcurrent.add(n, Ongoing[n]);
+                }
+            }
+            currentList.setModel(modelcurrent);
+            jScrollPane3.setViewportView(currentList);
+    }
+    
+    private void removeApplicable(int courseselect)
+    {
+        applicableCourses.remove(courseselect);
+        index.remove(courseselect);
+        
+        DefaultListModel model = new DefaultListModel();
+        if(!applicableCourses.isEmpty())
+        {
+            String[] Apply = new String[applicableCourses.size()];
+            for(int n=0;n<applicableCourses.size();n++)
+            {
+                Apply[n] = applicableCourses.get(n).getname();
+                model.add(n, Apply[n]);
+            }
+        }
+        availList.setModel(model);
+        jScrollPane1.setViewportView(availList);
+    }
+    
     //are 2 courses same ?
     private boolean AreEqual(Course a, Course b){
         if(!(a.getname().equals(b.getname()))
@@ -286,7 +359,8 @@ public class EnrollStudentGUI extends javax.swing.JFrame implements Serializable
         {
             if(AreEqual(shishya.subjects.get(s),shiksha))
             {
-                if(shishya.subjects.get(s).getstatus().equals("clear"))
+                if(shishya.subjects.get(s).getstatus().equals("clear")
+                        ||shishya.subjects.get(s).getstatus().equals("current"))
                 {
                     return false;
                 }
@@ -296,52 +370,41 @@ public class EnrollStudentGUI extends javax.swing.JFrame implements Serializable
     }
     
     private void SelectStudentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectStudentButtonActionPerformed
-        int select = NameList.getSelectedIndex();
-        if(select==-1)
+        studentSelect = NameList.getSelectedIndex();
+        if(studentSelect==-1)
         {
             JOptionPane.showMessageDialog(null,"Select a student !");
         }
         else
         {   //set available courses      
-            for(int a=0;a<courseList.size();a++)
-            {
-                if(canApplyFor(studentList.get(select),courseList.get(a)))
-                //course is not in particular student's cleared course list
-                {
-                    applicableCourses.add(courseList.get(a));
-                    index.add(a);
-                }
-            }
-            
-            String[] Apply = new String[applicableCourses.size()];
+            applicableCourses = new ArrayList<>();
             DefaultListModel model = new DefaultListModel();
-            for(int n=0;n<applicableCourses.size();n++)
+            if(!courseList.isEmpty())
             {
-                Apply[n] = applicableCourses.get(n).getname();
-                model.add(n, Apply[n]);
+                for(int a=0;a<courseList.size();a++)
+                {
+                    if(canApplyFor(studentList.get(studentSelect),courseList.get(a)))
+                    //course is not in particular student's cleared course list
+                    {
+                        applicableCourses.add(courseList.get(a));
+                        index.add(a);
+                    }
+                }
+                
+                if(!applicableCourses.isEmpty())
+                {
+                    String[] Apply = new String[applicableCourses.size()];
+                    for(int n=0;n<applicableCourses.size();n++)
+                    {
+                        Apply[n] = applicableCourses.get(n).getname();
+                        model.add(n, Apply[n]);
+                    }
+                }
             }
             availList.setModel(model);
             jScrollPane1.setViewportView(availList);
-            
-            //set current courses      
-            for(int a=0;a<courseList.size();a++)
-            {
-                if(studentList.get(select).subjects.get(a).getstatus().equals("current"))
-                //course is not in particular student's cleared course list
-                {
-                    currentCourses.add(courseList.get(a));
-                }
-            }
-            
-            String[] Ongoing = new String[currentCourses.size()];
-            DefaultListModel modelcurrent = new DefaultListModel();
-            for(int n=0;n<currentCourses.size();n++)
-            {
-                Ongoing[n] = currentCourses.get(n).getname();
-                modelcurrent.add(n, Apply[n]);
-            }
-            currentList.setModel(modelcurrent);
-            jScrollPane3.setViewportView(currentList);
+           
+            updateCurrentList();
         }
     }//GEN-LAST:event_SelectStudentButtonActionPerformed
 
