@@ -9,6 +9,7 @@ import static assignment5_group58.StartGUI.courseList;
 import static assignment5_group58.StartGUI.studentList;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -40,9 +41,9 @@ public class EnrollStudentGUI extends javax.swing.JFrame implements Serializable
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        availList = new javax.swing.JList<>();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        currentList = new javax.swing.JList<>();
         AddCourseButton = new javax.swing.JButton();
         SelectStudentButton = new javax.swing.JButton();
 
@@ -61,19 +62,19 @@ public class EnrollStudentGUI extends javax.swing.JFrame implements Serializable
 
         jLabel3.setText("Current courses of student");
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+        availList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(availList);
 
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
+        currentList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane3.setViewportView(jList2);
+        jScrollPane3.setViewportView(currentList);
 
         AddCourseButton.setText("Add course");
         AddCourseButton.addActionListener(new java.awt.event.ActionListener() {
@@ -144,8 +145,10 @@ public class EnrollStudentGUI extends javax.swing.JFrame implements Serializable
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    ArrayList<Course> applicableCourses = new ArrayList<Course>();
-                
+    static ArrayList<Course> applicableCourses = new ArrayList<Course>();
+    static List<Integer> index = new ArrayList<>();
+    static ArrayList<Course> currentCourses = new ArrayList<Course>();
+    
       private void newinitComponents(ArrayList<Student> studentList,ArrayList<Course> courseList) {
 
         jLabel1 = new javax.swing.JLabel();
@@ -154,21 +157,21 @@ public class EnrollStudentGUI extends javax.swing.JFrame implements Serializable
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        availList = new javax.swing.JList<>();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        currentList = new javax.swing.JList<>();
         AddCourseButton = new javax.swing.JButton();
         SelectStudentButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Available courses");
+       jLabel1.setText("Available courses");
         String[] names = new String[studentList.size()];
         DefaultListModel model = new DefaultListModel();
         for(int n=0;n<studentList.size();n++)
         {
             names[n] = studentList.get(n).getname();
-             model.add(n, names[n]);
+            model.add(n, names[n]);
         }
           
         NameList.setModel(model);
@@ -179,19 +182,19 @@ public class EnrollStudentGUI extends javax.swing.JFrame implements Serializable
 
         jLabel3.setText("Current courses of student");
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+        availList.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(availList);
 
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+        currentList.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane3.setViewportView(jList2);
+        jScrollPane3.setViewportView(currentList);
 
         AddCourseButton.setText("Add course");
         AddCourseButton.addActionListener(new java.awt.event.ActionListener() {
@@ -299,18 +302,47 @@ public class EnrollStudentGUI extends javax.swing.JFrame implements Serializable
             JOptionPane.showMessageDialog(null,"Select a student !");
         }
         else
-        {           
-
+        {   //set available courses      
             for(int a=0;a<courseList.size();a++)
             {
                 if(canApplyFor(studentList.get(select),courseList.get(a)))
                 //course is not in particular student's cleared course list
                 {
                     applicableCourses.add(courseList.get(a));
+                    index.add(a);
                 }
             }
+            
+            String[] Apply = new String[applicableCourses.size()];
+            DefaultListModel model = new DefaultListModel();
+            for(int n=0;n<applicableCourses.size();n++)
+            {
+                Apply[n] = applicableCourses.get(n).getname();
+                model.add(n, Apply[n]);
+            }
+            availList.setModel(model);
+            jScrollPane1.setViewportView(availList);
+            
+            //set current courses      
+            for(int a=0;a<courseList.size();a++)
+            {
+                if(studentList.get(select).subjects.get(a).getstatus().equals("current"))
+                //course is not in particular student's cleared course list
+                {
+                    currentCourses.add(courseList.get(a));
+                }
+            }
+            
+            String[] Ongoing = new String[currentCourses.size()];
+            DefaultListModel modelcurrent = new DefaultListModel();
+            for(int n=0;n<currentCourses.size();n++)
+            {
+                Ongoing[n] = currentCourses.get(n).getname();
+                modelcurrent.add(n, Apply[n]);
+            }
+            currentList.setModel(modelcurrent);
+            jScrollPane3.setViewportView(currentList);
         }
-
     }//GEN-LAST:event_SelectStudentButtonActionPerformed
 
     /**
@@ -352,11 +384,11 @@ public class EnrollStudentGUI extends javax.swing.JFrame implements Serializable
     private javax.swing.JButton AddCourseButton;
     private javax.swing.JList<String> NameList;
     private javax.swing.JButton SelectStudentButton;
+    private javax.swing.JList<String> availList;
+    private javax.swing.JList<String> currentList;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JList<String> jList2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
