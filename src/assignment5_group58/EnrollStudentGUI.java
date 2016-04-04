@@ -279,7 +279,7 @@ public class EnrollStudentGUI extends javax.swing.JFrame implements Serializable
         }
         else
         { 
-            courseList.get(index.get(courseselect)).StudentsOnRoll.add(studentList.get(studentSelect).getname());
+            //courseList.get(index.get(courseselect)).StudentsOnRoll.add(studentList.get(studentSelect).getname());
             //add current student's name in course for grading
             Course newCourse = courseList.get(index.get(courseselect));
             removeApplicable(courseselect); //remove from applicable course
