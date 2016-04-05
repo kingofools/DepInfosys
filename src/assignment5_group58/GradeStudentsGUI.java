@@ -19,6 +19,8 @@ public class GradeStudentsGUI extends javax.swing.JFrame implements Serializable
 
     /**
      * Creates new form GradeStudentsGUI
+     * @param courseList
+     * @param studentList
      */
     public GradeStudentsGUI(ArrayList<Course> courseList,ArrayList<Student> studentList) {
         newinitComponents(courseList,studentList);
@@ -91,14 +93,15 @@ public class GradeStudentsGUI extends javax.swing.JFrame implements Serializable
                         .addGap(26, 26, 26)
                         .addComponent(GradeStudentsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(70, 70, 70)
-                        .addComponent(courseName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(courseName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,7 +138,7 @@ public class GradeStudentsGUI extends javax.swing.JFrame implements Serializable
         for(int i = 0;i < courseList.size();i++)
         {
             courseObject[i][0] = courseList.get(i).getname();
-            courseObject[i][1] = courseList.get(i).getname();
+            courseObject[i][1] = courseList.get(i).getprofessor();
         }
         
         courseTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -183,14 +186,15 @@ public class GradeStudentsGUI extends javax.swing.JFrame implements Serializable
                         .addGap(26, 26, 26)
                         .addComponent(GradeStudentsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(70, 70, 70)
-                        .addComponent(courseName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(courseName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -219,13 +223,22 @@ public class GradeStudentsGUI extends javax.swing.JFrame implements Serializable
         }
         else
         {
-            courseName.setText("Course : "+courseList.get(select));
+            courseName.setText("Course : "+courseList.get(select).getname());
+        
+            String[] columns = {"Name","Roll","Grade"};
+            Object[][] studObject = new String[courseList.get(select).getstudentsonroll()][3];
+            for(int i = 0;i < courseList.get(select).getstudentsonroll();i++)
+            {
+                int rollID = courseList.get(select).StudentsOnRoll.get(i);
+                JOptionPane.showMessageDialog(null,"Roll >"+rollID+"<");
+                studObject[i][0] = studentList.get(rollID-1).getname();//roll start from 1 not 0
+                studObject[i][1] = Integer.toString(rollID);
+                studObject[i][2] = "0";
+            }
+        
+            studentTable.setModel(new javax.swing.table.DefaultTableModel(studObject,columns));
+            jScrollPane2.setViewportView(studentTable);
         }
-        
-        String[] columns = {"Name","Roll","Grade"};
-        
-        
-        
     }//GEN-LAST:event_GradeStudentsButtonActionPerformed
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
