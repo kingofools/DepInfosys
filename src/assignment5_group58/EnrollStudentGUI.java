@@ -289,7 +289,7 @@ public class EnrollStudentGUI extends javax.swing.JFrame implements Serializable
             
             Course newCourse = new Course();
             newCourse = courseList.get(index.get(courseselect));
-            JOptionPane.showMessageDialog(null,newCourse.getstudentsonroll()+"<size");
+            //JOptionPane.showMessageDialog(null,newCourse.getstudentsonroll()+"<size");
             removeApplicable(courseselect); //remove from applicable course
             newCourse.setstatus("current");//update status
             studentList.get(studentSelect).subjects.add(newCourse);
@@ -330,8 +330,8 @@ public class EnrollStudentGUI extends javax.swing.JFrame implements Serializable
     //needed if a new course is added to current courses , remove course from applicable list
     private void removeApplicable(int courseselect)
     {
-        JOptionPane.showMessageDialog(null,"Course "+applicableCourses.get(courseselect).getname()
-                +" added!");
+        //JOptionPane.showMessageDialog(null,"Course "+applicableCourses.get(courseselect).getname()
+          //      +" added!");
         applicableCourses.remove(courseselect);
         index.remove(courseselect);
         DefaultListModel<String> model = new DefaultListModel<>();
@@ -386,6 +386,7 @@ public class EnrollStudentGUI extends javax.swing.JFrame implements Serializable
             availField.setText("Available for "+studentList.get(studentSelect).getname());//available text
             currentField.setText("Current courses for "+studentList.get(studentSelect).getname());
             applicableCourses = new ArrayList<>();
+            index = new ArrayList<>();
             DefaultListModel<String> model = new DefaultListModel<>();
             if(!courseList.isEmpty())
             {

@@ -9,6 +9,7 @@ import static assignment5_group58.StartGUI.courseList;
 import static assignment5_group58.StartGUI.studentList;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -26,6 +27,8 @@ public class GradeStudentsGUI extends javax.swing.JFrame implements Serializable
         newinitComponents(courseList,studentList);
     }
 
+    static int courseselect = 0;
+    static List<Integer> studentindex = new ArrayList<>();
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -214,25 +217,55 @@ public class GradeStudentsGUI extends javax.swing.JFrame implements Serializable
         pack();
     }
     
+     
+         //are 2 courses same ?
+    private boolean AreEqual(Course a, Course b){
+        if(!(a.getname().equals(b.getname()))
+            ||!(a.getcredit()==b.getcredit())
+            ||!(a.getprofessor().equals(b.getprofessor())))//if one of the main parameter disagree
+        {
+            return false;
+        }
+        return true;
+    }
+    
     private void GradeStudentsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GradeStudentsButtonActionPerformed
         // TODO add your handling code here:
-        int select = courseTable.getSelectedRow();
-        if(select==-1)
+        courseselect = courseTable.getSelectedRow();
+        if(courseselect==-1)
         {
             JOptionPane.showMessageDialog(null,"Select a course first!");
         }
         else
         {
-            courseName.setText("Course : "+courseList.get(select).getname());
+            courseName.setText("Course : "+courseList.get(courseselect).getname());
         
             String[] columns = {"Name","Roll","Grade"};
-            Object[][] studObject = new String[courseList.get(select).getstudentsonroll()][3];
-            for(int i = 0;i < courseList.get(select).getstudentsonroll();i++)
+            ArrayList<Student> mystudent = new ArrayList<>();
+            studentindex = new ArrayList<>();
+            for(int k = 0 ; k < studentList.size(); k++)
             {
-                int rollID = courseList.get(select).StudentsOnRoll.get(i);
-                JOptionPane.showMessageDialog(null,"Roll >"+rollID+"<");
-                studObject[i][0] = studentList.get(rollID-1).getname();//roll start from 1 not 0
-                studObject[i][1] = Integer.toString(rollID);
+                for(int m = 0; m < studentList.get(k).subjects.size() ; m++)
+                {
+                    Course studying = studentList.get(k).subjects.get(m);
+                    if(AreEqual(studying,courseList.get(courseselect))
+                            &&studying.getstatus().equals("current"))
+                    {
+                        mystudent.add(studentList.get(k));
+                        studentindex.add(k);
+                    }
+                }
+            }
+            
+            
+            Object[][] studObject = new String[mystudent.size()][3];
+                // new String[courseList.get(courseselect).getstudentsonroll()][3];
+            for(int i = 0;i < mystudent.size();i++)
+            {
+                //int rollID = courseList.get(courseselect).StudentsOnRoll.get(i);
+                //JOptionPane.showMessageDialog(null,"Roll >"+rollID+"<");
+                studObject[i][0] = mystudent.get(i).getname();//roll start from 1 not 0
+                studObject[i][1] = Integer.toString(mystudent.get(i).getroll());
                 studObject[i][2] = "0";
             }
         
