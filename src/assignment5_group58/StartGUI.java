@@ -49,6 +49,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     static Object[][] contact_object;
     static int[] index;
     static boolean R_or_P = false;//false corresponds to isPublication
+    static int rollIndex = 1;
     
     public StartGUI() {
         initComponents();
@@ -1241,7 +1242,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         AddStudentGUI newgui;
         //todo : add exceptions here
         //try {
-        newgui = new AddStudentGUI(studentList);
+        newgui = new AddStudentGUI(studentList,rollIndex);
         newgui.setLocationRelativeTo(null);
         newgui.setVisible(true);
         //optional 

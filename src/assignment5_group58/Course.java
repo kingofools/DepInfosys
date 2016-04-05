@@ -20,7 +20,7 @@ public class Course implements Serializable
 	private int grade = -1;//applicable for students only , not required for courselist
 	private String status = "new";
 	private String professor = "";
-	public  ArrayList<String> StudentsOnRoll;
+	public  static ArrayList<String> StudentsOnRoll = new ArrayList<>();
 	        
 	public void setname(String topic)
 	{
