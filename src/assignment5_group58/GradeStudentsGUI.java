@@ -29,6 +29,7 @@ public class GradeStudentsGUI extends javax.swing.JFrame implements Serializable
 
     static int courseselect = 0;
     static List<Integer> studentindex = new ArrayList<>();
+    static ArrayList<Student> mystudent = new ArrayList<>();
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -73,12 +74,21 @@ public class GradeStudentsGUI extends javax.swing.JFrame implements Serializable
             new String [] {
                 "Name", "Roll", "Grade"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(studentTable);
 
         courseName.setText("Course : ");
 
         submitButton.setText("Submit");
+        submitButton.setToolTipText("Have you graded all the students ?");
         submitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 submitButtonActionPerformed(evt);
@@ -166,12 +176,21 @@ public class GradeStudentsGUI extends javax.swing.JFrame implements Serializable
             new String [] {
                 "Name", "Roll", "Grade"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(studentTable);
 
         courseName.setText("Course : ");
 
         submitButton.setText("Submit");
+        submitButton.setToolTipText("Have you graded all the students ?");
         submitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 submitButtonActionPerformed(evt);
@@ -217,7 +236,6 @@ public class GradeStudentsGUI extends javax.swing.JFrame implements Serializable
         pack();
     }
     
-     
          //are 2 courses same ?
     private boolean AreEqual(Course a, Course b){
         if(!(a.getname().equals(b.getname()))
@@ -241,7 +259,7 @@ public class GradeStudentsGUI extends javax.swing.JFrame implements Serializable
             courseName.setText("Course : "+courseList.get(courseselect).getname());
         
             String[] columns = {"Name","Roll","Grade"};
-            ArrayList<Student> mystudent = new ArrayList<>();
+            mystudent = new ArrayList<>();
             studentindex = new ArrayList<>();
             for(int k = 0 ; k < studentList.size(); k++)
             {
@@ -257,7 +275,6 @@ public class GradeStudentsGUI extends javax.swing.JFrame implements Serializable
                 }
             }
             
-            
             Object[][] studObject = new String[mystudent.size()][3];
                 // new String[courseList.get(courseselect).getstudentsonroll()][3];
             for(int i = 0;i < mystudent.size();i++)
@@ -268,16 +285,50 @@ public class GradeStudentsGUI extends javax.swing.JFrame implements Serializable
                 studObject[i][1] = Integer.toString(mystudent.get(i).getroll());
                 studObject[i][2] = "0";
             }
-        
-            studentTable.setModel(new javax.swing.table.DefaultTableModel(studObject,columns));
+            studentTable.setModel(new javax.swing.table.DefaultTableModel(studObject,columns) {
+                boolean[] canEdit = new boolean [] {
+                    false, false, true
+                };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+            public Object getValueAt(int row,int col){
+                return studObject[row][col];
+            }
+            public void setValueAt(Object in,int row,int col)
+            {
+                studObject[row][col] = in;
+                fireTableCellUpdated(row, col);
+            }
+            }
+            );
             jScrollPane2.setViewportView(studentTable);
         }
     }//GEN-LAST:event_GradeStudentsButtonActionPerformed
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         // TODO add your handling code here:
+        if(areValidGrades()!=0)
+        {
+            
+        }
+        else
+        {
+        
+        }
     }//GEN-LAST:event_submitButtonActionPerformed
 
+    private int areValidGrades()
+    {
+        int size = mystudent.size();
+        for(int i =0 ;i < size ; i++)
+        {
+            JOptionPane.showMessageDialog(null, studentTable.getValueAt(i, 2)+" at "+i);
+        }
+        return 0;
+    }
+    
     /**
      * @param args the command line arguments
      */
