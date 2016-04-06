@@ -1348,7 +1348,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             }
         }
         
-        WriteData newwrite = new WriteData(cashbook, Transfilename);
+        WriteTrans newwrite = new WriteTrans(cashbook, Transfilename);
         
     }//GEN-LAST:event_AddTransActionPerformed
 

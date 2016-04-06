@@ -14,9 +14,9 @@ import javax.swing.JOptionPane;
  *
  * @author surya
  */
-public class WriteData 
+public class WriteTrans 
 {
-    public WriteData(ArrayList<Transaction> cashbook,String file)
+    public WriteTrans(ArrayList<Transaction> cashbook,String file)
     {
         try {
         	FileOutputStream fileOut = new FileOutputStream(file); 
