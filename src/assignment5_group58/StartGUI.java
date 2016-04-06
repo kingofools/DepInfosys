@@ -113,14 +113,14 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        /*try   {
-            FileInputStream infile1 = new FileInputStream(Itemfilename);
-            ObjectInputStream outfile1 = new ObjectInputStream(infile1);
-            itemList = (ArrayList<Item>) outfile1.readObject();
+        try   {
+            FileInputStream infile2 = new FileInputStream(Itemfilename);
+            ObjectInputStream outfile2 = new ObjectInputStream(infile2);
+            courseList = (ArrayList<Course>) outfile2.readObject();
             JOptionPane.showMessageDialog(null, "Read successfully");
             //updateCashbook(cashbook);
-            infile1.close();
-            outfile1.close();
+            infile2.close();
+            outfile2.close();
 			//JOptionPane.showMessageDialog(null, "I tried");
 		}
         catch (FileNotFoundException e) 
@@ -140,9 +140,10 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
              }
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        }
         
         initComponents();
+        //updateCourseList(courseList);
         updateCashbook(cashbook);
         updateItemList(itemList);
     }
@@ -186,6 +187,22 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             }
         }
     }
+    
+    /*private void updateCourseList(ArrayList<Course> courselist){
+        ArrayList<Course> CourseList = courselist;
+        for(Course newCourse : CourseList){
+            netIncome += newTransaction.getprofit();
+            netExpenditure += newTransaction.getinvestment();
+            IncField.setText(Double.toString(netIncome));
+            ExpField.setText(Double.toString(netExpenditure));
+            BalField.setText(Double.toString(netIncome - netExpenditure));
+            if(newTransaction.getinvestment() == 0.0){
+                updateDebitsArea(newTransaction);
+            }else if(newTransaction.getprofit() == 0.0){
+                updateCreditsArea(newTransaction);
+            }
+        }
+    }*/
     
     //check if price is numeric
     public static boolean isNumeric(String str)  
@@ -1565,6 +1582,10 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         // TODO add your handling code here:
         canDelete = -1;
         ViewItemGUI newgui = new ViewItemGUI(itemList,cashbook,canDelete,modifyItem,modifyTransaction);
+        
+        WriteItem newwrite = new WriteItem(itemList, Itemfilename);
+        //updateItemList(itemList);
+        //updateCashbook(cashbook);
         newgui.setLocationRelativeTo(null);
         newgui.setVisible(true);
         
@@ -1765,15 +1786,11 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(StartGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(StartGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(StartGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(StartGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        
         //</editor-fold>
 
         /* Create and display the form */
