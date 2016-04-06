@@ -34,8 +34,6 @@ public class GradeStudentsGUI extends javax.swing.JFrame implements Serializable
     static List<Integer> courseindex = new ArrayList<>();
     static ArrayList<Student> mystudent = new ArrayList<>();
     static int grade = 5;
-    static Double cg = 0.0;
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -352,18 +350,52 @@ public class GradeStudentsGUI extends javax.swing.JFrame implements Serializable
         {
             Student dude = studentList.get(studentindex.get(select));
             dude.grades.set(courseindex.get(select), gradeSlider.getValue());
-            
-            //update cgpa
-            
+            //update individual grade for that course
+            /*updating cgpa and sgpa*/
+            //first update local variable for sg aggregate - undivided
+            dude.sg = dude.sg +
+                    (double)gradeSlider.getValue()*dude.subjects.get(courseindex.get(select)).getcredit();
+            //currCredits represent credits for already checked current courses
+            dude.setcurrCredits(dude.getcurrCredits()+dude.subjects.get(courseindex.get(select)).getcredit());
+
+            //check if all current courses are graded
+            if(dude.AllGraded())// && dude.getcurrCredits()==dude.getStudyingCredits())
+            {                   //already checked this ^
+                dude.sg = dude.sg/dude.getcurrCredits();
+                dude.sgpa.add(dude.sg);//update sgpa
+                    
+                //update cgpa
+                dude.cg = dude.cg*dude.getprevCredits() + dude.sg * dude.getcurrCredits();
+                dude.cg = dude.cg / (dude.getprevCredits()+dude.getcurrCredits());
+                dude.cgpa.add(dude.cg);
+                //cgpa and sgpa size will be same
+                dude.setprevCredits(dude.getprevCredits()+dude.getcurrCredits());                
+                dude.setcurrCredits(0);
+                dude.sg = 0;//ready for next sem
+                dude.updateCourses();//change status for all current courses
+                
+                JOptionPane.showMessageDialog(null, "SGPA and CGPA of "+dude.getname()+" for sem "+(dude.cgpa.size()-1)+" has been updated"
+                        +"\nSGPA = "+dude.sgpa.get(dude.sgpa.size()-1)
+                        +"\nCGPA = "+dude.cgpa.get(dude.cgpa.size()-1));
+                //NOTE : dude.sg is cleared every sem as (n+1)th sem's sg is independent of nth sem's sg
+                //However , cg of (n+1)th sem requires cg of nth sem . Also , cg(0th sem) = 0
+            } 
+            //update table for next grade
+            updateStudentTable();
+            gradeSlider.setValue(5);
+            /*//previous code for testing
             if(dude.getprevCredits()==0)
             {
-                cg = (double)gradeSlider.getValue();
+                dude.sg = (double)gradeSlider.getValue();
+                //dude.cg = (double)gradeSlider.getValue();
                 dude.setprevCredits(dude.getprevCredits()+dude.subjects.get(courseindex.get(select)).getcredit());
             }
             else
             {
                 //JOptionPane.showMessageDialog(null,"hey preVcredits = "+dude.getprevCredits()+" cg = "+dude.cgpa.get(0));
-                cg = dude.cgpa.get(0)*dude.getprevCredits()
+                //cg = dude.cgpa.get(0)*dude.getprevCredits()
+                //        +(double)gradeSlider.getValue()*dude.subjects.get(courseindex.get(select)).getcredit();
+                dude.sg = dude.sgpa.get(0)*dude.getprevCredits()
                         +(double)gradeSlider.getValue()*dude.subjects.get(courseindex.get(select)).getcredit();
                 //JOptionPane.showMessageDialog(null,"hey cg = "+cg);
                 
@@ -373,9 +405,9 @@ public class GradeStudentsGUI extends javax.swing.JFrame implements Serializable
                 cg = cg/dude.getprevCredits();
             }
             dude.cgpa.set(0, cg);
-            JOptionPane.showMessageDialog(null,dude.getname()+"'s cg is now "+dude.cgpa.get(0));
-            updateStudentTable();
-            gradeSlider.setValue(5);
+            dude.sgpa.set(0,sg);*/
+            //JOptionPane.showMessageDialog(null,dude.getname()+"'s cg is now "+dude.cgpa.get(0));
+
         }
     }//GEN-LAST:event_submitButtonActionPerformed
 

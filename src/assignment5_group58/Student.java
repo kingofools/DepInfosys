@@ -21,12 +21,14 @@ public class Student implements Serializable
 	private String mail;
 	private int roll;
         private int prevCredits = 0;
+        private int currCredits = 0;        
         public  ArrayList<Course> subjects = new ArrayList<>();
         public ArrayList<String> status = new ArrayList<>();
       	public  ArrayList<Double> sgpa = new ArrayList<>();
         public  ArrayList<Double> cgpa = new ArrayList<>();
         public ArrayList<Integer> grades = new ArrayList<>();
-        
+        public double cg = 0.0;
+        public double sg = 0.0;
         Double dummy = -1.0;
 	public void setname(String naam)
 	{
@@ -81,6 +83,15 @@ public class Student implements Serializable
 		return prevCredits;
 	};
 	
+        public void setcurrCredits(int totalCredits)
+	{
+		this.currCredits = totalCredits;
+	};
+	public int getcurrCredits()
+	{
+		return currCredits;
+	};
+        
         public boolean AllGraded()
         {
             int i;
@@ -114,24 +125,40 @@ public class Student implements Serializable
             return true;
         }
   
-        //called internally , hence assumed AllGraded is true
+        //called internally in code, hence assumed AllGraded is true
         public void updateCourses()
         {
             int i;
             for(i = 0; i < subjects.size();i++)
             {
-                if(subjects.get(i).getstatus().equals("current"))//check for each current course
+                if(status.get(i).equals("current"))//check for each current course
                 {
-                    if(subjects.get(i).getgrade()>5)//if current course is passed
+                    if(grades.get(i)>4)//if current course is passed
                     {
-                        subjects.get(i).setstatus("clear");
+                        status.set(i, "clear");//get(i).setstatus("clear");
                     }
                     else//course is graded since AllGraded is true , and grade < 5
                     {
-                        subjects.get(i).setstatus("backlog");
+                        status.set(i, "backlog");//subjects.get(i).setstatus("backlog");
                     }
                 }
             }
+        }
+        
+        //return crredits of all courses marked current - mostly for testing
+        public int getStudyingCredits()
+        {
+            int i;
+            int count = 0;
+            for(i = 0; i < subjects.size();i++)
+            {
+                if(status.get(i).equals("current"))//check for each current course
+                {
+                    count += this.subjects.get(i).getcredit();
+                }
+            }
+            
+            return count;
         }
             
 }
