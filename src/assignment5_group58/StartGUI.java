@@ -96,7 +96,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
 		}
         catch (FileNotFoundException e) 
 		{
-           // System.err.println("File not found");
+           JOptionPane.showMessageDialog(null, "FILE CREATED successfully");
             try{
                 File f = new File("ItemList.dat");
                 
@@ -115,7 +115,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         
         initComponents();
         updateCashbook(cashbook);
-        //updateItemList(itemList);
+        updateItemList(itemList);
     }
     
     private void updateCashbook(ArrayList<Transaction> cashbook){
@@ -138,9 +138,6 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         ArrayList<Item> ItemList = itemlist;
         Transaction itemTrans = new Transaction();
         for(Item newItem : ItemList){
-            newItem.setname(itemName.getText());
-            newItem.setlocation(itemLocation.getText());
-            newItem.setprice(Double.parseDouble(itemPrice.getText()));
             itemTrans.settitle(newItem.getname());
             itemTrans.setauthority("Inventory"); //need this for search result
             itemTrans.setdetails("Location : "+newItem.getlocation());
