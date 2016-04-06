@@ -20,6 +20,7 @@ import java.io.ObjectInputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -241,11 +242,18 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         OKButton = new javax.swing.JButton();
         jSpinner1 = new javax.swing.JSpinner();
         respubGroup = new javax.swing.ButtonGroup();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        HomePane = new javax.swing.JTabbedPane();
         Hometab = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
         welcome = new javax.swing.JLabel();
-        time = new javax.swing.JLabel();
+        iitKgp = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
         date = new javax.swing.JLabel();
+        time = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        devLabel = new javax.swing.JLabel();
+        sunshineLabel = new javax.swing.JLabel();
         Acadstab = new javax.swing.JPanel();
         Coursepanel = new javax.swing.JPanel();
         AddCourse = new javax.swing.JButton();
@@ -428,39 +436,130 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Home");
 
-        jTabbedPane1.setName("Home"); // NOI18N
+        HomePane.setName("Home"); // NOI18N
+        HomePane.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                HomePaneMouseClicked(evt);
+            }
+        });
+
+        jPanel3.setBackground(new java.awt.Color(102, 102, 255));
+        jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         welcome.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         welcome.setText("Welcome to IIT KGP Department Information System");
 
-        time.setText("time");
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(30, Short.MAX_VALUE)
+                .addComponent(welcome)
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(welcome)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        iitKgp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assignment5_group58/kgp_blur.png"))); // NOI18N
+        iitKgp.setText("s");
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Date and Time"));
 
         date.setText("date");
+
+        time.setText("time");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(time, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(date, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(time, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE))
+        );
+
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Developers"));
+
+        devLabel.setText("Kaustubh Hiware");
+
+        sunshineLabel.setText("Surya Midatala");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(devLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(sunshineLabel)
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(devLabel)
+                    .addComponent(sunshineLabel))
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout HometabLayout = new javax.swing.GroupLayout(Hometab);
         Hometab.setLayout(HometabLayout);
         HometabLayout.setHorizontalGroup(
             HometabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HometabLayout.createSequentialGroup()
-                .addGap(0, 39, Short.MAX_VALUE)
-                .addGroup(HometabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(welcome)
-                    .addComponent(date))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(time))
+            .addGroup(HometabLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(HometabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HometabLayout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(HometabLayout.createSequentialGroup()
+                        .addComponent(iitKgp, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(HometabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(HometabLayout.createSequentialGroup()
+                                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(24, 24, 24))
+                            .addGroup(HometabLayout.createSequentialGroup()
+                                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addContainerGap())))))
         );
         HometabLayout.setVerticalGroup(
             HometabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HometabLayout.createSequentialGroup()
-                .addGap(75, 75, 75)
-                .addComponent(welcome)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 204, Short.MAX_VALUE)
-                .addGroup(HometabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(time)
-                    .addComponent(date)))
+                .addContainerGap()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(HometabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(iitKgp, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
+                    .addGroup(HometabLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Home", Hometab);
+        HomePane.addTab("Home", Hometab);
 
         Coursepanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Course"));
         Coursepanel.setToolTipText("Course1");
@@ -589,7 +688,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Academics", Acadstab);
+        HomePane.addTab("Academics", Acadstab);
 
         viewItem.setText("View all");
         viewItem.addActionListener(new java.awt.event.ActionListener() {
@@ -720,7 +819,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Inventory", Inventorytab);
+        HomePane.addTab("Inventory", Inventorytab);
 
         TransType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Grant", "Fund", "Non Inventory Expenture" }));
         TransType.setToolTipText("Select a transaction type");
@@ -796,7 +895,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                 .addGap(32, 32, 32))
         );
 
-        jTabbedPane1.addTab("Treasury", Treasurytab);
+        HomePane.addTab("Treasury", Treasurytab);
 
         Logspanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Logs"));
         Logspanel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -896,7 +995,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Cash book", Cashbooktab);
+        HomePane.addTab("Cash book", Cashbooktab);
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel16.setText("Research / Publication");
@@ -1039,7 +1138,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Research/Publication", ResPubtab);
+        HomePane.addTab("Research/Publication", ResPubtab);
 
         SearchField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1177,18 +1276,18 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Search", Searchtab);
+        HomePane.addTab("Search", Searchtab);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(HomePane, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(HomePane, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -1768,6 +1867,18 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         }
     }//GEN-LAST:event_ViewSearchActionPerformed
 
+    private void HomePaneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomePaneMouseClicked
+        // TODO add your handling code here:
+        Date d = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        this.time.setText(sdf.format(d));
+        SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
+        this.date.setText(sdf1.format(d));
+        ImageIcon img = new ImageIcon("/assignment5_group58/icon.jpg");
+        this.setIconImage(img.getImage());
+        //iitKgp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assignment5_group58/kgp_blur.png")));
+    }//GEN-LAST:event_HomePaneMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1822,6 +1933,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     private javax.swing.JButton EnrollStudent;
     private javax.swing.JButton Evaluate;
     public static javax.swing.JTextField ExpField;
+    private javax.swing.JTabbedPane HomePane;
     private javax.swing.JPanel Hometab;
     public static javax.swing.JTextField IncField;
     private javax.swing.JPanel Inventorytab;
@@ -1848,7 +1960,10 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     private javax.swing.JButton ViewPublicationButton;
     private javax.swing.JButton ViewResearchButton;
     private javax.swing.JButton ViewSearch;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel date;
+    private javax.swing.JLabel devLabel;
+    private javax.swing.JLabel iitKgp;
     private javax.swing.JTextField itemLocation;
     private javax.swing.JTextField itemName;
     private javax.swing.JTextField itemPrice;
@@ -1884,6 +1999,9 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -1891,7 +2009,6 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField respubAuthority;
     private javax.swing.JTextArea respubDetails;
     private javax.swing.ButtonGroup respubGroup;
@@ -1906,6 +2023,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     private javax.swing.JTextField searchProfit;
     private javax.swing.JTextField searchTitle;
     private javax.swing.JTextField searchType;
+    private javax.swing.JLabel sunshineLabel;
     private javax.swing.JLabel time;
     private javax.swing.JButton viewItem;
     private javax.swing.JLabel welcome;
