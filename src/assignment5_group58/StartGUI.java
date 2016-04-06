@@ -43,6 +43,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     static double netExpenditure = 0.0;
     static String Transfilename = "TransList.dat";
     static String Itemfilename = "ItemList.dat";
+    static String Coursefilename = "CourseList.dat";
     
     static int canDelete = 0;
     static int index_stud = -1;
@@ -56,7 +57,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     
     public StartGUI() {
         
-        try   {
+        /*try   {
             FileInputStream infile = new FileInputStream(Transfilename);
             ObjectInputStream outfile = new ObjectInputStream(infile);
             cashbook = (ArrayList<Transaction>) outfile.readObject();
@@ -114,7 +115,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        try   {
+        /*try   {
             FileInputStream infile2 = new FileInputStream(Itemfilename);
             ObjectInputStream outfile2 = new ObjectInputStream(infile2);
             courseList = (ArrayList<Course>) outfile2.readObject();
@@ -141,12 +142,12 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
              }
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
         
         initComponents();
         //updateCourseList(courseList);
-        updateCashbook(cashbook);
-        updateItemList(itemList);
+        //updateCashbook(cashbook);
+        //updateItemList(itemList);
     }
     
     private void updateCashbook(ArrayList<Transaction> cashbook){
