@@ -284,14 +284,15 @@ public class EnrollStudentGUI extends javax.swing.JFrame implements Serializable
         { 
             //add current student's name in course for grading
             courseList.get(index.get(courseselect)).StudentsOnRoll.add(studentSelect+1);
-            JOptionPane.showMessageDialog(null, studentList.get(studentSelect).getname()+
-                    " added to "+courseList.get(index.get(courseselect)).getname());
+            //JOptionPane.showMessageDialog(null, studentList.get(studentSelect).getname()+
+            //        " added to "+courseList.get(index.get(courseselect)).getname());
             
             Course newCourse = new Course();
             newCourse = courseList.get(index.get(courseselect));
             //JOptionPane.showMessageDialog(null,newCourse.getstudentsonroll()+"<size");
             removeApplicable(courseselect); //remove from applicable course
-            newCourse.setstatus("current");//update status
+            studentList.get(studentSelect).status.add("current");//update status
+            studentList.get(studentSelect).grades.add(-1);
             studentList.get(studentSelect).subjects.add(newCourse);
             updateCurrentList();
         }
@@ -308,7 +309,7 @@ public class EnrollStudentGUI extends javax.swing.JFrame implements Serializable
             int subjectsize = studentList.get(studentSelect).subjects.size();
             for(int a=0;a<subjectsize;a++)
             {
-                if(studentList.get(studentSelect).subjects.get(a).getstatus().equals("current"))
+                if(studentList.get(studentSelect).status.get(a).equals("current"))
                 //course is not in particular student's cleared course list
                 {
                     currentCourses.add(studentList.get(studentSelect).subjects.get(a));
@@ -365,8 +366,8 @@ public class EnrollStudentGUI extends javax.swing.JFrame implements Serializable
         {
             if(AreEqual(shishya.subjects.get(s),shiksha))
             {
-                if(shishya.subjects.get(s).getstatus().equals("clear")
-                        ||shishya.subjects.get(s).getstatus().equals("current"))
+                if(shishya.status.get(s).equals("clear")
+                        ||shishya.status.get(s).equals("current"))
                 {
                     return false;
                 }

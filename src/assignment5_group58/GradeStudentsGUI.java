@@ -31,6 +31,7 @@ public class GradeStudentsGUI extends javax.swing.JFrame implements Serializable
     static List<Integer> studentindex = new ArrayList<>();
     static List<Integer> courseindex = new ArrayList<>();
     static ArrayList<Student> mystudent = new ArrayList<>();
+    static int grade = 5;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -196,7 +197,7 @@ public class GradeStudentsGUI extends javax.swing.JFrame implements Serializable
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true
+                false, false,false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -223,6 +224,7 @@ public class GradeStudentsGUI extends javax.swing.JFrame implements Serializable
         gradeSlider.setValue(5);
         gradeSlider.setBorder(javax.swing.BorderFactory.createTitledBorder("Grade"));
         gradeSlider.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        gradeSlider.setToolTipText("5 is the minimum for pass criteria");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -289,8 +291,7 @@ public class GradeStudentsGUI extends javax.swing.JFrame implements Serializable
         }
         else
         {
-            courseName.setText("Course : "+courseList.get(courseselect).getname());
-        
+            courseName.setText("Course : "+courseList.get(courseselect).getname());    
             updateStudentTable();
         }
     }//GEN-LAST:event_GradeStudentsButtonActionPerformed
@@ -300,13 +301,14 @@ public class GradeStudentsGUI extends javax.swing.JFrame implements Serializable
         String[] columns = {"Name","Roll","Grade"};
         mystudent = new ArrayList<>();
         studentindex = new ArrayList<>();
+        courseindex = new ArrayList<>();
         for(int k = 0 ; k < studentList.size(); k++)
         {
             for(int m = 0; m < studentList.get(k).subjects.size() ; m++)
             {
                 Course studying = studentList.get(k).subjects.get(m);
                 if(AreEqual(studying,courseList.get(courseselect))
-                        &&studying.getstatus().equals("current"))
+                        &&studentList.get(k).status.get(m).equals("current"))
                {
                     mystudent.add(studentList.get(k));
                     studentindex.add(k);
@@ -324,7 +326,8 @@ public class GradeStudentsGUI extends javax.swing.JFrame implements Serializable
             //JOptionPane.showMessageDialog(null,"Roll >"+rollID+"<");
             studObject[i][0] = mystudent.get(i).getname();//roll start from 1 not 0
             studObject[i][1] = Integer.toString(mystudent.get(i).getroll());
-            studObject[i][2] = Integer.toString(mystudent.get(i).subjects.get(courseindex.get(i)).getgrade());
+            studObject[i][2] = Integer.toString(mystudent.get(i).grades.get(courseindex.get(i)));
+            //mystudent.get(i).subjects.get(courseindex.get(i)).getgrade());
         }
         studentTable.setModel(new javax.swing.table.DefaultTableModel(studObject,columns) {
         }
@@ -342,12 +345,10 @@ public class GradeStudentsGUI extends javax.swing.JFrame implements Serializable
         }
         else
         {
-            int grade = gradeSlider.getValue();
-            studentList.get(studentindex.get(select)).subjects.get(courseindex.get(select)).setgrade(grade);
-            JOptionPane.showMessageDialog(null,studentList.get(studentindex.get(select)).getname()
-                    +" awarded "+ grade+" marks in "+courseList.get(courseselect).getname());
-
+            studentList.get(studentindex.get(select))
+                    .grades.set(courseindex.get(select), gradeSlider.getValue());
             updateStudentTable();
+            gradeSlider.setValue(5);
         }
     }//GEN-LAST:event_submitButtonActionPerformed
 

@@ -21,9 +21,11 @@ public class Student implements Serializable
 	private String mail;
 	private int roll;
         private int prevCredits;
-        public  ArrayList<Course> subjects = new ArrayList<Course>();
-      	public  ArrayList<Double> sgpa = new ArrayList<Double>();
-        public  ArrayList<Double> cgpa = new ArrayList<Double>();
+        public  ArrayList<Course> subjects = new ArrayList<>();
+        public ArrayList<String> status = new ArrayList<>();
+      	public  ArrayList<Double> sgpa = new ArrayList<>();
+        public  ArrayList<Double> cgpa = new ArrayList<>();
+        public ArrayList<Integer> grades = new ArrayList<>();
         
 	public void setname(String naam)
 	{
@@ -83,9 +85,9 @@ public class Student implements Serializable
             int i;
             for(i = 0; i < subjects.size();i++)
             {
-                if(subjects.get(i).getstatus().equals("current"))//check for each current course
+                if(status.get(i).equals("current"))//check for each current course
                 {
-                    if(subjects.get(i).getgrade()==-1)//if any current course is not graded
+                    if(grades.get(i)==-1)//if any current course is not graded
                     {
                         return false;
                     }
@@ -101,7 +103,7 @@ public class Student implements Serializable
             {
                 if(subjects.get(i).getname().equals(Subject))//check for each course
                 {
-                    if(subjects.get(i).getgrade()<5)//if course found , has insufficient grade
+                    if(grades.get(i)<5)//if course found , has insufficient grade
                     {
                         return false;// assuming grade below 5 is fail
                         //may need to check this at a later stage
