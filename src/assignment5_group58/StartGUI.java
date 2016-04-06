@@ -59,7 +59,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             ObjectInputStream outfile = new ObjectInputStream(infile);
             cashbook = (ArrayList<Transaction>) outfile.readObject();
             JOptionPane.showMessageDialog(null, "Read successfully");
-            updateCashbook(cashbook);
+            //updateCashbook(cashbook);
 			infile.close();
 			outfile.close();
 			//JOptionPane.showMessageDialog(null, "I tried");
@@ -82,17 +82,20 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+            
         
         initComponents();
-        
+        updateCashbook(cashbook);
     }
     
     private void updateCashbook(ArrayList<Transaction> cashbook){
         ArrayList<Transaction> translist = cashbook;
         for(Transaction newTransaction : translist){
-            
+            netIncome += newTransaction.getprofit();
+            netExpenditure += newTransaction.getinvestment();
+            IncField.setText(Double.toString(netIncome));
+            ExpField.setText(Double.toString(netExpenditure));
+            BalField.setText(Double.toString(netIncome - netExpenditure));
             if(newTransaction.getinvestment() == 0.0){
                 updateDebitsArea(newTransaction);
             }else if(newTransaction.getprofit() == 0.0){
