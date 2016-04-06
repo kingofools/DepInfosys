@@ -10,6 +10,7 @@ import static assignment5_group58.StartGUI.cashbook;
 import static assignment5_group58.StartGUI.itemList;
 import static assignment5_group58.StartGUI.modifyItem;
 import static assignment5_group58.StartGUI.modifyTransaction;
+import static assignment5_group58.StartGUI.Transfilename;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -203,6 +204,7 @@ public class ViewItemGUI extends javax.swing.JFrame implements Serializable{
                 }
             }
             ModifyItemGUI newgui = new ModifyItemGUI(modifyItem,modifyTransaction);
+            //updateCashbook(cashbook, Transfilename);
             newgui.setLocationRelativeTo(null);
             newgui.setVisible(true);
             dispose();

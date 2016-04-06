@@ -113,6 +113,35 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        /*try   {
+            FileInputStream infile1 = new FileInputStream(Itemfilename);
+            ObjectInputStream outfile1 = new ObjectInputStream(infile1);
+            itemList = (ArrayList<Item>) outfile1.readObject();
+            JOptionPane.showMessageDialog(null, "Read successfully");
+            //updateCashbook(cashbook);
+            infile1.close();
+            outfile1.close();
+			//JOptionPane.showMessageDialog(null, "I tried");
+		}
+        catch (FileNotFoundException e) 
+		{
+           JOptionPane.showMessageDialog(null, "FILE CREATED successfully");
+            try{
+                File f = new File("ItemList.dat");
+                
+                boolean bool = false;
+                bool = f.createNewFile();
+                while(bool==false)
+                {
+                	f.delete();
+                	bool = f.createNewFile();
+                }
+             }catch(Exception ex){
+             }
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+        
         initComponents();
         updateCashbook(cashbook);
         updateItemList(itemList);
@@ -1468,6 +1497,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         // TODO add your handling code here:
         canDelete = 0;
         ViewItemGUI newgui = new ViewItemGUI(itemList,cashbook,canDelete,modifyItem,modifyTransaction);
+        updateItemList(itemList);
         newgui.setLocationRelativeTo(null);
         newgui.setVisible(true);
         
@@ -1477,6 +1507,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         // TODO add your handling code here:
                 canDelete = 1;
         ViewItemGUI newgui = new ViewItemGUI(itemList,cashbook,canDelete,modifyItem,modifyTransaction);
+        updateItemList(itemList);
         newgui.setLocationRelativeTo(null);
         newgui.setVisible(true);
     }//GEN-LAST:event_DelItemActionPerformed
