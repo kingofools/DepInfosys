@@ -11,6 +11,7 @@ package assignment5_group58;
  */
 import java.util.ArrayList;
 import java.io.Serializable;
+import java.util.List;
 
 
 public class Course implements Serializable
@@ -20,7 +21,7 @@ public class Course implements Serializable
 	private int grade = -1;//applicable for students only , not required for courselist
 	private String status = "new";
 	private String professor = "";
-	public  ArrayList<String> StudentsOnRoll;
+	public  static List<Integer> StudentsOnRoll = new ArrayList<>();
 	        
 	public void setname(String topic)
 	{

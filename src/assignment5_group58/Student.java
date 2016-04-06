@@ -111,4 +111,24 @@ public class Student implements Serializable
             return true;
         }
   
+        //called internally , hence assumed AllGraded is true
+        public void updateCourses()
+        {
+            int i;
+            for(i = 0; i < subjects.size();i++)
+            {
+                if(subjects.get(i).getstatus().equals("current"))//check for each current course
+                {
+                    if(subjects.get(i).getgrade()>5)//if current course is passed
+                    {
+                        subjects.get(i).setstatus("clear");
+                    }
+                    else//course is graded since AllGraded is true , and grade < 5
+                    {
+                        subjects.get(i).setstatus("backlog");
+                    }
+                }
+            }
+        }
+            
 }

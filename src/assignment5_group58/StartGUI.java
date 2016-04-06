@@ -50,6 +50,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     static Object[][] contact_object;
     static int[] index;
     static boolean R_or_P = false;//false corresponds to isPublication
+    static int rollIndex = 1;
     
     public StartGUI() {
         
@@ -1261,14 +1262,14 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     }//GEN-LAST:event_ViewCourseActionPerformed
 
     private void EvaluateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EvaluateActionPerformed
-        ViewCourseGUI newviewcoursegui;
+        GradeStudentsGUI newgradegui;
         //todo : add exceptions here
         //try {
         canDelete = -1;
-        newviewcoursegui = new ViewCourseGUI(courseList, canDelete);
-        newviewcoursegui.setLocationRelativeTo(null);
-        newviewcoursegui.setTitle("Enter Grades");
-        newviewcoursegui.setVisible(true);
+        newgradegui = new GradeStudentsGUI(courseList,studentList);
+        newgradegui.setLocationRelativeTo(null);
+        newgradegui.setTitle("Enter Grades");
+        newgradegui.setVisible(true);
         //optional 
         //setVisible(false);
         /*} catch (FileNotFoundException ex) {
@@ -1280,7 +1281,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         AddStudentGUI newgui;
         //todo : add exceptions here
         //try {
-        newgui = new AddStudentGUI(studentList);
+        newgui = new AddStudentGUI(studentList,rollIndex);
         newgui.setLocationRelativeTo(null);
         newgui.setVisible(true);
         //optional 

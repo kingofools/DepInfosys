@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
  *
  * @author kaustubh
  */
+@SuppressWarnings("serial")
 public class EnrollStudentGUI extends javax.swing.JFrame implements Serializable{
 
     private static int studentSelect = -1;
@@ -156,6 +157,7 @@ public class EnrollStudentGUI extends javax.swing.JFrame implements Serializable
     static List<Integer> index = new ArrayList<>();
     static ArrayList<Course> currentCourses = new ArrayList<>();
     
+    @SuppressWarnings("unchecked")
       private void newinitComponents(ArrayList<Student> studentList,ArrayList<Course> courseList) {
 
         availField = new javax.swing.JLabel();
@@ -175,7 +177,8 @@ public class EnrollStudentGUI extends javax.swing.JFrame implements Serializable
 
        availField.setText("Available courses");
         String[] names = new String[studentList.size()];
-        DefaultListModel model = new DefaultListModel();
+        DefaultListModel<String> model;
+        model = new DefaultListModel<>();
         for(int n=0;n<studentList.size();n++)
         {
             names[n] = studentList.get(n).getname();
@@ -279,53 +282,59 @@ public class EnrollStudentGUI extends javax.swing.JFrame implements Serializable
         }
         else
         { 
-            //courseList.get(index.get(courseselect)).StudentsOnRoll.add(studentList.get(studentSelect).getname());
             //add current student's name in course for grading
-            Course newCourse = courseList.get(index.get(courseselect));
+            courseList.get(index.get(courseselect)).StudentsOnRoll.add(studentSelect+1);
+            JOptionPane.showMessageDialog(null, studentList.get(studentSelect).getname()+
+                    " added to "+courseList.get(index.get(courseselect)).getname());
+            
+            Course newCourse = new Course();
+            newCourse = courseList.get(index.get(courseselect));
+            //JOptionPane.showMessageDialog(null,newCourse.getstudentsonroll()+"<size");
             removeApplicable(courseselect); //remove from applicable course
             newCourse.setstatus("current");//update status
             studentList.get(studentSelect).subjects.add(newCourse);
-            updateCurrentList(); 
+            updateCurrentList();
         }
     }//GEN-LAST:event_AddCourseButtonActionPerformed
 
     //set current courses for updated list 
     private void updateCurrentList()
     {
-            DefaultListModel modelcurrent = new DefaultListModel();
-            currentCourses = new ArrayList<>();
-            if(!studentList.get(studentSelect).subjects.isEmpty())
+        DefaultListModel<String> modelcurrent;
+        modelcurrent = new DefaultListModel<>();
+        currentCourses = new ArrayList<>();
+        if(!studentList.get(studentSelect).subjects.isEmpty())
+        {
+            int subjectsize = studentList.get(studentSelect).subjects.size();
+            for(int a=0;a<subjectsize;a++)
             {
-                int subjectsize = studentList.get(studentSelect).subjects.size();
-                for(int a=0;a<subjectsize;a++)
+                if(studentList.get(studentSelect).subjects.get(a).getstatus().equals("current"))
+                //course is not in particular student's cleared course list
                 {
-                    if(studentList.get(studentSelect).subjects.get(a).getstatus().equals("current"))
-                    //course is not in particular student's cleared course list
-                    {
-                        currentCourses.add(studentList.get(studentSelect).subjects.get(a));
-                    }
-                }
-            
-                String[] Ongoing = new String[currentCourses.size()];
-                //DefaultListModel modelcurrent = new DefaultListModel();
-                for(int n=0;n<currentCourses.size();n++)
-                {
-                    Ongoing[n] = currentCourses.get(n).getname();
-                    modelcurrent.add(n, Ongoing[n]);
+                    currentCourses.add(studentList.get(studentSelect).subjects.get(a));
                 }
             }
-            currentList.setModel(modelcurrent);
-            jScrollPane3.setViewportView(currentList);
+            
+            String[] Ongoing = new String[currentCourses.size()];
+            //DefaultListModel modelcurrent = new DefaultListModel();
+            for(int n=0;n<currentCourses.size();n++)
+            {
+                Ongoing[n] = currentCourses.get(n).getname();
+                modelcurrent.add(n, Ongoing[n]);
+            }
+        }
+        currentList.setModel(modelcurrent);
+        jScrollPane3.setViewportView(currentList);
     }
     
     //needed if a new course is added to current courses , remove course from applicable list
     private void removeApplicable(int courseselect)
     {
-        JOptionPane.showMessageDialog(null,"Course "+applicableCourses.get(courseselect).getname()
-                +" added!");
+        //JOptionPane.showMessageDialog(null,"Course "+applicableCourses.get(courseselect).getname()
+          //      +" added!");
         applicableCourses.remove(courseselect);
         index.remove(courseselect);
-        DefaultListModel model = new DefaultListModel();
+        DefaultListModel<String> model = new DefaultListModel<>();
         if(!applicableCourses.isEmpty())
         {
             String[] Apply = new String[applicableCourses.size()];
@@ -377,7 +386,8 @@ public class EnrollStudentGUI extends javax.swing.JFrame implements Serializable
             availField.setText("Available for "+studentList.get(studentSelect).getname());//available text
             currentField.setText("Current courses for "+studentList.get(studentSelect).getname());
             applicableCourses = new ArrayList<>();
-            DefaultListModel model = new DefaultListModel();
+            index = new ArrayList<>();
+            DefaultListModel<String> model = new DefaultListModel<>();
             if(!courseList.isEmpty())
             {
                 for(int a=0;a<courseList.size();a++)

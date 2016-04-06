@@ -5,6 +5,7 @@
  */
 package assignment5_group58;
 
+import static assignment5_group58.StartGUI.rollIndex;
 import javax.swing.JOptionPane;
 import static assignment5_group58.StartGUI.studentList;
 import java.awt.Container;
@@ -20,8 +21,8 @@ public class AddStudentGUI extends javax.swing.JFrame implements Serializable{
     /**
      * Creates new form AddStudentGUI
      */
-    public AddStudentGUI(ArrayList<Student> studentList) {
-        newinitComponents(studentList);
+    public AddStudentGUI(ArrayList<Student> studentList,int rollIndex) {
+        newinitComponents(studentList,rollIndex);
     }
 
         //check if price is numeric
@@ -159,7 +160,7 @@ public class AddStudentGUI extends javax.swing.JFrame implements Serializable{
     }// </editor-fold>//GEN-END:initComponents
 
     
-     private void newinitComponents(ArrayList<Student> StudentList) {
+     private void newinitComponents(ArrayList<Student> StudentList,int rollIndex) {
 
         jLabel1 = new javax.swing.JLabel();
         NameField = new javax.swing.JTextField();
@@ -304,8 +305,10 @@ public class AddStudentGUI extends javax.swing.JFrame implements Serializable{
         if(!NameField.getText().isEmpty()&&!NumField.getText().isEmpty()&&isNumeric(number)
                 &&!(AddField.getText().isEmpty())&&!(MailField.getText().isEmpty()))
         {
+            newstudent.setroll(rollIndex);rollIndex++;
             studentList.add(newstudent);
-            JOptionPane.showMessageDialog(null,"Student "+newstudent.getname()+" added!");
+            JOptionPane.showMessageDialog(null,"Student "+newstudent.getname()+" added  at roll "
+                    +newstudent.getroll()+"!");
             Container frame2 = CreateStudButton.getParent();
             do 
             frame2 = frame2.getParent(); 
@@ -344,7 +347,7 @@ public class AddStudentGUI extends javax.swing.JFrame implements Serializable{
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddStudentGUI(studentList).setVisible(true);
+                new AddStudentGUI(studentList,rollIndex).setVisible(true);
             }
         });
     }
