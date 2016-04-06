@@ -40,6 +40,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     static ArrayList<Transaction> publicationList = new ArrayList<Transaction>();
     static double netIncome = 0.0;
     static double netExpenditure = 0.0;
+    static String Transfilename = "TransList.dat";
     
     static int canDelete = 0;
     static int index_stud = -1;
@@ -51,7 +52,49 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     static boolean R_or_P = false;//false corresponds to isPublication
     
     public StartGUI() {
+        
+        try   {
+            FileInputStream infile = new FileInputStream(Transfilename);
+            ObjectInputStream outfile = new ObjectInputStream(infile);
+            cashbook = (ArrayList<Transaction>) outfile.readObject();
+            JOptionPane.showMessageDialog(null, "Read successfully");
+            updateCashbook(cashbook);
+			infile.close();
+			outfile.close();
+			//JOptionPane.showMessageDialog(null, "I tried");
+		}
+        catch (FileNotFoundException e) 
+		{
+           // System.err.println("File not found");
+            try{
+                File f = new File("TransList.dat");
+                
+                boolean bool = false;
+                bool = f.createNewFile();
+                while(bool==false)
+                {
+                	f.delete();
+                	bool = f.createNewFile();
+                }
+             }catch(Exception ex){
+             }
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         initComponents();
+        
+    }
+    
+    private void updateCashbook(ArrayList<Transaction> cashbook){
+        ArrayList<Transaction> translist = cashbook;
+        for(Transaction newTransaction : translist){
+            if(newTransaction.getinvestment() == 0.0){
+                updateDebitsArea(newTransaction);
+            }else if(newTransaction.getprofit() == 0.0){
+                updateCreditsArea(newTransaction);
+            }
+        }
     }
     
     //check if price is numeric
@@ -346,9 +389,8 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                 .addGap(45, 45, 45)
                 .addGroup(CoursepanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(ViewCourse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(CoursepanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(DelCourse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(AddCourse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(DelCourse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(AddCourse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(56, Short.MAX_VALUE))
         );
         CoursepanelLayout.setVerticalGroup(
@@ -1034,14 +1076,11 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -1307,6 +1346,9 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                 updateCreditsArea(newTransaction);
             }
         }
+        
+        WriteData newwrite = new WriteData(cashbook, Transfilename);
+        
     }//GEN-LAST:event_AddTransActionPerformed
 
     private void saveItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveItemActionPerformed
