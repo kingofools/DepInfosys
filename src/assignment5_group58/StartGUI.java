@@ -83,6 +83,8 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        
+        
         initComponents();
         
     }
@@ -90,6 +92,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     private void updateCashbook(ArrayList<Transaction> cashbook){
         ArrayList<Transaction> translist = cashbook;
         for(Transaction newTransaction : translist){
+            
             if(newTransaction.getinvestment() == 0.0){
                 updateDebitsArea(newTransaction);
             }else if(newTransaction.getprofit() == 0.0){
