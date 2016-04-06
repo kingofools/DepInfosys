@@ -20,13 +20,14 @@ public class Student implements Serializable
 	private String phone;
 	private String mail;
 	private int roll;
-        private int prevCredits;
+        private int prevCredits = 0;
         public  ArrayList<Course> subjects = new ArrayList<>();
         public ArrayList<String> status = new ArrayList<>();
       	public  ArrayList<Double> sgpa = new ArrayList<>();
         public  ArrayList<Double> cgpa = new ArrayList<>();
         public ArrayList<Integer> grades = new ArrayList<>();
         
+        Double dummy = -1.0;
 	public void setname(String naam)
 	{
 		this.name = naam;
