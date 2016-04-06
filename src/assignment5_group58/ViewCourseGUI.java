@@ -197,10 +197,10 @@ public class ViewCourseGUI extends javax.swing.JFrame implements Serializable{
            // new ViewItemGUI(itemList,canDelete).setVisible(true);
         }else if (canDelete == 0){
             JOptionPane.showMessageDialog(null,"Displaying students in course");
-            DispStudentsGUI newstudList;
+            /*DispStudentsGUI newstudList;
             newstudList = new DispStudentsGUI(courseList.get(discard));
             newstudList.setVisible(true);
-            
+            */
         }
     }//GEN-LAST:event_DeleteItemButtonActionPerformed
 

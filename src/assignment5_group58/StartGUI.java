@@ -84,7 +84,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
             
-        /*try   {
+        try   {
             FileInputStream infile1 = new FileInputStream(Itemfilename);
             ObjectInputStream outfile1 = new ObjectInputStream(infile1);
             itemList = (ArrayList<Item>) outfile1.readObject();
@@ -111,7 +111,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
              }
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        }
         
         initComponents();
         updateCashbook(cashbook);
@@ -138,12 +138,9 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         ArrayList<Item> ItemList = itemlist;
         Transaction itemTrans = new Transaction();
         for(Item newItem : ItemList){
-            
             newItem.setname(itemName.getText());
             newItem.setlocation(itemLocation.getText());
             newItem.setprice(Double.parseDouble(itemPrice.getText()));
-            JOptionPane.showMessageDialog(null,"Item "+newItem.getname()+" has been added!");
-            
             itemTrans.settitle(newItem.getname());
             itemTrans.setauthority("Inventory"); //need this for search result
             itemTrans.setdetails("Location : "+newItem.getlocation());
@@ -1619,6 +1616,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             }
            
         }
+        WriteTrans newwrite = new WriteTrans(cashbook, Transfilename);
         
     }//GEN-LAST:event_saveRespubActionPerformed
 
