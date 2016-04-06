@@ -57,7 +57,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     
     public StartGUI() {
         
-        /*try   {
+        try   {
             FileInputStream infile = new FileInputStream(Transfilename);
             ObjectInputStream outfile = new ObjectInputStream(infile);
             cashbook = (ArrayList<Transaction>) outfile.readObject();
@@ -115,8 +115,8 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        /*try   {
-            FileInputStream infile2 = new FileInputStream(Itemfilename);
+        try   {
+            FileInputStream infile2 = new FileInputStream(Coursefilename);
             ObjectInputStream outfile2 = new ObjectInputStream(infile2);
             courseList = (ArrayList<Course>) outfile2.readObject();
             JOptionPane.showMessageDialog(null, "Read successfully");
@@ -129,7 +129,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
 		{
            JOptionPane.showMessageDialog(null, "FILE CREATED successfully");
             try{
-                File f = new File("ItemList.dat");
+                File f = new File("CourseList.dat");
                 
                 boolean bool = false;
                 bool = f.createNewFile();
@@ -142,12 +142,12 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
              }
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        }
         
         initComponents();
         //updateCourseList(courseList);
-        //updateCashbook(cashbook);
-        //updateItemList(itemList);
+        updateCashbook(cashbook);
+        updateItemList(itemList);
     }
     
     private void updateCashbook(ArrayList<Transaction> cashbook){
@@ -164,6 +164,10 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                 updateCreditsArea(newTransaction);
             }
         }
+    }
+    
+    private void updateCourseList(ArrayList<Course> courselist){
+        courseList = courselist;
     }
     
     private void updateItemList(ArrayList<Item> itemlist){
