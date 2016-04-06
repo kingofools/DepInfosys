@@ -18,6 +18,8 @@ import javax.swing.JOptionPane;
  */
 public class GradeStudentsGUI extends javax.swing.JFrame implements Serializable{
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * Creates new form GradeStudentsGUI
      * @param courseList
@@ -32,6 +34,8 @@ public class GradeStudentsGUI extends javax.swing.JFrame implements Serializable
     static List<Integer> courseindex = new ArrayList<>();
     static ArrayList<Student> mystudent = new ArrayList<>();
     static int grade = 5;
+    static Double cg = 0.0;
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -330,6 +334,7 @@ public class GradeStudentsGUI extends javax.swing.JFrame implements Serializable
             //mystudent.get(i).subjects.get(courseindex.get(i)).getgrade());
         }
         studentTable.setModel(new javax.swing.table.DefaultTableModel(studObject,columns) {
+            private static final long serialVersionUID = 1L;
         }
         );
         studentTable.setToolTipText("A grade of -1 indicates ungraded course");
@@ -345,8 +350,30 @@ public class GradeStudentsGUI extends javax.swing.JFrame implements Serializable
         }
         else
         {
-            studentList.get(studentindex.get(select))
-                    .grades.set(courseindex.get(select), gradeSlider.getValue());
+            Student dude = studentList.get(studentindex.get(select));
+            dude.grades.set(courseindex.get(select), gradeSlider.getValue());
+            
+            //update cgpa
+            
+            if(dude.getprevCredits()==0)
+            {
+                cg = (double)gradeSlider.getValue();
+                dude.setprevCredits(dude.getprevCredits()+dude.subjects.get(courseindex.get(select)).getcredit());
+            }
+            else
+            {
+                //JOptionPane.showMessageDialog(null,"hey preVcredits = "+dude.getprevCredits()+" cg = "+dude.cgpa.get(0));
+                cg = dude.cgpa.get(0)*dude.getprevCredits()
+                        +(double)gradeSlider.getValue()*dude.subjects.get(courseindex.get(select)).getcredit();
+                //JOptionPane.showMessageDialog(null,"hey cg = "+cg);
+                
+                dude.setprevCredits(dude.getprevCredits()+dude.subjects.get(courseindex.get(select)).getcredit());
+                //need to set prev credits right here , since cg computation depends on it
+                //JOptionPane.showMessageDialog(null,"hey preVcredits = "+dude.getprevCredits());
+                cg = cg/dude.getprevCredits();
+            }
+            dude.cgpa.set(0, cg);
+            JOptionPane.showMessageDialog(null,dude.getname()+"'s cg is now "+dude.cgpa.get(0));
             updateStudentTable();
             gradeSlider.setValue(5);
         }
