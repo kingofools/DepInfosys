@@ -41,6 +41,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     static double netIncome = 0.0;
     static double netExpenditure = 0.0;
     static String Transfilename = "TransList.dat";
+    static String Itemfilename = "ItemList.dat";
     
     static int canDelete = 0;
     static int index_stud = -1;
@@ -83,9 +84,38 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
             
+        /*try   {
+            FileInputStream infile1 = new FileInputStream(Itemfilename);
+            ObjectInputStream outfile1 = new ObjectInputStream(infile1);
+            itemList = (ArrayList<Item>) outfile1.readObject();
+            JOptionPane.showMessageDialog(null, "Read successfully");
+            //updateCashbook(cashbook);
+            infile1.close();
+            outfile1.close();
+			//JOptionPane.showMessageDialog(null, "I tried");
+		}
+        catch (FileNotFoundException e) 
+		{
+           // System.err.println("File not found");
+            try{
+                File f = new File("ItemList.dat");
+                
+                boolean bool = false;
+                bool = f.createNewFile();
+                while(bool==false)
+                {
+                	f.delete();
+                	bool = f.createNewFile();
+                }
+             }catch(Exception ex){
+             }
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
         
         initComponents();
         updateCashbook(cashbook);
+        //updateItemList(itemList);
     }
     
     private void updateCashbook(ArrayList<Transaction> cashbook){
@@ -100,6 +130,36 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                 updateDebitsArea(newTransaction);
             }else if(newTransaction.getprofit() == 0.0){
                 updateCreditsArea(newTransaction);
+            }
+        }
+    }
+    
+    private void updateItemList(ArrayList<Item> itemlist){
+        ArrayList<Item> ItemList = itemlist;
+        Transaction itemTrans = new Transaction();
+        for(Item newItem : ItemList){
+            
+            newItem.setname(itemName.getText());
+            newItem.setlocation(itemLocation.getText());
+            newItem.setprice(Double.parseDouble(itemPrice.getText()));
+            JOptionPane.showMessageDialog(null,"Item "+newItem.getname()+" has been added!");
+            
+            itemTrans.settitle(newItem.getname());
+            itemTrans.setauthority("Inventory"); //need this for search result
+            itemTrans.setdetails("Location : "+newItem.getlocation());
+            itemTrans.setinvestment(newItem.getprice());
+            itemTrans.setprofit(0.0);
+            itemTrans.settype("Item");
+            
+            netIncome += itemTrans.getprofit();
+            netExpenditure += itemTrans.getinvestment();
+            IncField.setText(Double.toString(netIncome));
+            ExpField.setText(Double.toString(netExpenditure));
+            BalField.setText(Double.toString(netIncome - netExpenditure));
+            if(itemTrans.getinvestment() == 0.0){
+                updateDebitsArea(itemTrans);
+            }else if(itemTrans.getprofit() == 0.0){
+                updateCreditsArea(itemTrans);
             }
         }
     }
@@ -1407,6 +1467,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
            BalField.setText(Double.toString(netIncome - netExpenditure));
            updateCreditsArea(itemTrans);
         }
+        WriteItem newwrite = new WriteItem(itemList, Itemfilename);
     }//GEN-LAST:event_saveItemActionPerformed
 
     private void viewItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewItemActionPerformed
