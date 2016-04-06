@@ -122,7 +122,7 @@ public class ViewCourseGUI extends javax.swing.JFrame implements Serializable{
             DeleteItemButton.setText("View Students");
             DeleteItemButton.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-                     //dispose();
+                     DeleteItemButtonActionPerformed(evt);
                 }
             });
         }
@@ -183,7 +183,7 @@ public class ViewCourseGUI extends javax.swing.JFrame implements Serializable{
     
     private void DeleteItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteItemButtonActionPerformed
         // TODO add your handling code here:
-        
+        JOptionPane.showMessageDialog(null,"Can delete is "+canDelete );        
         int discard = jTable1.getSelectedRow();
 	if(discard==-1)
 	{
@@ -195,6 +195,12 @@ public class ViewCourseGUI extends javax.swing.JFrame implements Serializable{
             JOptionPane.showMessageDialog(null,remove.getname()+" has been removed!");
             dispose();
            // new ViewItemGUI(itemList,canDelete).setVisible(true);
+        }else if (canDelete == 0){
+            JOptionPane.showMessageDialog(null,"Displaying students in course");
+            DispStudentsGUI newstudList;
+            newstudList = new DispStudentsGUI(courseList.get(discard));
+            newstudList.setVisible(true);
+            
         }
     }//GEN-LAST:event_DeleteItemButtonActionPerformed
 

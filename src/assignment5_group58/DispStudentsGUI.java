@@ -5,8 +5,6 @@
  */
 package assignment5_group58;
 
-import static assignment5_group58.StartGUI.index_stud;
-import static assignment5_group58.StartGUI.studentList;
 /**
  *
  * @author surya
@@ -17,23 +15,23 @@ public class DispStudentsGUI extends javax.swing.JFrame {
      * Creates new form DispStudentsGUI
      * @param index_stud
      */
-    public DispStudentsGUI() {
+    public DispStudentsGUI(Course newcourse) {
         //initComponents();
-        newinitComponents();
+        newinitComponents(newcourse);
     }
 
-    private void newinitComponents() {
+    private void newinitComponents(Course newcourse) {
 
         //Course newcourse = courseList.get(index_stud);
         
         String[] columns = {"Student"};
-	int size = studentList.size();
+	int size = newcourse.StudentsOnRoll.size();
 	Object[][] itemObject  = new String[size][1];
 		
 	int i;
 	for(i = 0; i < size ; i++)
 	{
-		itemObject[i][0] = studentList.get(i).getname();
+		itemObject[i][0] = newcourse.StudentsOnRoll;
                 //itemObject[i][1] = studentList.get(i)
 	}
 		
@@ -226,7 +224,7 @@ public class DispStudentsGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DispStudentsGUI().setVisible(true);
+                //new DispStudentsGUI().setVisible(true);
             }
         });
     }
