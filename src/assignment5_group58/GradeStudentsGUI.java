@@ -358,15 +358,21 @@ public class GradeStudentsGUI extends javax.swing.JFrame implements Serializable
             if(dude.getprevCredits()==0)
             {
                 cg = (double)gradeSlider.getValue();
-                dude.cgpa.set(0, cg);
+                dude.setprevCredits(dude.getprevCredits()+dude.subjects.get(courseindex.get(select)).getcredit());
             }
             else
             {
-                cg = dude.cgpa.get(0)*dude.getprevCredits()+(double)gradeSlider.getValue();
+                //JOptionPane.showMessageDialog(null,"hey preVcredits = "+dude.getprevCredits()+" cg = "+dude.cgpa.get(0));
+                cg = dude.cgpa.get(0)*dude.getprevCredits()
+                        +(double)gradeSlider.getValue()*dude.subjects.get(courseindex.get(select)).getcredit();
+                //JOptionPane.showMessageDialog(null,"hey cg = "+cg);
+                
                 dude.setprevCredits(dude.getprevCredits()+dude.subjects.get(courseindex.get(select)).getcredit());
+                //need to set prev credits right here , since cg computation depends on it
+                //JOptionPane.showMessageDialog(null,"hey preVcredits = "+dude.getprevCredits());
                 cg = cg/dude.getprevCredits();
-                dude.cgpa.set(0, cg);
             }
+            dude.cgpa.set(0, cg);
             JOptionPane.showMessageDialog(null,dude.getname()+"'s cg is now "+dude.cgpa.get(0));
             updateStudentTable();
             gradeSlider.setValue(5);
