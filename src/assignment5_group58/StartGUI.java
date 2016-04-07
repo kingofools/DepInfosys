@@ -166,9 +166,9 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         }
     }
     
-    private void updateCourseList(ArrayList<Course> courselist){
+    /*private void updateCourseList(ArrayList<Course> courselist){
         courseList = courselist;
-    }
+    }*/
     
     private void updateItemList(ArrayList<Item> itemlist){
         ArrayList<Item> ItemList = itemlist;
@@ -193,22 +193,6 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             }
         }
     }
-    
-    /*private void updateCourseList(ArrayList<Course> courselist){
-        ArrayList<Course> CourseList = courselist;
-        for(Course newCourse : CourseList){
-            netIncome += newTransaction.getprofit();
-            netExpenditure += newTransaction.getinvestment();
-            IncField.setText(Double.toString(netIncome));
-            ExpField.setText(Double.toString(netExpenditure));
-            BalField.setText(Double.toString(netIncome - netExpenditure));
-            if(newTransaction.getinvestment() == 0.0){
-                updateDebitsArea(newTransaction);
-            }else if(newTransaction.getprofit() == 0.0){
-                updateCreditsArea(newTransaction);
-            }
-        }
-    }*/
     
     //check if price is numeric
     public static boolean isNumeric(String str)  
@@ -1433,8 +1417,10 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         /*} catch (FileNotFoundException ex) {
             Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
         }*/
+        
     }//GEN-LAST:event_AddCourseActionPerformed
 
+    
     private void OKButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OKButtonActionPerformed
         this.LoginPwdError.setVisible(false);
     }//GEN-LAST:event_OKButtonActionPerformed
@@ -1453,6 +1439,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         /*} catch (FileNotFoundException ex) {
             Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
         }*/
+        WriteCourse newwrite = new WriteCourse(courseList, Coursefilename);
     }//GEN-LAST:event_DelCourseActionPerformed
 
     private void ViewCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewCourseActionPerformed
