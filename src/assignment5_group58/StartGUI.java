@@ -43,6 +43,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     static double netExpenditure = 0.0;
     static String Transfilename = "TransList.dat";
     static String Itemfilename = "ItemList.dat";
+    static String Coursefilename = "CourseList.dat";
     
     static int canDelete = 0;
     static int index_stud = -1;
@@ -115,7 +116,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         }
         
         try   {
-            FileInputStream infile2 = new FileInputStream(Itemfilename);
+            FileInputStream infile2 = new FileInputStream(Coursefilename);
             ObjectInputStream outfile2 = new ObjectInputStream(infile2);
             courseList = (ArrayList<Course>) outfile2.readObject();
             JOptionPane.showMessageDialog(null, "Read successfully");
@@ -128,7 +129,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
 		{
            JOptionPane.showMessageDialog(null, "FILE CREATED successfully");
             try{
-                File f = new File("ItemList.dat");
+                File f = new File("CourseList.dat");
                 
                 boolean bool = false;
                 bool = f.createNewFile();
@@ -163,6 +164,10 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                 updateCreditsArea(newTransaction);
             }
         }
+    }
+    
+    private void updateCourseList(ArrayList<Course> courselist){
+        courseList = courselist;
     }
     
     private void updateItemList(ArrayList<Item> itemlist){
