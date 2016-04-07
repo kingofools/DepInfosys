@@ -28,17 +28,18 @@ import javax.swing.SwingUtilities;
  *
  * @author surya
  */
+@SuppressWarnings("serial")
 public class StartGUI extends javax.swing.JFrame implements Serializable {
 
     /**
      * Creates new form StartGUI
      */
-    static ArrayList<Course> courseList = new ArrayList<Course>();
-    static ArrayList<Transaction> cashbook = new ArrayList<Transaction>();
-    static ArrayList<Item> itemList = new ArrayList<Item>();
-    static ArrayList<Student> studentList = new ArrayList<Student>();
-    static ArrayList<Transaction> researchList = new ArrayList<Transaction>();
-    static ArrayList<Transaction> publicationList = new ArrayList<Transaction>();
+    static ArrayList<Course> courseList = new ArrayList<>();
+    static ArrayList<Transaction> cashbook = new ArrayList<>();
+    static ArrayList<Item> itemList = new ArrayList<>();
+    static ArrayList<Student> studentList = new ArrayList<>();
+    static ArrayList<Transaction> researchList = new ArrayList<>();
+    static ArrayList<Transaction> publicationList = new ArrayList<>();
     static double netIncome = 0.0;
     static double netExpenditure = 0.0;
     static String Transfilename = "TransList.dat";
@@ -56,8 +57,12 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     static Object[][] contact_object;
     static int[] index;
     static boolean R_or_P = false;//false corresponds to isPublication
-    static int rollIndex = 1;
+    static int rollIndex = 1;//max roll number size
     static Course viewCourse = new Course();
+    static int rollid = 1;
+    static String rollID = "0";
+    static Student viewStudent = new Student();
+    
     public StartGUI() {
         
         try   {
@@ -500,7 +505,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
+                .addContainerGap(31, Short.MAX_VALUE)
                 .addComponent(welcome)
                 .addContainerGap())
         );
@@ -674,6 +679,11 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         });
 
         PrintStudent.setText("Print Student");
+        PrintStudent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PrintStudentActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout StudentpanelLayout = new javax.swing.GroupLayout(Studentpanel);
         Studentpanel.setLayout(StudentpanelLayout);
@@ -845,7 +855,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                     .addComponent(DelItem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(viewItem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ModItem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         InventorytabLayout.setVerticalGroup(
             InventorytabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -915,7 +925,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                     .addComponent(PriceField)
                     .addComponent(TransType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(TitleField))
-                .addContainerGap(155, Short.MAX_VALUE))
+                .addContainerGap(156, Short.MAX_VALUE))
         );
         TreasurytabLayout.setVerticalGroup(
             TreasurytabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -970,7 +980,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                     .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(LogspanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
                     .addGroup(LogspanelLayout.createSequentialGroup()
                         .addComponent(jLabel11)
                         .addGap(0, 0, Short.MAX_VALUE))))
@@ -1171,7 +1181,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                 .addGroup(ResPubtabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(ViewResearchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ViewPublicationButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         ResPubtabLayout.setVerticalGroup(
             ResPubtabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1255,7 +1265,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel28, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                .addComponent(jLabel28, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
                 .addGap(29, 29, 29))
         );
         jPanel2Layout.setVerticalGroup(
@@ -1927,6 +1937,36 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         this.setIconImage(img.getImage());
         //iitKgp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assignment5_group58/kgp_blur.png")));
     }//GEN-LAST:event_HomePaneMouseClicked
+
+    private void validateRollID()
+    {
+        rollID = JOptionPane.showInputDialog("Roll numbers are from 1 to "+(rollIndex-1)+"\nEnter roll number of student ");
+        try
+        {
+            rollid = Integer.parseInt(rollID.trim());
+            if(rollid < 1 || rollid > rollIndex-1)
+            {
+                validateRollID();
+            }
+        }
+        catch (NumberFormatException nfe)
+        {
+            //System.out.println("NumberFormatException: " + nfe.getMessage());
+            JOptionPane.showMessageDialog(null,"Need to enter number!");
+            validateRollID();
+        } 
+
+    }
+    
+    private void PrintStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrintStudentActionPerformed
+        // validate input outside
+        validateRollID();
+        PrintStudentGUI newgui;
+        newgui = new PrintStudentGUI(studentList.get(rollid-1));
+        newgui.setLocationRelativeTo(null);
+        newgui.setVisible(true);
+        
+    }//GEN-LAST:event_PrintStudentActionPerformed
 
     /**
      * @param args the command line arguments
