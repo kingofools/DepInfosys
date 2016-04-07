@@ -45,6 +45,8 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     static String Itemfilename = "ItemList.dat";
     static String Coursefilename = "CourseList.dat";
     static String Studentfilename = "StudentList.dat";
+    static String Resfilename = "ResList.dat";
+    static String Pubfilename = "PubList.dat";
     
     static int canDelete = 0;
     static int index_stud = -1;
@@ -63,11 +65,10 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             ObjectInputStream outfile = new ObjectInputStream(infile);
             cashbook = (ArrayList<Transaction>) outfile.readObject();
             JOptionPane.showMessageDialog(null, "Read successfully");
-            //updateCashbook(cashbook);
-			infile.close();
-			outfile.close();
-			//JOptionPane.showMessageDialog(null, "I tried");
-		}
+            infile.close();
+            outfile.close();
+                        
+        }
         catch (FileNotFoundException e) 
 		{
            // System.err.println("File not found");
@@ -175,9 +176,38 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        try   {
+            FileInputStream infile4 = new FileInputStream(Resfilename);
+            ObjectInputStream outfile4 = new ObjectInputStream(infile4);
+            researchList = (ArrayList<Transaction>) outfile4.readObject();
+            JOptionPane.showMessageDialog(null, "Read successfully");
+            infile4.close();
+            outfile4.close();
+		//JOptionPane.showMessageDialog(null, "I tried");
+		}
+        catch (FileNotFoundException e) 
+		{
+           JOptionPane.showMessageDialog(null, "FILE CREATED successfully");
+            try{
+                File f = new File("ResList.dat");
+                
+                boolean bool = false;
+                bool = f.createNewFile();
+                while(bool==false)
+                {
+                	f.delete();
+                	bool = f.createNewFile();
+                }
+             }catch(Exception ex){
+             }
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         initComponents();
-        //updateCourseList(courseList);
         updateCashbook(cashbook);
+        updateCashbook(researchList);
+        updateCashbook(publicationList);
         updateItemList(itemList);
     }
     
@@ -196,11 +226,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             }
         }
     }
-    
-    /*private void updateCourseList(ArrayList<Course> courselist){
-        courseList = courselist;
-    }*/
-    
+        
     private void updateItemList(ArrayList<Item> itemlist){
         ArrayList<Item> ItemList = itemlist;
         Transaction itemTrans = new Transaction();
@@ -1780,14 +1806,15 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             if(newResPub.gettype().equals("Research"))
             {
                 researchList.add(newResPub);
+                WriteResearch newwrite = new WriteResearch(researchList, Resfilename);
             }
             else
             {
                 publicationList.add(newResPub);
+                WritePub newwrite = new WritePub(publicationList, Pubfilename);
             }
            
         }
-        WriteTrans newwrite = new WriteTrans(cashbook, Transfilename);
         
     }//GEN-LAST:event_saveRespubActionPerformed
 
