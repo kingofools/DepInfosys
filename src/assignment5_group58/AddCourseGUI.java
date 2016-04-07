@@ -5,6 +5,7 @@
  */
 package assignment5_group58;
 
+import static assignment5_group58.StartGUI.Coursefilename;
 import static assignment5_group58.StartGUI.courseList;
 import java.awt.Container;
 import java.io.Serializable;
@@ -227,6 +228,7 @@ public class AddCourseGUI extends javax.swing.JFrame implements Serializable{
             while (!(this instanceof JFrame));                                      
                 dispose();
         }
+        WriteCourse newwrite = new WriteCourse(courseList, Coursefilename);
     }//GEN-LAST:event_CreateCourseButtonActionPerformed
 
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed

@@ -44,6 +44,9 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     static String Transfilename = "TransList.dat";
     static String Itemfilename = "ItemList.dat";
     static String Coursefilename = "CourseList.dat";
+    static String Studentfilename = "StudentList.dat";
+    static String Resfilename = "ResList.dat";
+    static String Pubfilename = "PubList.dat";
     
     static int canDelete = 0;
     static int index_stud = -1;
@@ -62,11 +65,10 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             ObjectInputStream outfile = new ObjectInputStream(infile);
             cashbook = (ArrayList<Transaction>) outfile.readObject();
             JOptionPane.showMessageDialog(null, "Read successfully");
-            //updateCashbook(cashbook);
-			infile.close();
-			outfile.close();
-			//JOptionPane.showMessageDialog(null, "I tried");
-		}
+            infile.close();
+            outfile.close();
+                        
+        }
         catch (FileNotFoundException e) 
 		{
            // System.err.println("File not found");
@@ -144,9 +146,68 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        try   {
+            FileInputStream infile3 = new FileInputStream(Studentfilename);
+            ObjectInputStream outfile3 = new ObjectInputStream(infile3);
+            studentList = (ArrayList<Student>) outfile3.readObject();
+            rollIndex = studentList.size()+1;
+            JOptionPane.showMessageDialog(null, "Read successfully");
+            //updateCashbook(cashbook);
+            infile3.close();
+            outfile3.close();
+			//JOptionPane.showMessageDialog(null, "I tried");
+		}
+        catch (FileNotFoundException e) 
+		{
+           JOptionPane.showMessageDialog(null, "FILE CREATED successfully");
+            try{
+                File f = new File("CourseList.dat");
+                
+                boolean bool = false;
+                bool = f.createNewFile();
+                while(bool==false)
+                {
+                	f.delete();
+                	bool = f.createNewFile();
+                }
+             }catch(Exception ex){
+             }
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try   {
+            FileInputStream infile4 = new FileInputStream(Resfilename);
+            ObjectInputStream outfile4 = new ObjectInputStream(infile4);
+            researchList = (ArrayList<Transaction>) outfile4.readObject();
+            JOptionPane.showMessageDialog(null, "Read successfully");
+            infile4.close();
+            outfile4.close();
+		//JOptionPane.showMessageDialog(null, "I tried");
+		}
+        catch (FileNotFoundException e) 
+		{
+           JOptionPane.showMessageDialog(null, "FILE CREATED successfully");
+            try{
+                File f = new File("ResList.dat");
+                
+                boolean bool = false;
+                bool = f.createNewFile();
+                while(bool==false)
+                {
+                	f.delete();
+                	bool = f.createNewFile();
+                }
+             }catch(Exception ex){
+             }
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         initComponents();
-        //updateCourseList(courseList);
         updateCashbook(cashbook);
+        updateCashbook(researchList);
+        updateCashbook(publicationList);
         updateItemList(itemList);
     }
     
@@ -158,18 +219,14 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             IncField.setText(Double.toString(netIncome));
             ExpField.setText(Double.toString(netExpenditure));
             BalField.setText(Double.toString(netIncome - netExpenditure));
-            if(newTransaction.getinvestment() == 0.0){
+            if(newTransaction.getprofit() != 0.0){
                 updateDebitsArea(newTransaction);
-            }else if(newTransaction.getprofit() == 0.0){
+            }else if(newTransaction.getinvestment() != 0.0){
                 updateCreditsArea(newTransaction);
             }
         }
     }
-    
-    private void updateCourseList(ArrayList<Course> courselist){
-        courseList = courselist;
-    }
-    
+        
     private void updateItemList(ArrayList<Item> itemlist){
         ArrayList<Item> ItemList = itemlist;
         Transaction itemTrans = new Transaction();
@@ -186,29 +243,13 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             IncField.setText(Double.toString(netIncome));
             ExpField.setText(Double.toString(netExpenditure));
             BalField.setText(Double.toString(netIncome - netExpenditure));
-            if(itemTrans.getinvestment() == 0.0){
+            if(itemTrans.getprofit() != 0.0){
                 updateDebitsArea(itemTrans);
-            }else if(itemTrans.getprofit() == 0.0){
+            }else if(itemTrans.getinvestment() != 0.0){
                 updateCreditsArea(itemTrans);
             }
         }
     }
-    
-    /*private void updateCourseList(ArrayList<Course> courselist){
-        ArrayList<Course> CourseList = courselist;
-        for(Course newCourse : CourseList){
-            netIncome += newTransaction.getprofit();
-            netExpenditure += newTransaction.getinvestment();
-            IncField.setText(Double.toString(netIncome));
-            ExpField.setText(Double.toString(netExpenditure));
-            BalField.setText(Double.toString(netIncome - netExpenditure));
-            if(newTransaction.getinvestment() == 0.0){
-                updateDebitsArea(newTransaction);
-            }else if(newTransaction.getprofit() == 0.0){
-                updateCreditsArea(newTransaction);
-            }
-        }
-    }*/
     
     //check if price is numeric
     public static boolean isNumeric(String str)  
@@ -1433,8 +1474,10 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         /*} catch (FileNotFoundException ex) {
             Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
         }*/
+        
     }//GEN-LAST:event_AddCourseActionPerformed
 
+    
     private void OKButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OKButtonActionPerformed
         this.LoginPwdError.setVisible(false);
     }//GEN-LAST:event_OKButtonActionPerformed
@@ -1453,6 +1496,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         /*} catch (FileNotFoundException ex) {
             Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
         }*/
+        WriteCourse newwrite = new WriteCourse(courseList, Coursefilename);
     }//GEN-LAST:event_DelCourseActionPerformed
 
     private void ViewCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewCourseActionPerformed
@@ -1761,14 +1805,15 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             if(newResPub.gettype().equals("Research"))
             {
                 researchList.add(newResPub);
+                WriteResearch newwrite = new WriteResearch(researchList, Resfilename);
             }
             else
             {
                 publicationList.add(newResPub);
+                WritePub newwrite = new WritePub(publicationList, Pubfilename);
             }
            
         }
-        WriteTrans newwrite = new WriteTrans(cashbook, Transfilename);
         
     }//GEN-LAST:event_saveRespubActionPerformed
 
@@ -2033,3 +2078,4 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     private javax.swing.JLabel welcome;
     // End of variables declaration//GEN-END:variables
 }
+

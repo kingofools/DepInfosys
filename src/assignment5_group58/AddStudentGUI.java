@@ -5,6 +5,7 @@
  */
 package assignment5_group58;
 
+import static assignment5_group58.StartGUI.Studentfilename;
 import static assignment5_group58.StartGUI.rollIndex;
 import javax.swing.JOptionPane;
 import static assignment5_group58.StartGUI.studentList;
@@ -315,6 +316,7 @@ public class AddStudentGUI extends javax.swing.JFrame implements Serializable{
             while (!(this instanceof JFrame));                                      
                 dispose();
         }
+        WriteStudent newwrite = new WriteStudent(studentList, Studentfilename);
     }//GEN-LAST:event_CreateStudButtonActionPerformed
 
     /**

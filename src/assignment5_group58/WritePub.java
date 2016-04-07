@@ -14,14 +14,14 @@ import javax.swing.JOptionPane;
  *
  * @author surya
  */
-public class WriteCourse {
-    public WriteCourse(ArrayList<Course> CourseList,String file)
+public class WritePub {
+    public WritePub(ArrayList<Transaction> PubList,String file)
     {
         try {
         	FileOutputStream fileOut = new FileOutputStream(file); 
         	ObjectOutputStream Output = new ObjectOutputStream(fileOut);
             
-        	Output.writeObject(CourseList);
+        	Output.writeObject(PubList);
 
     		JOptionPane.showMessageDialog(null, "saved successfully");
 
