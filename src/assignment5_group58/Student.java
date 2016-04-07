@@ -29,7 +29,6 @@ public class Student implements Serializable
         public ArrayList<Integer> grades = new ArrayList<>();
         public double cg = 0.0;
         public double sg = 0.0;
-        Double dummy = -1.0;
 	public void setname(String naam)
 	{
 		this.name = naam;

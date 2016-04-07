@@ -294,7 +294,7 @@ public class EnrollStudentGUI extends javax.swing.JFrame implements Serializable
 
             if(studentList.get(studentSelect).cgpa.isEmpty())
             {
-                studentList.get(studentSelect).cgpa.add(-1.0);
+                studentList.get(studentSelect).cgpa.add(0.0);
             }
             studentList.get(studentSelect).status.add("current");//update status
             studentList.get(studentSelect).grades.add(-1);
