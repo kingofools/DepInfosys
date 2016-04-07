@@ -219,9 +219,9 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             IncField.setText(Double.toString(netIncome));
             ExpField.setText(Double.toString(netExpenditure));
             BalField.setText(Double.toString(netIncome - netExpenditure));
-            if(newTransaction.getinvestment() == 0.0){
+            if(newTransaction.getprofit() != 0.0){
                 updateDebitsArea(newTransaction);
-            }else if(newTransaction.getprofit() == 0.0){
+            }else if(newTransaction.getinvestment() != 0.0){
                 updateCreditsArea(newTransaction);
             }
         }
@@ -243,9 +243,9 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             IncField.setText(Double.toString(netIncome));
             ExpField.setText(Double.toString(netExpenditure));
             BalField.setText(Double.toString(netIncome - netExpenditure));
-            if(itemTrans.getinvestment() == 0.0){
+            if(itemTrans.getprofit() != 0.0){
                 updateDebitsArea(itemTrans);
-            }else if(itemTrans.getprofit() == 0.0){
+            }else if(itemTrans.getinvestment() != 0.0){
                 updateCreditsArea(itemTrans);
             }
         }
