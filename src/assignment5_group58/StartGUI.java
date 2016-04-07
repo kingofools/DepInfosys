@@ -44,6 +44,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     static String Transfilename = "TransList.dat";
     static String Itemfilename = "ItemList.dat";
     static String Coursefilename = "CourseList.dat";
+    static String Studentfilename = "StudentList.dat";
     
     static int canDelete = 0;
     static int index_stud = -1;
@@ -123,6 +124,36 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             //updateCashbook(cashbook);
             infile2.close();
             outfile2.close();
+			//JOptionPane.showMessageDialog(null, "I tried");
+		}
+        catch (FileNotFoundException e) 
+		{
+           JOptionPane.showMessageDialog(null, "FILE CREATED successfully");
+            try{
+                File f = new File("CourseList.dat");
+                
+                boolean bool = false;
+                bool = f.createNewFile();
+                while(bool==false)
+                {
+                	f.delete();
+                	bool = f.createNewFile();
+                }
+             }catch(Exception ex){
+             }
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try   {
+            FileInputStream infile3 = new FileInputStream(Studentfilename);
+            ObjectInputStream outfile3 = new ObjectInputStream(infile3);
+            studentList = (ArrayList<Student>) outfile3.readObject();
+            rollIndex = studentList.size()+1;
+            JOptionPane.showMessageDialog(null, "Read successfully");
+            //updateCashbook(cashbook);
+            infile3.close();
+            outfile3.close();
 			//JOptionPane.showMessageDialog(null, "I tried");
 		}
         catch (FileNotFoundException e) 
@@ -2021,3 +2052,4 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     private javax.swing.JLabel welcome;
     // End of variables declaration//GEN-END:variables
 }
+
