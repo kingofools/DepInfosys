@@ -7,6 +7,8 @@ package assignment5_group58;
 
 import static assignment5_group58.StartGUI.canDelete;
 import static assignment5_group58.StartGUI.courseList;
+import static assignment5_group58.StartGUI.viewCourse;
+import static assignment5_group58.StartGUI.studentList;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -20,8 +22,9 @@ public class ViewCourseGUI extends javax.swing.JFrame implements Serializable{
     /**
      * Creates new form ViewItemGUI
      */
-    public ViewCourseGUI(ArrayList<Course> courseList,int canDelete) {
-        newinitComponents(courseList, canDelete);
+    public ViewCourseGUI(ArrayList<Course> courseList,ArrayList<Student> studentList,
+            int canDelete,Course viewCourse) {
+        newinitComponents(courseList,studentList, canDelete, viewCourse);
     }
 
     /**
@@ -36,6 +39,7 @@ public class ViewCourseGUI extends javax.swing.JFrame implements Serializable{
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         DeleteItemButton = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,35 +71,46 @@ public class ViewCourseGUI extends javax.swing.JFrame implements Serializable{
             }
         });
 
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(150, 150, 150)
-                        .addComponent(DeleteItemButton)))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(15, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(57, 57, 57)
+                .addComponent(backButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(DeleteItemButton)
+                .addGap(128, 128, 128))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(DeleteItemButton, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(DeleteItemButton, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                    .addComponent(backButton))
+                .addGap(16, 16, 16))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     
-    private void newinitComponents(ArrayList<Course> itemList,int canDelete) {
+    private void newinitComponents(ArrayList<Course> courseList,ArrayList<Student> studentList,
+            int canDelete,Course viewCourse) {
         
         String[] columns = {"Name", "Professor", "Credits"};
 	int size = courseList.size();
@@ -112,6 +127,7 @@ public class ViewCourseGUI extends javax.swing.JFrame implements Serializable{
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable(itemObject,columns);
         DeleteItemButton = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
         DeleteItemButton.setVisible(false);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -134,48 +150,40 @@ public class ViewCourseGUI extends javax.swing.JFrame implements Serializable{
                      DeleteItemButtonActionPerformed(evt);
                 }
             });
-        }else if(canDelete == -1){
-            DeleteItemButton.setVisible(true);
-            DeleteItemButton.setText("Enter Grades");
-            DeleteItemButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    int index = jTable1.getSelectedRow();
-                    if(index==-1){
-                        JOptionPane.showMessageDialog(null, "Select an item first!");
-                    }
-                    else{
-                        //DispStudentsinCourseGUI dispgui;
-                        //dispgui = new DispStudentsinCourseGUI(index);
-                        
-                        dispose();
-                    }
-                    //DispStudentsinCourseGUI();
-                }
-            });
         }
+        
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
         
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(150, 150, 150)
-                        .addComponent(DeleteItemButton)))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(15, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(57, 57, 57)
+                .addComponent(backButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(DeleteItemButton)
+                .addGap(128, 128, 128))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(DeleteItemButton, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(DeleteItemButton, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                    .addComponent(backButton))
+                .addGap(16, 16, 16))
         );
 
         pack();
@@ -183,26 +191,30 @@ public class ViewCourseGUI extends javax.swing.JFrame implements Serializable{
     
     private void DeleteItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteItemButtonActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null,"Can delete is "+canDelete );        
-        int discard = jTable1.getSelectedRow();
-	if(discard==-1)
+        //JOptionPane.showMessageDialog(null,"Can delete is "+canDelete );        
+        int select = jTable1.getSelectedRow();
+	if(select==-1)
 	{
-            JOptionPane.showMessageDialog(null, "Select an item first!");
+            JOptionPane.showMessageDialog(null, "Select a course first!");
 	}
         else if(canDelete==1)
 	{
-            Course remove = courseList.remove(discard);
+            Course remove = courseList.remove(select);
             JOptionPane.showMessageDialog(null,remove.getname()+" has been removed!");
             dispose();
-           // new ViewItemGUI(itemList,canDelete).setVisible(true);
-        }else if (canDelete == 0){
-            JOptionPane.showMessageDialog(null,"Displaying students in course");
-            /*DispStudentsGUI newstudList;
-            newstudList = new DispStudentsGUI(courseList.get(discard));
-            newstudList.setVisible(true);
-            */
+        }
+        else if(canDelete==0)
+        {
+            ViewStudentsGUI viewStud = new ViewStudentsGUI(courseList.get(select),studentList);
+            viewStud.setLocationRelativeTo(null);
+            viewStud.setVisible(true);
         }
     }//GEN-LAST:event_DeleteItemButtonActionPerformed
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_backButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -235,13 +247,14 @@ public class ViewCourseGUI extends javax.swing.JFrame implements Serializable{
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewCourseGUI(courseList,canDelete).setVisible(true);
+                new ViewCourseGUI(courseList,studentList,canDelete,viewCourse).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton DeleteItemButton;
+    private javax.swing.JButton backButton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables

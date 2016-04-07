@@ -54,7 +54,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     static int[] index;
     static boolean R_or_P = false;//false corresponds to isPublication
     static int rollIndex = 1;
-    
+    static Course viewCourse = new Course();
     public StartGUI() {
         
         try   {
@@ -1444,7 +1444,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         //todo : add exceptions here
         //try {
         canDelete = 1;
-        coursegui = new ViewCourseGUI(courseList,canDelete);
+        coursegui = new ViewCourseGUI(courseList,studentList,canDelete,viewCourse);
         coursegui.setLocationRelativeTo(null);
         coursegui.setTitle("Delete Course");
         coursegui.setVisible(true);
@@ -1460,7 +1460,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         //todo : add exceptions here
         //try {
         canDelete = 0;
-        coursegui = new ViewCourseGUI(courseList, canDelete);
+        coursegui = new ViewCourseGUI(courseList,studentList, canDelete,viewCourse);
         coursegui.setLocationRelativeTo(null);
         coursegui.setTitle("View Course");
         coursegui.setVisible(true);
@@ -1475,7 +1475,6 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         GradeStudentsGUI newgradegui;
         //todo : add exceptions here
         //try {
-        canDelete = -1;
         newgradegui = new GradeStudentsGUI(courseList,studentList);
         newgradegui.setLocationRelativeTo(null);
         newgradegui.setTitle("Enter Grades");
