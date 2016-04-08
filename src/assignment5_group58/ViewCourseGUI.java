@@ -190,6 +190,33 @@ public class ViewCourseGUI extends javax.swing.JFrame implements Serializable{
         pack();
     }// </editor-fold>    
     
+    private boolean AreEqual(Course a, Course b){
+        if(!(a.getname().equals(b.getname()))
+            ||!(a.getcredit()==b.getcredit())
+            ||!(a.getprofessor().equals(b.getprofessor())))//if one of the main parameter disagree
+        {
+            return false;
+        }
+        return true;
+    }
+        
+    private boolean canRemove(Course viewCourse)
+    {
+        for(int i = 0;i < studentList.size() ; i++ )
+        {
+            Student dude = studentList.get(i);
+            for(int j = 0; j < dude.subjects.size() ; j++)
+            {
+                if(AreEqual(viewCourse,dude.subjects.get(j))
+                        && dude.status.get(j).equals("current"))
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    
     private void DeleteItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteItemButtonActionPerformed
         // TODO add your handling code here:
         //JOptionPane.showMessageDialog(null,"Can delete is "+canDelete );        
@@ -200,10 +227,19 @@ public class ViewCourseGUI extends javax.swing.JFrame implements Serializable{
 	}
         else if(canDelete==1)
 	{
-            Course remove = courseList.remove(select);
-            JOptionPane.showMessageDialog(null,remove.getname()+" has been removed!");
-            WriteCourse newwrite = new WriteCourse(courseList, Coursefilename);
-            dispose();
+            //first , check if any student is enrolled in a course currently
+            viewCourse = courseList.get(select);
+            if(canRemove(viewCourse))
+            {
+                Course remove = courseList.remove(select); 
+                JOptionPane.showMessageDialog(null,remove.getname()+" has been removed!");
+                WriteCourse newwrite = new WriteCourse(courseList, Coursefilename);
+                dispose();
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"Cannot remove "+viewCourse.getname()
+                        +" since students are enrolled currently\nTry deleting after all students are graded for the course");
+            }
         }
         else if(canDelete==0)
         {
