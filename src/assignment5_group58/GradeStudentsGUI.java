@@ -12,6 +12,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -185,38 +186,25 @@ public class GradeStudentsGUI extends javax.swing.JFrame implements Serializable
         jScrollPane1.setViewportView(courseTable);
 
         GradeStudentsButton.setText("Evaluate");
-        GradeStudentsButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GradeStudentsButtonActionPerformed(evt);
-            }
+        GradeStudentsButton.addActionListener((java.awt.event.ActionEvent evt) -> {
+            GradeStudentsButtonActionPerformed(evt);
         });
 
-        studentTable.setModel(new javax.swing.table.DefaultTableModel(
+        studentTable.setModel(new DefaultTableModelImpl(
             new Object [][] {
 
             },
             new String [] {
                 "Name", "Roll","Grade"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false,false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+            }));
         jScrollPane2.setViewportView(studentTable);
 
         courseName.setText("Course : ");
 
         submitButton.setText("Submit");
        // submitButton.setToolTipText("Have you graded all the students ?");
-        submitButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                submitButtonActionPerformed(evt);
-            }
+        submitButton.addActionListener((java.awt.event.ActionEvent evt) -> {
+            submitButtonActionPerformed(evt);
         });
 
         gradeSlider.setMajorTickSpacing(1);
@@ -276,13 +264,11 @@ public class GradeStudentsGUI extends javax.swing.JFrame implements Serializable
     
          //are 2 courses same ?
     private boolean AreEqual(Course a, Course b){
-        if(!(a.getname().equals(b.getname()))
-            ||!(a.getcredit()==b.getcredit())
-            ||!(a.getprofessor().equals(b.getprofessor())))//if one of the main parameter disagree
-        {
-            return false;
-        }
-        return true;
+        //if one of the main parameter disagree
+        
+        return !(!(a.getname().equals(b.getname()))
+                ||!(a.getcredit()==b.getcredit())
+                ||!(a.getprofessor().equals(b.getprofessor())));
     }
     
     private void GradeStudentsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GradeStudentsButtonActionPerformed
@@ -436,22 +422,16 @@ public class GradeStudentsGUI extends javax.swing.JFrame implements Serializable
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GradeStudentsGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GradeStudentsGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GradeStudentsGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(GradeStudentsGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        
+        //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GradeStudentsGUI(courseList,studentList).setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new GradeStudentsGUI(courseList,studentList).setVisible(true);
         });
     }
 
@@ -465,4 +445,20 @@ public class GradeStudentsGUI extends javax.swing.JFrame implements Serializable
     private javax.swing.JTable studentTable;
     private javax.swing.JButton submitButton;
     // End of variables declaration//GEN-END:variables
+
+    private class DefaultTableModelImpl extends DefaultTableModel {
+
+        public DefaultTableModelImpl(Object[][] data, Object[] columnNames) {
+            super(data, columnNames);
+        }
+        private static final long serialVersionUID = 1L;
+        boolean[] canEdit = new boolean [] {
+            false, false,false
+        };
+
+        @Override
+        public boolean isCellEditable(int rowIndex, int columnIndex) {
+            return canEdit [columnIndex];
+        }
+    }
 }

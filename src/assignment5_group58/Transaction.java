@@ -9,9 +9,9 @@ package assignment5_group58;
  *
  * @author kaustubh
  */
-import java.util.ArrayList;
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 public class Transaction implements Serializable
 {
     private String title;

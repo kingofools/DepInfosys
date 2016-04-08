@@ -13,10 +13,13 @@ import java.util.ArrayList;
  *
  * @author kaustubh
  */
+@SuppressWarnings("serial")
 public class ViewStudentsGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form ViewStudentsGUI
+     * @param viewCourse
+     * @param studentList
      */
     public ViewStudentsGUI(Course viewCourse , ArrayList<Student> studentList) {
         newinitComponents(viewCourse,studentList);
@@ -85,13 +88,11 @@ public class ViewStudentsGUI extends javax.swing.JFrame {
     static ArrayList<Student> myStudent = new ArrayList<>();
         //are 2 courses same ?
     private boolean AreEqual(Course a, Course b){
-        if(!(a.getname().equals(b.getname()))
-            ||!(a.getcredit()==b.getcredit())
-            ||!(a.getprofessor().equals(b.getprofessor())))//if one of the main parameter disagree
-        {
-            return false;
-        }
-        return true;
+        //if one of the main parameter disagree
+        
+        return !(!(a.getname().equals(b.getname()))
+                ||!(a.getcredit()==b.getcredit())
+                ||!(a.getprofessor().equals(b.getprofessor())));
     }
     
         private void newinitComponents(Course viewCourse,ArrayList<Student> studentList) {
@@ -104,20 +105,17 @@ public class ViewStudentsGUI extends javax.swing.JFrame {
         setTitle("Students currently in "+viewCourse.getname());
 
         BackButton.setText("Back");
-        BackButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BackButtonActionPerformed(evt);
-            }
+        BackButton.addActionListener((java.awt.event.ActionEvent evt) -> {
+            BackButtonActionPerformed(evt);
         });
 
         int i,j;
-        Student dude = new Student();
         myStudent = new ArrayList<>();
         for(i = 0; i < studentList.size(); i++ )
         {
             for(j = 0; j < studentList.get(i).subjects.size() ; j++)
             {
-                dude = studentList.get(i);
+                Student dude = studentList.get(i);
                 if(AreEqual(viewCourse,dude.subjects.get(j))
                         && dude.status.get(j).equals("current"))
                 {
@@ -190,22 +188,16 @@ public class ViewStudentsGUI extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewStudentsGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewStudentsGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewStudentsGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ViewStudentsGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        
+        //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ViewStudentsGUI(viewCourse,studentList).setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new ViewStudentsGUI(viewCourse,studentList).setVisible(true);
         });
     }
 

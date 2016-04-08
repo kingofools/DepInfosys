@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
  *
  * @author kaustubh
  */
+@SuppressWarnings("serial")
 public class ViewResPubGUI extends javax.swing.JFrame {
 
     /**
@@ -237,11 +238,9 @@ public class ViewResPubGUI extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         ViewResPubButton.setText("View");
-        ViewResPubButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ViewResPubButtonActionPerformed(evt);
-            }
-        });
+        ViewResPubButton.addActionListener((java.awt.event.ActionEvent evt) -> {
+            ViewResPubButtonActionPerformed(evt);
+         });
 
         TitleLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         TitleLabel.setText("Title");
@@ -379,22 +378,16 @@ public class ViewResPubGUI extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewResPubGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewResPubGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewResPubGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ViewResPubGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        
+        //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ViewResPubGUI(researchList,publicationList,R_or_P).setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new ViewResPubGUI(researchList,publicationList,R_or_P).setVisible(true);
         });
     }
 

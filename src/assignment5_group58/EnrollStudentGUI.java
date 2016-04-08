@@ -212,17 +212,13 @@ public class EnrollStudentGUI extends javax.swing.JFrame implements Serializable
         jScrollPane3.setViewportView(currentList);
 
         AddCourseButton.setText("Add course");
-        AddCourseButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddCourseButtonActionPerformed(evt);
-            }
+        AddCourseButton.addActionListener((java.awt.event.ActionEvent evt) -> {
+            AddCourseButtonActionPerformed(evt);
         });
 
         SelectStudentButton.setText("Enroll");
-        SelectStudentButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SelectStudentButtonActionPerformed(evt);
-            }
+        SelectStudentButton.addActionListener((java.awt.event.ActionEvent evt) -> {
+            SelectStudentButtonActionPerformed(evt);
         });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -284,11 +280,11 @@ public class EnrollStudentGUI extends javax.swing.JFrame implements Serializable
         else
         { 
             //add current student's name in course for grading
-            courseList.get(index.get(courseselect)).StudentsOnRoll.add(studentSelect+1);
+            boolean add = Course.StudentsOnRoll.add(studentSelect+1);
             //JOptionPane.showMessageDialog(null, studentList.get(studentSelect).getname()+
             //        " added to "+courseList.get(index.get(courseselect)).getname());
             
-            Course newCourse = new Course();
+            Course newCourse;
             newCourse = courseList.get(index.get(courseselect));
 
             removeApplicable(courseselect); //remove from applicable course
@@ -360,13 +356,11 @@ public class EnrollStudentGUI extends javax.swing.JFrame implements Serializable
     
     //are 2 courses same ?
     private boolean AreEqual(Course a, Course b){
-        if(!(a.getname().equals(b.getname()))
-            ||!(a.getcredit()==b.getcredit())
-            ||!(a.getprofessor().equals(b.getprofessor())))//if one of the main parameter disagree
-        {
-            return false;
-        }
-        return true;
+        //if one of the main parameter disagree
+        
+        return !(!(a.getname().equals(b.getname()))
+                ||!(a.getcredit()==b.getcredit())
+                ||!(a.getprofessor().equals(b.getprofessor())));
     }
     
     //check if a course is already cleared by the student
@@ -443,22 +437,16 @@ public class EnrollStudentGUI extends javax.swing.JFrame implements Serializable
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EnrollStudentGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EnrollStudentGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EnrollStudentGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(EnrollStudentGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        
+        //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new EnrollStudentGUI(studentList,courseList).setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new EnrollStudentGUI(studentList,courseList).setVisible(true);
         });
     }
 

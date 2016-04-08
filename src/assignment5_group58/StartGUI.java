@@ -49,19 +49,20 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     static String Resfilename = "ResList.dat";
     static String Pubfilename = "PubList.dat";
     
-    static int canDelete = 0;
+    static int canDelete = 0;//view course and view items
     static int index_stud = -1;
     static Item modifyItem = new Item();
     static Transaction modifyTransaction = new Transaction();
-    static String key = "";
+    static String key = "";//search keyt
     static Object[][] contact_object;
     static int[] index;
     static boolean R_or_P = false;//false corresponds to isPublication
     static int rollIndex = 1;//max roll number size
     static Course viewCourse = new Course();
-    static int rollid = 1;
-    static String rollID = "0";
+    static int rollid = 1;//selected roll number
+    static String rollID = "0";//used for conversion
     static Student viewStudent = new Student();
+    static int attempt = 0;
     
     public StartGUI() {
         
@@ -1697,7 +1698,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
            BalField.setText(Double.toString(netIncome - netExpenditure));
            updateCreditsArea(itemTrans);
            WriteItem newwrite = new WriteItem(itemList, Itemfilename);
-           
+           WriteTrans newwrite2 = new WriteTrans(cashbook, Transfilename);
            //clear textfield to prevent accidental saving items
            itemName.setText("");
            itemLocation.setText("");
@@ -1775,7 +1776,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
            BalField.setText(Double.toString(netIncome - netExpenditure));
            updateCreditsArea(itemTrans);
            WriteItem newwrite = new WriteItem(itemList, Itemfilename);
-           
+           WriteTrans newwrite2 = new WriteTrans(cashbook, Transfilename);
            //clear textfield to prevent accidental saving items
            itemName.setText("");
            itemLocation.setText("");
@@ -1881,7 +1882,14 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                 publicationList.add(newResPub);
                 WritePub newwrite = new WritePub(publicationList, Pubfilename);
             }
-           
+            WriteTrans newwrite = new WriteTrans(cashbook, Transfilename);
+            
+            //clear all fields
+            respubTitle.setText("");
+            respubAuthority.setText("");
+            respubDetails.setText("");
+            respubInvestment.setText("");
+            respubProfit.setText("");
         }
         
     }//GEN-LAST:event_saveRespubActionPerformed
@@ -1950,32 +1958,40 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
 
     private void validateRollID()
     {
+        attempt++;
         rollID = JOptionPane.showInputDialog("Roll numbers are from 1 to "+(rollIndex-1)+"\nEnter roll number of student ");
         try
         {
             rollid = Integer.parseInt(rollID.trim());
             if(rollid < 1 || rollid > rollIndex-1)
             {
+                if(attempt < 6){
                 validateRollID();
+                }
             }
         }
         catch (NumberFormatException nfe)
         {
             //System.out.println("NumberFormatException: " + nfe.getMessage());
             JOptionPane.showMessageDialog(null,"Need to enter number!");
+            if(attempt > 6){
             validateRollID();
+            }
         } 
 
     }
     
     private void PrintStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrintStudentActionPerformed
         // validate input outside
+        attempt = 0;//this is used to ensure the user does not keep on wasting time
         validateRollID();
-        PrintStudentGUI newgui;
-        newgui = new PrintStudentGUI(studentList.get(rollid-1));
-        newgui.setLocationRelativeTo(null);
-        newgui.setVisible(true);
-        
+        if(attempt < 6)
+        {
+            PrintStudentGUI newgui;
+            newgui = new PrintStudentGUI(studentList.get(rollid-1));
+            newgui.setLocationRelativeTo(null);
+            newgui.setVisible(true);
+        }
     }//GEN-LAST:event_PrintStudentActionPerformed
 
     private void SearchFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SearchFieldKeyReleased
@@ -2054,14 +2070,10 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-
-                StartGUI s = new StartGUI();
-                s.LoginPopup.setLocationRelativeTo(null);
-                s.LoginPopup.setVisible(true);
-
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            StartGUI s = new StartGUI();
+            s.LoginPopup.setLocationRelativeTo(null);
+            s.LoginPopup.setVisible(true);
         });
     }
 

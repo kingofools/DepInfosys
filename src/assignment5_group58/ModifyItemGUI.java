@@ -12,17 +12,19 @@ import static assignment5_group58.StartGUI.Transfilename;
 import static assignment5_group58.StartGUI.modifyItem;
 import static assignment5_group58.StartGUI.modifyTransaction;
 import java.io.Serializable;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author kaustubh
  */
+@SuppressWarnings("serial")
 public class ModifyItemGUI extends javax.swing.JFrame implements Serializable{
 
     /**
      * Creates new form ModifyItemGUI
+     * @param modifyItem
+     * @param modifyTransaction
      */
     public ModifyItemGUI(Item modifyItem,Transaction modifyTransaction) {
         newinitComponents(modifyItem,modifyTransaction);
@@ -112,10 +114,8 @@ public class ModifyItemGUI extends javax.swing.JFrame implements Serializable{
         jLabel2.setText("Location :");
 
         newItemSave.setText("Save");
-        newItemSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                newItemSaveActionPerformed(evt);
-            }
+        newItemSave.addActionListener((java.awt.event.ActionEvent evt) -> {
+            newItemSaveActionPerformed(evt);
         });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -195,23 +195,16 @@ public class ModifyItemGUI extends javax.swing.JFrame implements Serializable{
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ModifyItemGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ModifyItemGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ModifyItemGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ModifyItemGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        
+        //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-
-                new ModifyItemGUI(modifyItem, modifyTransaction).setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new ModifyItemGUI(modifyItem, modifyTransaction).setVisible(true);
         });
     }
 

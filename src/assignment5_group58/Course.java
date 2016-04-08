@@ -13,7 +13,11 @@ import java.util.ArrayList;
 import java.io.Serializable;
 import java.util.List;
 
-
+/**
+ *
+ * @author kaustubh
+ */
+@SuppressWarnings("serial")
 public class Course implements Serializable
 {
 	private String coursename;

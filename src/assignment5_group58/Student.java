@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.io.Serializable;
 
 
+@SuppressWarnings("serial")
 public class Student implements Serializable
 {
 	private String name; 

@@ -8,7 +8,6 @@ package assignment5_group58;
 import static assignment5_group58.StartGUI.Itemfilename;
 import static assignment5_group58.StartGUI.canDelete;
 import static assignment5_group58.StartGUI.cashbook;
-import static assignment5_group58.StartGUI.itemList;
 import static assignment5_group58.StartGUI.modifyItem;
 import static assignment5_group58.StartGUI.modifyTransaction;
 import static assignment5_group58.StartGUI.Transfilename;
@@ -21,12 +20,18 @@ import javax.swing.JOptionPane;
  *
  * @author kaustubh
  */
+@SuppressWarnings("serial")
 public class ViewItemGUI extends javax.swing.JFrame implements Serializable{
 
     private Item modItem;
 
     /**
      * Creates new form ViewItemGUI
+     * @param itemList
+     * @param cashbook
+     * @param canDelete
+     * @param modifyItem
+     * @param modifyTransaction
      */
     public ViewItemGUI(ArrayList<Item> itemList,ArrayList<Transaction> cashbook,
             int canDelete,Item modifyItem,Transaction modifyTransaction) {
@@ -119,32 +124,28 @@ public class ViewItemGUI extends javax.swing.JFrame implements Serializable{
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         jScrollPane1.setViewportView(jTable1);
         
-        if(canDelete==0)
-        {   DeleteItemButton.setVisible(true);
-            DeleteItemButton.setText("OK");
-            DeleteItemButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                     dispose();
-                }
-            });
-        }
-        else if(canDelete==1)
-        {   DeleteItemButton.setVisible(true);
-            DeleteItemButton.setText("Delete");
-            DeleteItemButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                     DeleteItemButtonActionPerformed(evt);
-                }
-            });
-        }
-        else if(canDelete==-1)//modify
-        {   DeleteItemButton.setVisible(true);
-            DeleteItemButton.setText("Modify");
-            DeleteItemButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                     DeleteItemButtonActionPerformed(evt);
-                }
-            });
+        switch (canDelete) {
+            case 0:
+                DeleteItemButton.setVisible(true);
+                DeleteItemButton.setText("OK");
+                DeleteItemButton.addActionListener((java.awt.event.ActionEvent evt) -> {
+                    dispose();
+        }); break;
+            case 1:
+                DeleteItemButton.setVisible(true);
+                DeleteItemButton.setText("Delete");
+                DeleteItemButton.addActionListener((java.awt.event.ActionEvent evt) -> {
+                    DeleteItemButtonActionPerformed(evt);
+        }); break;
+        //modify
+            case -1:
+                DeleteItemButton.setVisible(true);
+                DeleteItemButton.setText("Modify");
+                DeleteItemButton.addActionListener((java.awt.event.ActionEvent evt) -> {
+                    DeleteItemButtonActionPerformed(evt);
+        }); break;
+            default:
+                break;
         }
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -234,22 +235,16 @@ public class ViewItemGUI extends javax.swing.JFrame implements Serializable{
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewItemGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewItemGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewItemGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ViewItemGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        
+        //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ViewItemGUI(itemList,cashbook,canDelete,modifyItem,modifyTransaction).setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new ViewItemGUI(itemList,cashbook,canDelete,modifyItem,modifyTransaction).setVisible(true);
         });
     }
 
