@@ -1641,6 +1641,11 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         
         WriteTrans newwrite = new WriteTrans(cashbook, Transfilename);
         
+        //clear textfield for redundant saving
+        TitleField.setText("");
+        PriceField.setText("");
+        DetailsArea.setText("");
+        
     }//GEN-LAST:event_AddTransActionPerformed
 
     private void saveItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveItemActionPerformed
@@ -1692,6 +1697,11 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
            BalField.setText(Double.toString(netIncome - netExpenditure));
            updateCreditsArea(itemTrans);
            WriteItem newwrite = new WriteItem(itemList, Itemfilename);
+           
+           //clear textfield to prevent accidental saving items
+           itemName.setText("");
+           itemLocation.setText("");
+           itemPrice.setText("");
         }
         
     }//GEN-LAST:event_saveItemActionPerformed
@@ -1742,8 +1752,8 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             JOptionPane.showMessageDialog(null,"Item "+newItem.getname()+" has been added!");
             
             itemTrans.settitle(newItem.getname());
-            itemTrans.setauthority("Inventory");
-            itemTrans.setdetails("Location :"+newItem.getlocation());
+            itemTrans.setauthority("Inventory"); //need this for search result
+            itemTrans.setdetails("Location : "+newItem.getlocation());
             itemTrans.setinvestment(newItem.getprice());
             itemTrans.setprofit(0.0);
             itemTrans.settype("Item");
@@ -1758,11 +1768,20 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
            {
                JOptionPane.showMessageDialog(null,"Negative balance! Suggested to add grant/fund");
            }
-        }//update incfiels and expfield
+           
+           //update incfiels and expfield
            IncField.setText(Double.toString(netIncome));
            ExpField.setText(Double.toString(netExpenditure));
            BalField.setText(Double.toString(netIncome - netExpenditure));
            updateCreditsArea(itemTrans);
+           WriteItem newwrite = new WriteItem(itemList, Itemfilename);
+           
+           //clear textfield to prevent accidental saving items
+           itemName.setText("");
+           itemLocation.setText("");
+           itemPrice.setText("");
+        }
+        
     }//GEN-LAST:event_itemPriceActionPerformed
 
     private void ModItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModItemActionPerformed

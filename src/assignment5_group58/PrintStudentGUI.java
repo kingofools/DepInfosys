@@ -128,7 +128,7 @@ public class PrintStudentGUI extends javax.swing.JFrame {
     static boolean isfirst = false;
         private void newinitComponents(Student viewStudent) {
             
-        JOptionPane.showMessageDialog(null,"You chose "+viewStudent.getname());
+        //JOptionPane.showMessageDialog(null,"You chose "+viewStudent.getname());
         NameLabel = new javax.swing.JLabel();
         RollField = new javax.swing.JLabel();
         CGField = new javax.swing.JLabel();
@@ -148,7 +148,7 @@ public class PrintStudentGUI extends javax.swing.JFrame {
 
         SaveButton.setText("Save as file");
 
-        JOptionPane.showMessageDialog(null,"Bwahahahah");
+        //JOptionPane.showMessageDialog(null,"Bwahahahah");
         Object[][] Details = new String[viewStudent.subjects.size()][6];
         j = 0;isfirst = false;
         for(int i = 0 ; i < viewStudent.subjects.size() ; i++)

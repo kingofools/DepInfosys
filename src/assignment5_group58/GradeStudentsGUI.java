@@ -5,6 +5,7 @@
  */
 package assignment5_group58;
 
+import static assignment5_group58.StartGUI.Studentfilename;
 import static assignment5_group58.StartGUI.courseList;
 import static assignment5_group58.StartGUI.studentList;
 import java.io.Serializable;
@@ -387,6 +388,9 @@ public class GradeStudentsGUI extends javax.swing.JFrame implements Serializable
             //update table for next grade
             updateStudentTable();
             gradeSlider.setValue(5);
+            
+            //save grades
+            WriteStudent newwrite = new WriteStudent(studentList, Studentfilename);
             /*//previous code for testing
             if(dude.getprevCredits()==0)
             {
