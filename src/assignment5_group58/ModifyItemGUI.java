@@ -5,6 +5,10 @@
  */
 package assignment5_group58;
 
+import static assignment5_group58.StartGUI.Itemfilename;
+import static assignment5_group58.StartGUI.itemList;
+import static assignment5_group58.StartGUI.cashbook;
+import static assignment5_group58.StartGUI.Transfilename;
 import static assignment5_group58.StartGUI.modifyItem;
 import static assignment5_group58.StartGUI.modifyTransaction;
 import java.io.Serializable;
@@ -168,6 +172,8 @@ public class ModifyItemGUI extends javax.swing.JFrame implements Serializable{
             modifyItem.setlocation(newLocation.getText());
             modifyTransaction.settitle(newName.getText());
             modifyTransaction.setdetails("Location: "+newLocation.getText());
+            WriteItem newwrite = new WriteItem(itemList, Itemfilename);
+            WriteTrans neww = new WriteTrans(cashbook, Transfilename);
             JOptionPane.showMessageDialog(null,"Changes saved!");
             dispose();
         }

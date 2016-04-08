@@ -69,7 +69,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             FileInputStream infile = new FileInputStream(Transfilename);
             ObjectInputStream outfile = new ObjectInputStream(infile);
             cashbook = (ArrayList<Transaction>) outfile.readObject();
-            JOptionPane.showMessageDialog(null, "Read successfully");
+            JOptionPane.showMessageDialog(null, "TransList.dat Read successfully");
             infile.close();
             outfile.close();
                         
@@ -79,7 +79,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
            // System.err.println("File not found");
             try{
                 File f = new File("TransList.dat");
-                
+                JOptionPane.showMessageDialog(null, "Translist FILE CREATED successfully");
                 boolean bool = false;
                 bool = f.createNewFile();
                 while(bool==false)
@@ -97,7 +97,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             FileInputStream infile1 = new FileInputStream(Itemfilename);
             ObjectInputStream outfile1 = new ObjectInputStream(infile1);
             itemList = (ArrayList<Item>) outfile1.readObject();
-            JOptionPane.showMessageDialog(null, "Read successfully");
+            JOptionPane.showMessageDialog(null, "ItemList.dat Read successfully");
             //updateCashbook(cashbook);
             infile1.close();
             outfile1.close();
@@ -105,10 +105,10 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
 		}
         catch (FileNotFoundException e) 
 		{
-           JOptionPane.showMessageDialog(null, "FILE CREATED successfully");
+           
             try{
                 File f = new File("ItemList.dat");
-                
+                JOptionPane.showMessageDialog(null, "Itemlist FILE CREATED successfully");
                 boolean bool = false;
                 bool = f.createNewFile();
                 while(bool==false)
@@ -126,7 +126,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             FileInputStream infile2 = new FileInputStream(Coursefilename);
             ObjectInputStream outfile2 = new ObjectInputStream(infile2);
             courseList = (ArrayList<Course>) outfile2.readObject();
-            JOptionPane.showMessageDialog(null, "Read successfully");
+            JOptionPane.showMessageDialog(null, "CourseList.dat Read successfully");
             //updateCashbook(cashbook);
             infile2.close();
             outfile2.close();
@@ -134,10 +134,10 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
 		}
         catch (FileNotFoundException e) 
 		{
-           JOptionPane.showMessageDialog(null, "FILE CREATED successfully");
+           
             try{
                 File f = new File("CourseList.dat");
-                
+                JOptionPane.showMessageDialog(null, "Course list FILE CREATED successfully");
                 boolean bool = false;
                 bool = f.createNewFile();
                 while(bool==false)
@@ -156,18 +156,17 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             ObjectInputStream outfile3 = new ObjectInputStream(infile3);
             studentList = (ArrayList<Student>) outfile3.readObject();
             rollIndex = studentList.size()+1;
-            JOptionPane.showMessageDialog(null, "Read successfully");
+            JOptionPane.showMessageDialog(null, "StudentList.dat Read successfully");
             //updateCashbook(cashbook);
             infile3.close();
             outfile3.close();
 			//JOptionPane.showMessageDialog(null, "I tried");
 		}
         catch (FileNotFoundException e) 
-		{
-           JOptionPane.showMessageDialog(null, "FILE CREATED successfully");
+		{           
             try{
-                File f = new File("CourseList.dat");
-                
+                File f = new File("StudentList.dat");
+                JOptionPane.showMessageDialog(null, "Student list FILE CREATED successfully");
                 boolean bool = false;
                 bool = f.createNewFile();
                 while(bool==false)
@@ -185,17 +184,44 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             FileInputStream infile4 = new FileInputStream(Resfilename);
             ObjectInputStream outfile4 = new ObjectInputStream(infile4);
             researchList = (ArrayList<Transaction>) outfile4.readObject();
-            JOptionPane.showMessageDialog(null, "Read successfully");
+            JOptionPane.showMessageDialog(null, "ResList.dat Read successfully");
             infile4.close();
             outfile4.close();
 		//JOptionPane.showMessageDialog(null, "I tried");
 		}
         catch (FileNotFoundException e) 
 		{
-           JOptionPane.showMessageDialog(null, "FILE CREATED successfully");
             try{
                 File f = new File("ResList.dat");
-                
+                JOptionPane.showMessageDialog(null, "res list FILE CREATED successfully");      
+                boolean bool = false;
+                bool = f.createNewFile();
+                while(bool==false)
+                {
+                	f.delete();
+                	bool = f.createNewFile();
+                }
+             }catch(Exception ex){
+             }
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try   {
+            FileInputStream infile5 = new FileInputStream(Pubfilename);
+            ObjectInputStream outfile5 = new ObjectInputStream(infile5);
+            publicationList = (ArrayList<Transaction>) outfile5.readObject();
+            JOptionPane.showMessageDialog(null, "PubList.dat Read successfully");
+            infile5.close();
+            outfile5.close();
+		//JOptionPane.showMessageDialog(null, "I tried");
+		}
+        catch (FileNotFoundException e) 
+		{
+           
+            try{
+                File f = new File("PubList.dat");
+                JOptionPane.showMessageDialog(null, "pub list FILE CREATED successfully");
                 boolean bool = false;
                 bool = f.createNewFile();
                 while(bool==false)
@@ -224,9 +250,10 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             IncField.setText(Double.toString(netIncome));
             ExpField.setText(Double.toString(netExpenditure));
             BalField.setText(Double.toString(netIncome - netExpenditure));
-            if(newTransaction.getprofit() != 0.0){
+            if(newTransaction.getprofit() != 0){
                 updateDebitsArea(newTransaction);
-            }else if(newTransaction.getinvestment() != 0.0){
+            }
+            if(newTransaction.getinvestment() != 0){
                 updateCreditsArea(newTransaction);
             }
         }
@@ -250,7 +277,8 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             BalField.setText(Double.toString(netIncome - netExpenditure));
             if(itemTrans.getprofit() != 0.0){
                 updateDebitsArea(itemTrans);
-            }else if(itemTrans.getinvestment() != 0.0){
+            }
+            if(itemTrans.getinvestment() != 0.0){
                 updateCreditsArea(itemTrans);
             }
         }
@@ -1506,7 +1534,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         /*} catch (FileNotFoundException ex) {
             Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
         }*/
-        WriteCourse newwrite = new WriteCourse(courseList, Coursefilename);
+        //WriteCourse newwrite = new WriteCourse(courseList, Coursefilename);
     }//GEN-LAST:event_DelCourseActionPerformed
 
     private void ViewCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewCourseActionPerformed
@@ -1663,15 +1691,17 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
            ExpField.setText(Double.toString(netExpenditure));
            BalField.setText(Double.toString(netIncome - netExpenditure));
            updateCreditsArea(itemTrans);
+           WriteItem newwrite = new WriteItem(itemList, Itemfilename);
         }
-        WriteItem newwrite = new WriteItem(itemList, Itemfilename);
+        
     }//GEN-LAST:event_saveItemActionPerformed
 
+    
     private void viewItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewItemActionPerformed
         // TODO add your handling code here:
         canDelete = 0;
         ViewItemGUI newgui = new ViewItemGUI(itemList,cashbook,canDelete,modifyItem,modifyTransaction);
-        updateItemList(itemList);
+        //updateItemList(itemList);
         newgui.setLocationRelativeTo(null);
         newgui.setVisible(true);
         
@@ -1740,7 +1770,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         canDelete = -1;
         ViewItemGUI newgui = new ViewItemGUI(itemList,cashbook,canDelete,modifyItem,modifyTransaction);
         
-        WriteItem newwrite = new WriteItem(itemList, Itemfilename);
+        
         //updateItemList(itemList);
         //updateCashbook(cashbook);
         newgui.setLocationRelativeTo(null);

@@ -6,6 +6,10 @@
 package assignment5_group58;
 
 import static assignment5_group58.StartGUI.viewStudent;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -46,6 +50,11 @@ public class PrintStudentGUI extends javax.swing.JFrame {
         CGField.setText("CGPA : ");
 
         SaveButton.setText("Save as file");
+        SaveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SaveButtonActionPerformed(evt);
+            }
+        });
 
         DetailsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -92,6 +101,29 @@ public class PrintStudentGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveButtonActionPerformed
+        /*JOptionPane.showMessageDialog(null,"Starting up buffered writer");
+        BufferedWriter writer = null;
+    try {
+        String filename = "stud_"+viewStudent.getroll()+"_semno_"+viewStudent.semSize;
+        writer = new BufferedWriter(new FileWriter(filename+".txt"));
+        writer.write("your data here");
+        JOptionPane.showMessageDialog(null,"Student no."+viewStudent.getroll() + " data stored in file "+ filename);
+    } catch (IOException e) {
+        System.err.println(e);
+        JOptionPane.showMessageDialog(null,"IO exception occured");
+    } finally {
+        if (writer != null) {
+            try {
+                writer.close();
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null,"IO exception occured again");
+                System.err.println(e);
+            }
+        }
+    }*/
+    }//GEN-LAST:event_SaveButtonActionPerformed
+
     static int j = 0;
     
         private void newinitComponents(Student viewStudent) {
@@ -108,6 +140,7 @@ public class PrintStudentGUI extends javax.swing.JFrame {
 
         NameLabel.setText("Name : "+viewStudent.getname());
 
+        
         RollField.setText("Roll : "+viewStudent.getroll());
 
         CGField.setText("CGPA : "+viewStudent.cg);

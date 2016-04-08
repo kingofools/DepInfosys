@@ -5,12 +5,14 @@
  */
 package assignment5_group58;
 
+import static assignment5_group58.StartGUI.Itemfilename;
 import static assignment5_group58.StartGUI.canDelete;
 import static assignment5_group58.StartGUI.cashbook;
 import static assignment5_group58.StartGUI.itemList;
 import static assignment5_group58.StartGUI.modifyItem;
 import static assignment5_group58.StartGUI.modifyTransaction;
 import static assignment5_group58.StartGUI.Transfilename;
+import static assignment5_group58.StartGUI.itemList;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -184,12 +186,16 @@ public class ViewItemGUI extends javax.swing.JFrame implements Serializable{
 	{
             Item remove = itemList.remove(discard);
             JOptionPane.showMessageDialog(null,remove.getname()+" has been removed!");
+            WriteItem newwrite = new WriteItem(itemList, Itemfilename);
+            WriteTrans neww = new WriteTrans(cashbook, Transfilename);
             dispose();
            // new ViewItemGUI(itemList,canDelete).setVisible(true);
         }
         else
         {
             modifyItem = itemList.get(discard);
+            WriteItem newwrite = new WriteItem(itemList, Itemfilename);
+            WriteTrans neww = new WriteTrans(cashbook, Transfilename);
             int m;
             for(m = 0;m <cashbook.size();m++)
             {
@@ -204,6 +210,7 @@ public class ViewItemGUI extends javax.swing.JFrame implements Serializable{
                 }
             }
             ModifyItemGUI newgui = new ModifyItemGUI(modifyItem,modifyTransaction);
+            
             //updateCashbook(cashbook, Transfilename);
             newgui.setLocationRelativeTo(null);
             newgui.setVisible(true);

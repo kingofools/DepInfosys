@@ -5,6 +5,7 @@
  */
 package assignment5_group58;
 
+import static assignment5_group58.StartGUI.Coursefilename;
 import static assignment5_group58.StartGUI.canDelete;
 import static assignment5_group58.StartGUI.courseList;
 import static assignment5_group58.StartGUI.viewCourse;
@@ -201,6 +202,7 @@ public class ViewCourseGUI extends javax.swing.JFrame implements Serializable{
 	{
             Course remove = courseList.remove(select);
             JOptionPane.showMessageDialog(null,remove.getname()+" has been removed!");
+            WriteCourse newwrite = new WriteCourse(courseList, Coursefilename);
             dispose();
         }
         else if(canDelete==0)
