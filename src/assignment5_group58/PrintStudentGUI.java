@@ -115,14 +115,15 @@ public class PrintStudentGUI extends javax.swing.JFrame {
         SaveButton.setText("Save as file");
 
         Object[][] Details = new String[viewStudent.subjects.size()][6];
+        j = 0;
         for(int i = 0 ; i < viewStudent.subjects.size() ; i++)
-        {
+        {  
             if(i== viewStudent.semSize.get(j))
             {
                 j++;
                 Details[i][0] = Integer.toString(j);
-                Details[i][4] = viewStudent.sgpa.get(j);
-                Details[i][5] = viewStudent.cgpa.get(j);
+                Details[i][4] = Double.toString(viewStudent.sgpa.get(j));
+                Details[i][5] = Double.toString(viewStudent.cgpa.get(j));
             }
             else
             {
