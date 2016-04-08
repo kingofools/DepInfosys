@@ -125,9 +125,10 @@ public class PrintStudentGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_SaveButtonActionPerformed
 
     static int j = 0;
-    
+    static boolean isfirst = false;
         private void newinitComponents(Student viewStudent) {
-
+            
+        JOptionPane.showMessageDialog(null,"You chose "+viewStudent.getname());
         NameLabel = new javax.swing.JLabel();
         RollField = new javax.swing.JLabel();
         CGField = new javax.swing.JLabel();
@@ -147,16 +148,37 @@ public class PrintStudentGUI extends javax.swing.JFrame {
 
         SaveButton.setText("Save as file");
 
+        JOptionPane.showMessageDialog(null,"Bwahahahah");
         Object[][] Details = new String[viewStudent.subjects.size()][6];
-        j = 0;
+        j = 0;isfirst = false;
         for(int i = 0 ; i < viewStudent.subjects.size() ; i++)
         {  
-            if(i== viewStudent.semSize.get(j))
+            if(j >=viewStudent.semSize.size())
             {
+                if(!isfirst)
+                {
+                    isfirst = true;
+                    Details[i][0] = Integer.toString(j);
+                    Details[i][4] = "";
+                    Details[i][5] = "";
+                }  
+            }
+            else if(i== viewStudent.semSize.get(j))
+            {
+                isfirst = true;
                 j++;
-                Details[i][0] = Integer.toString(j);
-                Details[i][4] = Double.toString(viewStudent.sgpa.get(j));
-                Details[i][5] = Double.toString(viewStudent.cgpa.get(j));
+                if(j >=viewStudent.semSize.size())
+                {
+                    Details[i][0] = Integer.toString(j);
+                    Details[i][4] = "-";
+                    Details[i][5] = Double.toString(viewStudent.cg);  
+                }
+                else
+                {
+                    Details[i][0] = Integer.toString(j);
+                    Details[i][4] = Double.toString(viewStudent.sgpa.get(j));
+                    Details[i][5] = Double.toString(viewStudent.cgpa.get(j));
+                }
             }
             else
             {
