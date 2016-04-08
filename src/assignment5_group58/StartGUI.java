@@ -1534,7 +1534,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         /*} catch (FileNotFoundException ex) {
             Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
         }*/
-        WriteCourse newwrite = new WriteCourse(courseList, Coursefilename);
+        //WriteCourse newwrite = new WriteCourse(courseList, Coursefilename);
     }//GEN-LAST:event_DelCourseActionPerformed
 
     private void ViewCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewCourseActionPerformed
