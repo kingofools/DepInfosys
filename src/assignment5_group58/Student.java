@@ -27,6 +27,7 @@ public class Student implements Serializable
       	public  ArrayList<Double> sgpa = new ArrayList<>();
         public  ArrayList<Double> cgpa = new ArrayList<>();
         public ArrayList<Integer> grades = new ArrayList<>();
+        public ArrayList<Integer> semSize = new ArrayList<>();
         public double cg = 0.0;
         public double sg = 0.0;
 	public void setname(String naam)

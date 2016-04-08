@@ -362,13 +362,16 @@ public class GradeStudentsGUI extends javax.swing.JFrame implements Serializable
             if(dude.AllGraded())// && dude.getcurrCredits()==dude.getStudyingCredits())
             {                   //already checked this ^
                 dude.sg = dude.sg/dude.getcurrCredits();
+                dude.sg = Math.round( dude.sg * 100.0 ) / 100.0;
                 dude.sgpa.add(dude.sg);//update sgpa
                     
                 //update cgpa
                 dude.cg = dude.cg*dude.getprevCredits() + dude.sg * dude.getcurrCredits();
                 dude.cg = dude.cg / (dude.getprevCredits()+dude.getcurrCredits());
+                dude.cg = Math.round( dude.cg * 100.0 ) / 100.0;
                 dude.cgpa.add(dude.cg);
                 //cgpa and sgpa size will be same
+                dude.semSize.add(dude.subjects.size());
                 dude.setprevCredits(dude.getprevCredits()+dude.getcurrCredits());                
                 dude.setcurrCredits(0);
                 dude.sg = 0;//ready for next sem
@@ -376,7 +379,8 @@ public class GradeStudentsGUI extends javax.swing.JFrame implements Serializable
                 
                 JOptionPane.showMessageDialog(null, "SGPA and CGPA of "+dude.getname()+" for sem "+(dude.cgpa.size()-1)+" has been updated"
                         +"\nSGPA = "+dude.sgpa.get(dude.sgpa.size()-1)
-                        +"\nCGPA = "+dude.cgpa.get(dude.cgpa.size()-1));
+                        +"\nCGPA = "+dude.cgpa.get(dude.cgpa.size()-1)
+                        +"\nsemSize = "+dude.semSize.get(dude.semSize.size()-1));
                 //NOTE : dude.sg is cleared every sem as (n+1)th sem's sg is independent of nth sem's sg
                 //However , cg of (n+1)th sem requires cg of nth sem . Also , cg(0th sem) = 0
             } 
