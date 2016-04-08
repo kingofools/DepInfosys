@@ -1224,9 +1224,9 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
 
         HomePane.addTab("Research/Publication", ResPubtab);
 
-        SearchField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SearchFieldActionPerformed(evt);
+        SearchField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                SearchFieldKeyReleased(evt);
             }
         });
 
@@ -1796,11 +1796,11 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         {
             JOptionPane.showMessageDialog(null,"Enter name of in-charge !");
         }
-        else if(!isNumeric(respubInvestment.getText()))
+        else if(!isNumeric(respubInvestment.getText()) && !respubInvestment.getText().isEmpty())
         {
             JOptionPane.showMessageDialog(null,"Enter numerical investment!- 0 if none ");
         }
-        else if(!isNumeric(respubProfit.getText()))
+        else if(!isNumeric(respubProfit.getText()) && !respubProfit.getText().isEmpty())
         {
             JOptionPane.showMessageDialog(null,"Enter numerical profit!- 0 if none ");
         }
@@ -1818,9 +1818,19 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             newResPub.settitle(respubTitle.getText());
             newResPub.setauthority(respubAuthority.getText());
             newResPub.setdetails(respubDetails.getText() + "\nAuthority:" + respubAuthority.getText() + "\nType: " + newResPub.gettype());
-            newResPub.setinvestment(Double.parseDouble(respubInvestment.getText()));
-            newResPub.setprofit(Double.parseDouble(respubProfit.getText()));
-            
+           
+            if(respubInvestment.getText().isEmpty()){
+                newResPub.setinvestment(0.0);
+            }
+            else{
+                newResPub.setinvestment(Double.parseDouble(respubInvestment.getText()));
+            }
+            if(respubProfit.getText().isEmpty()){
+                newResPub.setprofit(0.0);
+            }
+            else{
+                newResPub.setprofit(Double.parseDouble(respubProfit.getText()));
+            }
             //transaction must be saved
             netIncome += newResPub.getprofit();
             netExpenditure += newResPub.getinvestment();
@@ -1888,55 +1898,6 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         }*/
     }//GEN-LAST:event_EnrollStudentActionPerformed
 
-    private void SearchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchFieldActionPerformed
-
-        if(SearchField.getText().isEmpty())
-        {
-            key = "";
-        } 
-        else
-        {
-            key = SearchField.getText();
-        }
-        String[] columns = {"Name","Type"};
-	int foundSize = 0;
-	int i;
-	for(i = 0; i < cashbook.size() ; i++)
-        {
-            
-            if(cashbook.get(i).gettitle().toLowerCase().contains(key.toLowerCase())||
-                    cashbook.get(i).gettitle().toLowerCase().startsWith(key.toLowerCase()))
-            {
-		foundSize++;
-               //JOptionPane.showMessageDialog(null,key+" in "+cashbook.get(i).gettitle());
-            }
-            else
-            {
-                 //JOptionPane.showMessageDialog(null,key+" not in "+cashbook.get(i).gettitle());
-                 //JOptionPane.showMessageDialog(null,cashbook.get(i).gettitle().toLowerCase().startsWith(key)+"<bool");
-            }
-	}
-        index = new int[foundSize];
-	contact_object  = new String[foundSize][2];
-	int j =0;
-		
-	for(i = 0; i < cashbook.size(); i++)
-	{
-            if (cashbook.get(i).gettitle().toLowerCase().contains(key.toLowerCase())||
-                    cashbook.get(i).gettitle().toLowerCase().startsWith(key.toLowerCase())) 
-            { 
-                Transaction found = cashbook.get(i);
-                
-                index[j] = i;
-                contact_object[j][0] = found.gettitle();
-                contact_object[j][1] = found.gettype();
-                j++;
-            }
-        }
-        SearchResTable = new javax.swing.JTable(contact_object,columns);
-        jScrollPane7.setViewportView(SearchResTable);           
-    }//GEN-LAST:event_SearchFieldActionPerformed
-
     private void ViewSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewSearchActionPerformed
         
         int select =  SearchResTable.getSelectedRow();
@@ -1997,6 +1958,56 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         newgui.setVisible(true);
         
     }//GEN-LAST:event_PrintStudentActionPerformed
+
+    private void SearchFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SearchFieldKeyReleased
+        // TODO add your handling code here:
+        
+        if(SearchField.getText().isEmpty())
+        {
+            key = "";
+        } 
+        else
+        {
+            key = SearchField.getText();
+        }
+        String[] columns = {"Name","Type"};
+	int foundSize = 0;
+	int i;
+	for(i = 0; i < cashbook.size() ; i++)
+        {
+            
+            if(cashbook.get(i).gettitle().toLowerCase().contains(key.toLowerCase())||
+                    cashbook.get(i).gettitle().toLowerCase().startsWith(key.toLowerCase()))
+            {
+		foundSize++;
+               //JOptionPane.showMessageDialog(null,key+" in "+cashbook.get(i).gettitle());
+            }
+            else
+            {
+                 //JOptionPane.showMessageDialog(null,key+" not in "+cashbook.get(i).gettitle());
+                 //JOptionPane.showMessageDialog(null,cashbook.get(i).gettitle().toLowerCase().startsWith(key)+"<bool");
+            }
+	}
+        index = new int[foundSize];
+	contact_object  = new String[foundSize][2];
+	int j =0;
+		
+	for(i = 0; i < cashbook.size(); i++)
+	{
+            if (cashbook.get(i).gettitle().toLowerCase().contains(key.toLowerCase())||
+                    cashbook.get(i).gettitle().toLowerCase().startsWith(key.toLowerCase())) 
+            { 
+                Transaction found = cashbook.get(i);
+                
+                index[j] = i;
+                contact_object[j][0] = found.gettitle();
+                contact_object[j][1] = found.gettype();
+                j++;
+            }
+        }
+        SearchResTable = new javax.swing.JTable(contact_object,columns);
+        jScrollPane7.setViewportView(SearchResTable);    
+    }//GEN-LAST:event_SearchFieldKeyReleased
 
     /**
      * @param args the command line arguments
