@@ -119,28 +119,37 @@ public class PrintStudentGUI extends javax.swing.JFrame {
         writer.println("Phone number : "+viewStudent.getnumber());
         writer.println("Email Address : "+viewStudent.getmail());
         writer.println("Address : "+viewStudent.getplace());   
-        writer.println("Current CGPA: "+viewStudent.cgpa.get(viewStudent.cgpa.size()-1));
-        writer.println("----------------------------------------------------");
-        Object[][] Details = new String[viewStudent.subjects.size()][6];
-        j = 0;isfirst = false;
-        for(int i = 0 ; i < viewStudent.subjects.size() ; i++){  
-            if(j >=viewStudent.semSize.size()){
-                if(!isfirst){
-                    isfirst = true;
-                }  
-            }else if(i== viewStudent.semSize.get(j)){
-                int k = j+1;
-                writer.println("Sem no: "+k+"\tSGPA: "+viewStudent.sgpa.get(j+1)+"\tCGPA: "+viewStudent.cgpa.get(j+1));
-                isfirst = true;
-                j++;
-            }else{
-            
-            }
-            
+        if(viewStudent.subjects.size() == 0){
+            writer.println();
+            writer.println("This student has not yet registered for any subjects");
+        }else if (viewStudent.semSize.size() == 1){
+            for(int i = 0 ; i < viewStudent.subjects.size() ; i++){  
             writer.println("Subject: "+viewStudent.subjects.get(i).getname()+"\tGrade: "+Integer.toString(viewStudent.grades.get(i)) + "\tStatus: " +viewStudent.status.get(i));
+            }
+        }else{
+            writer.println("Current CGPA: "+viewStudent.cgpa.get(viewStudent.cgpa.size()-1));
+            //writer.println("----------------------------------------------------");
+            Object[][] Details = new String[viewStudent.subjects.size()][6];
+            j = 0;isfirst = false;
+            for(int i = 0 ; i < viewStudent.subjects.size() ; i++){  
+                if(j >=viewStudent.semSize.size()){
+                    if(!isfirst){
+                        isfirst = true;
+                    }  
+                }else if(i== viewStudent.semSize.get(j)){
+                    int k = j+1;
+                    writer.println("----------------------------------------------------");
+                    writer.println("\n\nSem no: "+k+"\tSGPA: "+viewStudent.sgpa.get(j+1)+"\tCGPA: "+viewStudent.cgpa.get(j+1));
+                    isfirst = true;
+                    j++;
+                }else{
             
-        }  
-        
+                }
+            
+                writer.println("Subject: "+viewStudent.subjects.get(i).getname()+"\tGrade: "+Integer.toString(viewStudent.grades.get(i)) + "\tStatus: " +viewStudent.status.get(i));
+            
+            }  
+        }
     } catch (FileNotFoundException e){
            // System.err.println("File not found");
             try{
