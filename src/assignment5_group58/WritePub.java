@@ -23,7 +23,7 @@ public class WritePub {
             
         	Output.writeObject(PubList);
 
-    		JOptionPane.showMessageDialog(null, "saved successfully");
+    		//JOptionPane.showMessageDialog(null, "saved successfully");
 
            // System.out.println("Stored in database"); 
             fileOut.close(); 

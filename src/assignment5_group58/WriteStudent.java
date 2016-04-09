@@ -23,7 +23,7 @@ public class WriteStudent {
             
         	Output.writeObject(StudentList);
 
-    		JOptionPane.showMessageDialog(null, "saved successfully");
+    		//JOptionPane.showMessageDialog(null, "saved successfully");
 
            // System.out.println("Stored in database"); 
             fileOut.close(); 
