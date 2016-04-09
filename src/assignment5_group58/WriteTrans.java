@@ -5,16 +5,10 @@
  */
 package assignment5_group58;
 
-import static assignment5_group58.StartGUI.BalField;
-import static assignment5_group58.StartGUI.ExpField;
-import static assignment5_group58.StartGUI.IncField;
-import static assignment5_group58.StartGUI.netExpenditure;
-import static assignment5_group58.StartGUI.netIncome;
 import java.io.*;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 
 /**
  *

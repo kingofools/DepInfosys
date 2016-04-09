@@ -7,10 +7,8 @@ package assignment5_group58;
 
 import static assignment5_group58.StartGUI.viewStudent;
 import java.awt.HeadlessException;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
@@ -115,8 +113,7 @@ public class PrintStudentGUI extends javax.swing.JFrame {
         String filename = "stud_"+viewStudent.getroll()+"_"
                 + "semno_"+viewStudent.semSize.size()+".txt";
         //BufferedWriter writer = null;
-    try {
-        PrintWriter writer = new PrintWriter(filename, "UTF-8");
+    try (PrintWriter writer = new PrintWriter(filename, "UTF-8")) {
         writer.println("Student Name: " + viewStudent.getname());
         writer.println("Roll number : "+viewStudent.getroll());
         writer.println("Phone number : "+viewStudent.getnumber());
@@ -144,8 +141,6 @@ public class PrintStudentGUI extends javax.swing.JFrame {
             
         }  
         
-        writer.close();
-        JOptionPane.showMessageDialog(null,"Student no."+viewStudent.getroll() + " data stored in file "+ filename);
     } catch (FileNotFoundException e){
            // System.err.println("File not found");
             try{
@@ -167,6 +162,7 @@ public class PrintStudentGUI extends javax.swing.JFrame {
             writer.close();
         }
     }*/
+    JOptionPane.showMessageDialog(null,"Student no."+viewStudent.getroll() + " data stored in file "+ filename);
     }//GEN-LAST:event_SaveButtonActionPerformed
 
     static int j = 0;
@@ -239,6 +235,7 @@ public class PrintStudentGUI extends javax.swing.JFrame {
         
         SaveButton.setText("Save as file");
         SaveButton.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 //viewStudent = viewStudent;
                 SaveButtonActionPerformed(evt, viewStudent);

@@ -5,6 +5,7 @@
  */
 package assignment5_group58;
 
+import java.awt.HeadlessException;
 import java.io.FileNotFoundException;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -88,7 +89,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                 	f.delete();
                 	bool = f.createNewFile();
                 }
-             }catch(Exception ex){
+             }catch(HeadlessException | IOException ex){
              }
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -117,7 +118,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                 	f.delete();
                 	bool = f.createNewFile();
                 }
-             }catch(Exception ex){
+             }catch(HeadlessException | IOException ex){
              }
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -146,7 +147,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                 	f.delete();
                 	bool = f.createNewFile();
                 }
-             }catch(Exception ex){
+             }catch(HeadlessException | IOException ex){
              }
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -175,7 +176,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                 	f.delete();
                 	bool = f.createNewFile();
                 }
-             }catch(Exception ex){
+             }catch(HeadlessException | IOException ex){
              }
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -202,7 +203,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                 	f.delete();
                 	bool = f.createNewFile();
                 }
-             }catch(Exception ex){
+             }catch(HeadlessException | IOException ex){
              }
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -230,7 +231,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                 	f.delete();
                 	bool = f.createNewFile();
                 }
-             }catch(Exception ex){
+             }catch(HeadlessException | IOException ex){
              }
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(StartGUI.class.getName()).log(Level.SEVERE, null, ex);
