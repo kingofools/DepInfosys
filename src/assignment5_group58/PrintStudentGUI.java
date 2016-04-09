@@ -109,7 +109,7 @@ public class PrintStudentGUI extends javax.swing.JFrame {
 /*
     private void SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveButtonActionPerformed
  */ private void SaveButtonActionPerformed(java.awt.event.ActionEvent evt, Student viewStudent) {     
-        JOptionPane.showMessageDialog(null,"Starting up printwriter");
+        //JOptionPane.showMessageDialog(null,"Starting up printwriter");
         String filename = "stud_"+viewStudent.getroll()+"_"
                 + "semno_"+viewStudent.semSize.size()+".txt";
         //BufferedWriter writer = null;
