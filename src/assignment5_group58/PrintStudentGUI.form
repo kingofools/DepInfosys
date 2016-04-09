@@ -34,7 +34,7 @@
                       <Component id="RollField" min="-2" pref="97" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="CGField" min="-2" pref="99" max="-2" attributes="0"/>
-                      <EmptySpace pref="36" max="32767" attributes="0"/>
+                      <EmptySpace pref="87" max="32767" attributes="0"/>
                       <Component id="SaveButton" min="-2" pref="107" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -49,7 +49,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="NameLabel" max="32767" attributes="0"/>
                   <Component id="RollField" alignment="0" max="32767" attributes="0"/>
-                  <Component id="CGField" alignment="0" max="32767" attributes="0"/>
+                  <Component id="CGField" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="SaveButton" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
