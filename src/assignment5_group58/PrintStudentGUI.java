@@ -123,6 +123,8 @@ public class PrintStudentGUI extends javax.swing.JFrame {
             writer.println();
             writer.println("This student has not yet registered for any subjects");
         }else if (viewStudent.semSize.size() == 1){
+            writer.println("----------------------------------------------------");
+            writer.println("\n\nSem no: 1 \t SGPA: - \t CGPA: 0.0");        
             for(int i = 0 ; i < viewStudent.subjects.size() ; i++){  
             writer.println("Subject: "+viewStudent.subjects.get(i).getname()+"\tGrade: "+Integer.toString(viewStudent.grades.get(i)) + "\tStatus: " +viewStudent.status.get(i));
             }
