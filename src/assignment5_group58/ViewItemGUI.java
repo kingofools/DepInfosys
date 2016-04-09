@@ -188,15 +188,15 @@ public class ViewItemGUI extends javax.swing.JFrame implements Serializable{
             Item remove = itemList.remove(discard);
             JOptionPane.showMessageDialog(null,remove.getname()+" has been removed!");
             WriteItem newwrite = new WriteItem(itemList, Itemfilename);
-            WriteTrans neww = new WriteTrans(cashbook, Transfilename);
+            //WriteTrans neww = new WriteTrans(cashbook, Transfilename);
             dispose();
            // new ViewItemGUI(itemList,canDelete).setVisible(true);
         }
         else
         {
             modifyItem = itemList.get(discard);
-            WriteItem newwrite = new WriteItem(itemList, Itemfilename);
-            WriteTrans neww = new WriteTrans(cashbook, Transfilename);
+           // WriteItem newwrite = new WriteItem(itemList, Itemfilename);
+           // WriteTrans neww = new WriteTrans(cashbook, Transfilename);
             int m;
             for(m = 0;m <cashbook.size();m++)
             {

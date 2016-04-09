@@ -1883,7 +1883,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
                 publicationList.add(newResPub);
                 WritePub newwrite = new WritePub(publicationList, Pubfilename);
             }
-            WriteTrans newwrite = new WriteTrans(cashbook, Transfilename);
+            WriteTrans newwrite2 = new WriteTrans(cashbook, Transfilename);
             
             //clear all fields
             respubTitle.setText("");
