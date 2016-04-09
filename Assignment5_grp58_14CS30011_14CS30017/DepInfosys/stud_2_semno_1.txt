@@ -1,0 +1,13 @@
+Student Name: you
+Roll number : 2
+Phone number : 3
+Email Address : 3
+Address : 33
+----------------------------------------------------
+
+
+Sem no: 1 	 SGPA: - 	 CGPA: 0.0
+Subject: math	Grade: 9	Status: current
+Subject: phy	Grade: -1	Status: current
+Subject: pds	Grade: -1	Status: current
+Subject: ed	Grade: -1	Status: current
