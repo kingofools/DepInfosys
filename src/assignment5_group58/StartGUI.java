@@ -1650,7 +1650,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
     }//GEN-LAST:event_AddTransActionPerformed
 
     private void saveItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveItemActionPerformed
-        // TODO add your handling code here:
+       // TODO add your handling code here:
         Item newItem = new Item();
         Transaction itemTrans = new Transaction();
         
