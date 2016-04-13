@@ -292,7 +292,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
       try  
       {  
            double d = Double.parseDouble(str);  
-            if(d<0)
+            if(d<1)
             {
                 return false;
             }
@@ -1593,7 +1593,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         {
             JOptionPane.showMessageDialog(null,"Need to enter title !");
         }
-        if(PriceField.getText().isEmpty()||!isNumeric(PriceField.getText())){
+        else if(PriceField.getText().isEmpty()||!isNumeric(PriceField.getText())){
              JOptionPane.showMessageDialog(null, "Need to enter price correctly !");
         }
         else
@@ -1639,7 +1639,6 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
             }else if(newTransaction.getprofit() == 0.0){
                 updateCreditsArea(newTransaction);
             }
-        }
         
         WriteTrans newwrite = new WriteTrans(cashbook, Transfilename);
         
@@ -1647,11 +1646,11 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
         TitleField.setText("");
         PriceField.setText("");
         DetailsArea.setText("");
-        
+        }
     }//GEN-LAST:event_AddTransActionPerformed
 
     private void saveItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveItemActionPerformed
-        // TODO add your handling code here:
+       // TODO add your handling code here:
         Item newItem = new Item();
         Transaction itemTrans = new Transaction();
         
