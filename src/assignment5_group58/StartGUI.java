@@ -292,7 +292,7 @@ public class StartGUI extends javax.swing.JFrame implements Serializable {
       try  
       {  
            double d = Double.parseDouble(str);  
-            if(d<0)
+            if(d<1)
             {
                 return false;
             }
