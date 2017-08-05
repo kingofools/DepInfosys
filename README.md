@@ -1,13 +1,7 @@
-# University_Department_information_System
+# University Department Information System
 Project for CS29006 Software Lab
 
-#SA SD UML 
-Completed on  27 Mar 2016
+DepInfosys is a university department information management system that handles student registries, department inventories, research papers and book catalogs, and cashflow of a department.
 
-#Development 
-Software implementation - Completed on 9 Apr 2016
-
-#Testing - Completed
-
-#Usage
+# Usage:
 Refer to DepInfosys.mp4 for usage instructions
